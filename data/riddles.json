@@ -1,5 +1,4 @@
-{
-  "randomRiddles": [
+[
     {
       "riddle": "It is greater than God and more evil than the devil. The poor have it, the rich need it and if you eat it you will die. What is it?",
       "answer": "nothing"
@@ -77,5 +76,4 @@
       "riddle": "What is the smallest positive integer that leaves a remainder of 1 when divided by 2, remainder of 2 when divided by 3, a remainder of 3 when divided by 4, and so on up to a remainder of 9 when divided by 10?",
       "answer": "2519"
     }
-  ]
-}
+]
