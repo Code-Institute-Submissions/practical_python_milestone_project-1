@@ -1,0 +1,34 @@
+{% extends 'base.html' %} {% block content %}
+
+
+<h2>{{ page_title }}</h2>
+
+<table class="leaderboard">
+    <tr>
+        <th>Position</th>
+        <th>Username</th>
+        <th>Riddles Solved</th>
+    </tr>
+
+    <!-- For loop to enter top 10 highscores -->
+
+    {% for user in top_scores_array %}  <!-- use ordered list for numbers?-->
+    <tr class="lb-position-{{ loop.index }}">
+        <td>
+            {{ loop.index }}
+        </td>
+        <td>
+            <!-- Insert data for player username -->
+        </td>
+        <td>
+            <!-- Insert data for player score -->
+        </td>
+    </tr>
+
+    {% endfor %}
+</table>
+
+
+
+
+{% endblock %}

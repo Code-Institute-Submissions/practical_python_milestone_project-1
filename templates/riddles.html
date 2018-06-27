@@ -1,0 +1,44 @@
+{% extends 'base.html' %} {% block content %}
+
+
+<h2>{{ page_title }}</h2>
+<section class="riddles-box">
+    <p>{{ riddles_data[0]["riddle"] }}</p>
+</section>
+
+<hr>
+
+<section class="guess-box">
+    <p>What is your answer?</p>
+
+    <form>
+        <input type="text" name="" />
+        <input type="submit" value="Submit" />
+    </form>
+</section>
+
+<hr>
+
+<section class="feedback-box">
+    <p>I am your feedback</p>
+
+    <table>
+        <tr>
+            <th>User Name</th>
+            <th>Their guess...</th>
+        </tr>
+        {% for data in guesses %}
+        <tr>
+            <td>
+                <!-- Insert data for username -->
+            </td>
+            <td>
+                <!-- Insert data for their guess -->
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</section>
+
+{% endblock %}

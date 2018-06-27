@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hey Riddle Diddle</title>
+    
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    
+</head>
+
+<body>
+    <nav>
+        <div class="logo"></div>
+        <h1 class="title">Hey Riddle Diddle</h1>
+        <ul>
+            <li><a href="{{ url_for('home_page') }}">Home</a></li>
+            <li><a href="{{ url_for('log_in') }}">Log In</a></li>
+            <li><a href="{{ url_for('sign_up') }}">Sign Up</a></li>
+            <li><a href="{{ url_for('riddles') }}">Riddles</a></li>
+            <li><a href="{{ url_for('leaderboard') }}">Leaderboard</a></li>
+            <li><a href="{{ url_for('account') }}">User:  {{ logged_in_user }}</a></li>
+        </ul>
+    </nav>
+
+    {% block content %} 
+    {% endblock %}
+
+
+    <footer>
+        <h3>By Giancarlo Fiorletta</h3>
+    </footer>
+</body>
+
+</html>
