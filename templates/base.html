@@ -17,12 +17,12 @@
         <div class="logo"></div>
         <h1 class="title">Hey Riddle Diddle</h1>
         <ul>
-            <li><a href="{{ url_for('home_page') }}">Home</a></li>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
             <li><a href="{{ url_for('log_in') }}">Log In</a></li>
             <li><a href="{{ url_for('sign_up') }}">Sign Up</a></li>
             <li><a href="{{ url_for('riddles') }}">Riddles</a></li>
             <li><a href="{{ url_for('leaderboard') }}">Leaderboard</a></li>
-            <li><a href="{{ url_for('account') }}">User:  {{ logged_in_user }}</a></li>
+            <li><a href="{{ url_for('account') }}">User:  {{ user }}</a></li>
         </ul>
     </nav>
 
