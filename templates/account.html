@@ -3,7 +3,14 @@
 
 <h2>{{ page_title }}</h2>
 
+{% if username == "guest" %}
+<h3>Welcome dear friend!  You don't appear to have logged in as yet.</h3>
+<p>If you have an account then please do so now...</p>
+<button>Here</button>
+<p>Alternatively please create an acount here...</p>
+<button>There</button>
 
+{%else%}
 
 {% with messages = get_flashed_messages() %} 
 {% if messages %} 
@@ -14,15 +21,15 @@
 {% endfor %} 
 {% else %}
 
+
+<p>Please add more of your details, your chosen username will show up on the leaderboard if you complete it!</p>
+
 <form method="POST">
     <label for="username">Choose a Username</label>
     <input type="text" name="username" />
 
     <label for="password">Password</label>
     <input type="text" name="password" />
-
-    <label for="confirm-password">Confirm Password</label>
-    <input type="text" name="confirm-password" />
 
     <label for="firstname">First Name</label>
     <input type="text" name="firstname" />
@@ -37,4 +44,5 @@
 </form>
 {% endif %} 
 {% endwith %} 
+{% endif %} 
 {% endblock %}

@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
 
-
     <section class="welcome-box">
         <h2>{{ page_title }}</h2>
+        
+        {% if username != "guest" %}
+        <h3>Welcome back {{ username }}!!!</h3>
+        {% endif %}
+        
         <p>Who doesn't like a good riddle every once in a while?!</p>
         <p>Test your skills and see if you can top the leaderboard like the Riddler himself!</p>
     </section>
