@@ -2,8 +2,21 @@
 
 
 <h2>{{ page_title }}</h2>
+
+{% with messages = get_flashed_messages() %} 
+{% if messages %} 
+{% for message in messages %}
+<p class="flashed-message">
+    {{ message }}
+</p>
+{% endfor %} 
+{% endif %} 
+{% endwith %} 
+
+
+
 <section class="riddles-box">
-    <p>{{ riddles_data[0]["riddle"] }}</p>
+    <p>{{ riddles_data[riddle_index]["riddle"] }}</p>
 </section>
 
 <hr>
@@ -11,11 +24,14 @@
 <section class="guess-box">
     <p>What is your answer?</p>
 
-    <form>
-        <input type="text" name="" />
+    <form method="POST">
+        <input type="text" name="guess-entry" required/>
         <input type="submit" value="Submit" />
     </form>
 </section>
+
+
+<p>{{ current_riddle }}</p> 
 
 <hr>
 

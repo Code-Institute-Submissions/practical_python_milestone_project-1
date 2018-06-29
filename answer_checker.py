@@ -9,6 +9,8 @@ def correct_answer(guess, answer):
         return "You didn't provide an answer!"
         
     # If the guess matches the answer...
+    elif len(your_guess) > len(answer):
+        return "Your answer has too many characters"
     elif your_guess.lower() == answer.lower(): # put in html form element to check
         return True
         

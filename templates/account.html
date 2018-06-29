@@ -29,7 +29,7 @@
     <input type="text" name="username" />
 
     <label for="password">Password</label>
-    <input type="text" name="password" />
+    <input type="text" name="password" value="{{ user_data[0]['password'] }}"/>
 
     <label for="firstname">First Name</label>
     <input type="text" name="firstname" />
@@ -38,7 +38,7 @@
     <input type="text" name="surname" />
 
     <label for="email">Email Address</label>
-    <input type="text" name="email" />
+    <input type="text" name="email" value="{{ user_data[0]['email'] }}"/>
 
     <input type="submit" value="Submit" />
 </form>
