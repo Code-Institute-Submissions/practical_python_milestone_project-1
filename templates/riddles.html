@@ -9,6 +9,14 @@
 <p class="flashed-message">
     {{ message }}
 </p>
+
+<p>If it's any consolation, here are some of the guesses other people made...</p>
+<!--{% for key,val in guesses %}-->
+<!--{% if riddle_index in guesses %}-->
+<!--    <p> val </p>-->
+<!--{% endif %} -->
+<!--{% endfor %} -->
+
 {% endfor %} 
 {% endif %} 
 {% endwith %} 
@@ -25,7 +33,7 @@
     <p>What is your answer?</p>
 
     <form method="POST">
-        <input type="text" name="guess-entry" required/>
+        <input type="text" name="guess-entry" autocomplete="off" required/>
         <input type="submit" value="Submit" />
     </form>
 </section>

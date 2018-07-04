@@ -26,7 +26,7 @@
             <li><a href="{{ url_for('riddles', username = username) }}">Riddles</a></li>
             <li><a href="{{ url_for('leaderboard') }}">Leaderboard</a></li>
             {% if username != "guest" %}
-            <li><a href="{{ url_for('account') }}">User:  {{ username }}</a></li>
+            <li><a href="{{ url_for('account', username = username) }}">User:  {{ username }}</a></li>
             {% endif %}
         </ul>
     </nav>

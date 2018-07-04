@@ -1,3 +1,30 @@
 body {
     font-family: 'Roboto', sans-serif;
 }
+
+
+h1 {
+    margin: 0;
+    float: left;
+    
+}
+
+ul {
+    float: right;
+    margin: 0;
+}
+
+nav ul li {
+    float: left;
+    padding: 10px;
+    margin: 0 10px;
+}
+
+li a {
+     text-decoration: none;
+}
+
+h2 {
+    clear: both;
+    padding-top: 50px;
+}

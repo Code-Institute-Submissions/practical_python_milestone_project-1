@@ -1,1 +1,23 @@
-[{"email":"admin", "password":"iW4TnT14"}],[{'password': u'SME', 'email': u'caianroma@yahoo.co.uk'}],[{'password': u'SME', 'email': u'caianroma@yahoo.co.uk'}],[{'password': u'SME', 'email': u'caianroma@yahoo.co.uk'}],[{'password': u'SME', 'email': u'caianroma@yahoo.co.uk'}],[{'password': u'', 'email': u'caianroma@yahoo.co.uk'}],[{'password': u'', 'email': u'caianroma@yahoo.co.uk'}],[{'password': u'gg', 'email': u'gggg@h.com'}],[{'password': u'SME', 'email': u'caianroma@yahoo.co.uk'}],[{'password': u'SME', 'email': u'caianroma@yahoo.co.uk'}],[{'password': u'SME', 'email': u'caianroma@yahoo.co.uk'}],[{'password': 2, 'email': u'caianroma@yahoo.co.uk'}]
+[
+    {
+        "username": "TBC",
+        "password": "sddsdsds",
+        "surname": "TBC",
+        "email": "a@a.com",
+        "firstname": "TBC"
+    },
+    {
+        "username": "TBC",
+        "password": "213123123",
+        "surname": "TBC",
+        "email": "mmm@mm.com",
+        "firstname": "TBC"
+    },
+    {
+        "username": "Bill",
+        "password": "fvvfvff",
+        "surname": "TBC",
+        "email": "caianroma@yahoo.co.uk",
+        "firstname": "TBC"
+    }
+]
