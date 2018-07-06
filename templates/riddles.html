@@ -10,13 +10,18 @@
     {{ message }}
 </p>
 
-<p>If it's any consolation, here are some of the guesses other people made...</p>
-<!--{% for key,val in guesses %}-->
-<!--{% if riddle_index in guesses %}-->
-<!--    <p> val </p>-->
-<!--{% endif %} -->
-<!--{% endfor %} -->
+{% if game_in_play == False %}
 
+<p>If it's any consolation, here are some of the guesses other people made...</p>
+
+{% for guess in guesses %}
+{% if guess["question"] == score + 1 %}
+
+<p>{{ guess["guess"].upper() }}</p>
+
+{% endif %}
+{% endfor %}
+{% endif %}
 {% endfor %} 
 {% endif %} 
 {% endwith %} 
@@ -33,7 +38,7 @@
     <p>What is your answer?</p>
 
     <form method="POST">
-        <input type="text" name="guess-entry" autocomplete="off" required/>
+        <input type="text" name="guess-entry" autocomplete="off" autofocus="autofocus" required/>
         <input type="submit" value="Submit" />
     </form>
 </section>

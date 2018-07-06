@@ -11,7 +11,9 @@
     {{ message }}
 </p>
 {% endfor %} 
-{% else %}
+
+{% endif %} 
+{% endwith %} 
 
     <form method="POST">
         <label for="email">Email</label>
@@ -22,7 +24,5 @@
         
         <input type="submit" value="Submit" />
     </form>
-    
-{% endif %} 
-{% endwith %} 
+
 {% endblock %}

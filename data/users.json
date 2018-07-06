@@ -1,23 +1,24 @@
-[
-    {
-        "username": "TBC",
-        "password": "sddsdsds",
-        "surname": "TBC",
-        "email": "a@a.com",
-        "firstname": "TBC"
-    },
-    {
-        "username": "TBC",
-        "password": "213123123",
-        "surname": "TBC",
-        "email": "mmm@mm.com",
-        "firstname": "TBC"
-    },
-    {
-        "username": "Bill",
-        "password": "fvvfvff",
-        "surname": "TBC",
-        "email": "caianroma@yahoo.co.uk",
-        "firstname": "TBC"
-    }
-]
+[{
+    "username": "TBC",
+    "highscore": 0,
+    "surname": "TBC",
+    "firstname": "TBC",
+    "password": "aaaaa",
+    "email": "caianroma@yahoo.co.uk"
+},
+ {
+    "username": "TBC",
+    "highscore": 0,
+    "surname": "TBC",
+    "firstname": "TBC",
+    "password": "ppppp",
+    "email": "billy@bob.com"
+},
+ {
+    "username": "TBC",
+    "highscore": 0,
+    "surname": "TBC",
+    "firstname": "TBC",
+    "password": "RgOf2014",
+    "email": "jacquifiorletta@yahoo.co.uk"
+}]
