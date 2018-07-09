@@ -12,24 +12,35 @@
 
 {% if game_in_play == False %}
 
+<h3>Your score was {{ score }}</h3>
+{% if username != "guest" %}
+{% for user in user_data %}
+{% if username == user["email"] %}
+
+<h3>Your highest ever score is {{ user["highscore"] }}!</h3>
+{% endif %}
+{% endfor %}
+{% endif %}
 <p>If it's any consolation, here are some of the guesses other people made...</p>
 
+{% if guesses == [] %}
+<p>No other guesses so far</p>
+{% else %}
 {% for guess in guesses %}
-{% if guess["question"] == score + 1 %}
+{% if last == guess["question"] %}
 
-<p>{{ guess["guess"].upper() }}</p>
+<p>{{ guess["guess"] }}</p>
 
 {% endif %}
 {% endfor %}
 {% endif %}
-{% endfor %} 
+{% endif %}
+{% endfor %}
 {% endif %} 
 {% endwith %} 
 
-
-
 <section class="riddles-box">
-    <p>{{ riddles_data[riddle_index]["riddle"] }}</p>
+    <p>{{ riddles_data[riddle_order[riddle_index]]["riddle"] }}</p>
 </section>
 
 <hr>
@@ -44,30 +55,6 @@
 </section>
 
 
-<p>{{ current_riddle }}</p> 
-
 <hr>
-
-<section class="feedback-box">
-    <p>I am your feedback</p>
-
-    <table>
-        <tr>
-            <th>User Name</th>
-            <th>Their guess...</th>
-        </tr>
-        {% for data in guesses %}
-        <tr>
-            <td>
-                <!-- Insert data for username -->
-            </td>
-            <td>
-                <!-- Insert data for their guess -->
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
-
-</section>
 
 {% endblock %}

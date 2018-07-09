@@ -1,24 +1,10 @@
-[{
-    "username": "TBC",
-    "highscore": 0,
-    "surname": "TBC",
-    "firstname": "TBC",
-    "password": "aaaaa",
-    "email": "caianroma@yahoo.co.uk"
-},
- {
-    "username": "TBC",
-    "highscore": 0,
-    "surname": "TBC",
-    "firstname": "TBC",
-    "password": "ppppp",
-    "email": "billy@bob.com"
-},
- {
-    "username": "TBC",
-    "highscore": 0,
-    "surname": "TBC",
-    "firstname": "TBC",
-    "password": "RgOf2014",
-    "email": "jacquifiorletta@yahoo.co.uk"
-}]
+[
+    {
+        "username": "ebaymademepoor",
+        "highscore": 1,
+        "surname": "TBC",
+        "firstname": "TBC",
+        "password": "ppppp",
+        "email": "caianroma@yahoo.co.uk"
+    }
+]
