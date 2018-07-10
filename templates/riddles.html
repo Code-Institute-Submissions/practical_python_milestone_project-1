@@ -19,21 +19,14 @@
 
 <h3>Your highest ever score is {{ user["highscore"] }}!</h3>
 {% endif %}
+
 {% endfor %}
 {% endif %}
 <p>If it's any consolation, here are some of the guesses other people made...</p>
-
-{% if guesses == [] %}
-<p>No other guesses so far</p>
-{% else %}
 {% for guess in guesses %}
-{% if last == guess["question"] %}
-
-<p>{{ guess["guess"] }}</p>
-
-{% endif %}
+<p>{{ guess }}</p>
 {% endfor %}
-{% endif %}
+
 {% endif %}
 {% endfor %}
 {% endif %} 

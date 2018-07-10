@@ -27,6 +27,7 @@
             <li><a href="{{ url_for('leaderboard') }}">Leaderboard</a></li>
             {% if username != "guest" %}
             <li><a href="{{ url_for('account', username = username) }}">User:  {{ username }}</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
             {% endif %}
         </ul>
     </nav>
@@ -38,6 +39,11 @@
     <footer>
         <h3>By Giancarlo Fiorletta</h3>
     </footer>
+    <script>
+        setTimeout(function() {
+            location.reload();
+        }, 10000);
+    </script>
 </body>
 
 </html>

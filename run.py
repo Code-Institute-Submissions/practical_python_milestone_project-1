@@ -70,8 +70,8 @@ def add_a_new_user(email, password):
     """
     existing_email = 0
     
-    for user in json_users_data:
-        if user["email"] == email:
+    for existing_user in json_users_data:
+        if existing_user["email"] == email:
             existing_email += 1
             break
         
@@ -164,7 +164,6 @@ def update_high_score(new_score):
     for user in range(len(data)):
         print(current_user)
         if data[user]["email"] == current_user:
-            print("found user")
             if any("highscore" in x for x in data[user]):
                 if data[user]["highscore"] < new_score:
                     data[user]["highscore"]  = new_score
@@ -189,7 +188,6 @@ def check_answer(guess, data, index, username):
         score_last_game = current_riddle
         global last_riddle
         last_riddle = riddle_order[current_riddle]
-        print(last_riddle)
         global game_in_play
         game_in_play = False
         add_guess_to_file(request.form["guess-entry"], riddle_order[current_riddle]-1)
@@ -200,6 +198,41 @@ def check_answer(guess, data, index, username):
         riddle_order = []
         determine_riddle_order(riddle_order)
         flash("I'm sorry!  {} was incorrect!\n Please try again from the beginning :(".format(guess.upper()))
+
+def other_users_guesses(riddle):
+    guess_data = load_json_data(guesses_file, "r")
+    user_guesses = []
+    num_of_related_guesses = 0
+    for guess in guess_data:
+        if guess["question"] == riddle:
+            user_guesses.append(guess["guess"])
+            num_of_related_guesses +=1
+        
+    if num_of_related_guesses != 0:
+        return user_guesses
+    else:
+        return ["No other guesses so far"]
+            
+def create_leaderboard(userdata):
+    sort_on = "highscore"
+    decorated = [(dict_[sort_on], dict_) for dict_ in userdata]
+    decorated.sort(reverse=True)
+    result = [dict_ for (key, dict_) in decorated]
+    
+    top_ten = []
+    
+    if len(result) < 10:
+        max_leaderboard = len(result)
+    else:
+        max_leaderboard = 10
+    
+    
+    i = 0
+    while i < max_leaderboard:
+        top_ten.append(result[i])
+        i+= 1
+    
+    return top_ten
 
 @app.route('/')
 @app.route('/<username>')
@@ -223,27 +256,28 @@ def log_in():
         given matches the users stored password
         """
         if validate_password_on_log_in(request.form["email"], request.form["password"]) == True:
-            return redirect("{}/riddles.html".format(current_user))
+            return redirect(request.form["email"])
         else:
             return render_template("log_in.html", page_title="Log In", username=current_user)
     return render_template("log_in.html", page_title="Log In", username=current_user)
 
 @app.route('/<username>/riddles.html', methods=["GET", "POST"])
 def riddles(username):
-    guesses_data = load_json_data(guesses_file, "r")
-    guess_length = len(guesses_data) -1
-    
+    guesses_data = []
+    print(guesses_data)
     if riddle_order == []:
         determine_riddle_order(riddle_order)
     
     if request.method == "POST":
         check_answer(request.form["guess-entry"], load_json_data(riddles_file, "r"), riddle_order[current_riddle], current_user)
+        guesses_data = other_users_guesses(last_riddle)
     return render_template("riddles.html", page_title="Riddles", riddles_data=load_json_data(riddles_file, "r"), user_data=load_json_data(users_file, "r"), username=current_user, riddle_index=current_riddle, 
     guesses=guesses_data, game_in_play=game_in_play, score=score_last_game, riddle_order=riddle_order, last=last_riddle)
 
 @app.route('/leaderboard.html')
 def leaderboard():
-    return render_template("leaderboard.html", page_title="Leaderboard", username=current_user)
+    top_ten = create_leaderboard(load_json_data(users_file, "r"))
+    return render_template("leaderboard.html", page_title="Leaderboard", username=current_user, top_ten = top_ten)
 
 @app.route('/<username>/account.html', methods=["GET", "POST"])
 def account(username):
@@ -253,6 +287,12 @@ def account(username):
         update_user_details(username, request.form["email"], request.form["password"], request.form["username"], request.form["firstname"], request.form["surname"])
         user_data = load_json_data(users_file, "r")
     return render_template("account.html", page_title="Account", username=current_user, user_data=user_data)
+
+@app.route('/logout.html')
+def logout():
+    global current_user
+    current_user = "guest"
+    return redirect("logout")
 
 if __name__ == "__main__":
     app.run(host=os.environ.get('IP'),

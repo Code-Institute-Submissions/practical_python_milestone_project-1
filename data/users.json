@@ -1,10 +1,26 @@
 [
     {
+        "username": "TBC",
+        "highscore": 3,
+        "surname": "TBC",
+        "firstname": "TBC",
+        "password": "ooooo",
+        "email": "billy@bob.com"
+    },
+    {
         "username": "ebaymademepoor",
         "highscore": 1,
         "surname": "TBC",
         "firstname": "TBC",
         "password": "ppppp",
         "email": "caianroma@yahoo.co.uk"
+    },
+    {
+        "username": "Adam",
+        "highscore": 1,
+        "surname": "TBC",
+        "firstname": "TBC",
+        "password": "77777",
+        "email": "a@a.com"
     }
 ]

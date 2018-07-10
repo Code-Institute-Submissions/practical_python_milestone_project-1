@@ -12,16 +12,20 @@
 
     <!-- For loop to enter top 10 highscores -->
 
-    {% for user in top_scores_array %}  <!-- use ordered list for numbers?-->
+    {% for user in top_ten %}  <!-- use ordered list for numbers?-->
     <tr class="lb-position-{{ loop.index }}">
         <td>
             {{ loop.index }}
         </td>
         <td>
-            <!-- Insert data for player username -->
+            {% if user["username"] == "TBC" %}
+            {{ user["email"] }}
+            {% else %}
+            {{ user["username"] }}
+            {% endif %}
         </td>
         <td>
-            <!-- Insert data for player score -->
+            {{ user["highscore"] }}
         </td>
     </tr>
 
