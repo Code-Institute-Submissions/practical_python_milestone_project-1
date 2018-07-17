@@ -1,16 +1,24 @@
-{% extends 'base.html' %}
-{% block content %}
-
-    <section class="welcome-box">
-        <h2>{{ page_title }}</h2>
-        
-        {% if username != "guest" %}
-        <h3>Welcome back {{ username }}!!!</h3>
-        {% endif %}
-        
-        <p>Who doesn't like a good riddle every once in a while?!</p>
-        <p>Test your skills and see if you can top the leaderboard like the Riddler himself!</p>
-    </section>
-
-    
+{% extends 'base.html' %} {% block content %}
+<section class="welcome-box centered">
+    <div class="page-header no-overflow">
+        <h2 class="welcome-h2 color-change-and-shrink">Welcome to Hey Riddle Diddle</h2>
+    </div>
+    <h1>{{ page_title }}</h1>
+    <div class="introduction">
+        <div class="welcome-text">
+            {% if username != "guest" %}
+            <h3 id="welcome-user">Welcome back {{ username }}!!!</h3>
+            {% else %}
+            <h3>Welcome to Hey Riddle Diddle!!!</h3>
+            <p>A website for all your riddling needs.<br><a class="accentuated-links" href="{{ url_for('sign_up') }}"><strong>Sign up</strong></a> or <a class="accentuated-links" href="{{ url_for('log_in') }}"><strong>Log in</strong></a> now!</p>
+            {% endif %}
+            <p>Who doesn't like a good riddle every once in a while?!</p>
+            <p>Test your skills and see if you can top the leaderboard like the Riddler himself!</p>
+            <button class="riddle-link-btn grow"><a href="{{ url_for('riddles', username = username) }}">Let's riddle</a></button>
+        </div>
+    </div>
+</section>
+<script>
+    document.getElementById('welcome-user').scrollIntoView();
+</script>
 {% endblock %}

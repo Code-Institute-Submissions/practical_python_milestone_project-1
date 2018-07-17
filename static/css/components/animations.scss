@@ -1,0 +1,92 @@
+.color-change-and-shrink {
+    animation: shrink 5s 1, color-change 30s 1;
+}
+
+.grow {
+  transform: scale(1);
+  transition-property: transform;
+  transition-duration: 1s;
+}
+
+.grow:hover {
+  transform: scale(1.2);
+}
+
+.fade-in {
+    animation-name: fade-in;
+    animation-duration: 10s;
+    animation-delay: 5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+.fade-out {
+    animation-name: fade-out;
+    animation-duration: 1s;
+    animation-delay: 5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes color-change {
+    0% {
+        color: $white;
+    }
+    10% {
+        color: $riddler-pink;
+    }
+    20% {
+        color: $white;
+    }
+    30% {
+        color: $riddler-pink;
+    }
+    40% {
+        color: $white;
+    }
+    50% {
+        color: $riddler-pink;
+    }
+    60% {
+        color: $white;
+    }
+    70% {
+        color: $riddler-pink;
+    }
+    80% {
+        color: $white;
+    }
+    90% {
+        color: $riddler-pink;
+    }
+    100% {
+        color: $white;
+    }
+}
+
+@keyframes shrink {
+    0% {
+        transform: scale(2.0);
+    }
+    100% {
+        transform: scale(1.0);
+    }
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}

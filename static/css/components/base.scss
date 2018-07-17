@@ -1,0 +1,55 @@
+// Navbar ----------------------------------------------------------------------
+
+.riddler-mark-logo,
+.nav-title {
+    clear: none;
+    margin: 0;
+    float: left;
+    padding: 30px 10px;
+    color: $white;
+    text-shadow: 5px 5px $black;
+}
+
+.riddler-mark-logo {
+    width: 30px;
+    padding: 20px 30px 19px;
+}
+
+ul {
+    float: right;
+    margin: 0;
+    list-style: none;
+}
+
+nav ul li {
+    float: left;
+    padding: 35px;
+    margin: 0 10px;
+    text-decoration: none;
+    color: $white;
+}
+
+.main-nav {
+    width: 100%;
+    min-width: 850px;
+    min-height: 90px;
+    background-color: $riddler-purple;
+    position: fixed;
+    top: 0;
+    @extend %nav-shadow;
+    z-index: 100;
+}
+
+li a {
+    text-decoration: none;
+    color: $white;
+}
+
+// Footer ----------------------------------------------------------------------
+
+footer {
+    background-color: $riddler-purple;
+    margin: 0;
+    padding: 10px 0;
+    color: $white;
+}

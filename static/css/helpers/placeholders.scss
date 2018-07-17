@@ -1,0 +1,23 @@
+%box-shadow-large {
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+%number-shadow {
+    -webkit-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+%nav-shadow {
+    -webkit-box-shadow: inset 0px -4px 30px 0px rgba(0, 0, 0, 0.20);
+    -moz-box-shadow: inset 0px -4px 30px 0px rgba(0, 0, 0, 0.20);
+    box-shadow: inset 0px -4px 30px 0px rgba(0, 0, 0, 0.20);
+}
+
+%cover-background {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}

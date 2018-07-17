@@ -1,0 +1,23 @@
+button:focus {
+    outline: 0;
+}
+
+.results-box-button {
+    display: block;
+    clear: both;
+    margin: 20px auto;
+}
+
+.riddle-link-btn {
+    width: 225px;
+    padding: 20px;
+    border-radius: 50px;
+    font-size: 20px;
+    background-color: $riddler-deeper-purple;
+    margin: 20px;
+    
+}
+
+.riddle-link-btn a {
+    color: $white;
+}

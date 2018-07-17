@@ -118,4 +118,532 @@
 {
     "guess": "All of them",
     "question": 15
+},
+{
+    "guess": "darkness",
+    "question": 7
+},
+{
+    "guess": "coffin",
+    "question": 18
+},
+{
+    "guess": "coffin",
+    "question": 5
+},
+{
+    "guess": "coffin",
+    "question": 7
+},
+{
+    "guess": "a coffin",
+    "question": 3
+},
+{
+    "guess": "aa",
+    "question": 11
+},
+{
+    "guess": "man",
+    "question": 13
+},
+{
+    "guess": "man",
+    "question": 12
+},
+{
+    "guess": "man",
+    "question": 3
+},
+{
+    "guess": "76",
+    "question": 15
+},
+{
+    "guess": "5",
+    "question": 13
+},
+{
+    "guess": "5",
+    "question": 11
+},
+{
+    "guess": "Bob",
+    "question": 15
+},
+{
+    "guess": "Bob",
+    "question": 8
+},
+{
+    "guess": "76",
+    "question": 17
+},
+{
+    "guess": "80",
+    "question": 15
+},
+{
+    "guess": "What?",
+    "question": 16
+},
+{
+    "guess": "100",
+    "question": 12
+},
+{
+    "guess": "100",
+    "question": 10
+},
+{
+    "guess": "100",
+    "question": 1
+},
+{
+    "guess": "100",
+    "question": 2
+},
+{
+    "guess": "76",
+    "question": 12
+},
+{
+    "guess": "peg",
+    "question": 7
+},
+{
+    "guess": "30",
+    "question": 13
+},
+{
+    "guess": "20",
+    "question": 18
+},
+{
+    "guess": "76",
+    "question": 18
+},
+{
+    "guess": "The sea",
+    "question": 17
+},
+{
+    "guess": "The sea",
+    "question": 2
+},
+{
+    "guess": "mhnm",
+    "question": 8
+},
+{
+    "guess": "nothing",
+    "question": 17
+},
+{
+    "guess": "who knows",
+    "question": 15
+},
+{
+    "guess": "31",
+    "question": 13
+},
+{
+    "guess": "3",
+    "question": 10
+},
+{
+    "guess": "31",
+    "question": 13
+},
+{
+    "guess": "a river",
+    "question": 14
+},
+{
+    "guess": "the darkness",
+    "question": 8
+},
+{
+    "guess": "the darkness",
+    "question": 11
+},
+{
+    "guess": "98.98",
+    "question": 14
+},
+{
+    "guess": "WHITE PAINT",
+    "question": 15
+},
+{
+    "guess": "no idea",
+    "question": 16
+},
+{
+    "guess": "time",
+    "question": 4
+},
+{
+    "guess": "74",
+    "question": 18
+},
+{
+    "guess": "4",
+    "question": 10
+},
+{
+    "guess": "0",
+    "question": 14
+},
+{
+    "guess": "20",
+    "question": 18
+},
+{
+    "guess": "who knowz",
+    "question": 15
+},
+{
+    "guess": "30",
+    "question": 18
+},
+{
+    "guess": "time",
+    "question": 2
+},
+{
+    "guess": "100",
+    "question": 14
+},
+{
+    "guess": "11",
+    "question": 18
+},
+{
+    "guess": " ariver",
+    "question": 3
+},
+{
+    "guess": "2",
+    "question": 10
+},
+{
+    "guess": "oxygen",
+    "question": 4
+},
+{
+    "guess": "bob",
+    "question": 4
+},
+{
+    "guess": "0",
+    "question": 17
+},
+{
+    "guess": "LIGHT 1 WAIT LIGHT 2",
+    "question": 16
+},
+{
+    "guess": "90 HOURS",
+    "question": 13
+},
+{
+    "guess": "10 hours",
+    "question": 13
+},
+{
+    "guess": "man",
+    "question": 15
+},
+{
+    "guess": "99%",
+    "question": 14
+},
+{
+    "guess": "99%",
+    "question": 13
+},
+{
+    "guess": "7",
+    "question": 10
+},
+{
+    "guess": "7",
+    "question": 12
+},
+{
+    "guess": "the letter e",
+    "question": 6
+},
+{
+    "guess": "the letter e",
+    "question": 8
+},
+{
+    "guess": "the letter e",
+    "question": 5
+},
+{
+    "guess": "the letter e",
+    "question": 11
+},
+{
+    "guess": "A whale",
+    "question": 17
+},
+{
+    "guess": "your mom",
+    "question": 0
+},
+{
+    "guess": "POP",
+    "question": 12
+},
+{
+    "guess": "BEDROOMS",
+    "question": 13
+},
+{
+    "guess": "A POO",
+    "question": 11
+},
+{
+    "guess": "SLEEP",
+    "question": 8
+},
+{
+    "guess": "YOUR BODY",
+    "question": 16
+},
+{
+    "guess": "PURPLE MONKEY DISHEWASHER",
+    "question": 9
+},
+{
+    "guess": "AGE",
+    "question": 4
+},
+{
+    "guess": "YOUR DREAMS",
+    "question": 5
+},
+{
+    "guess": "BAD EYESIGHT",
+    "question": 8
+},
+{
+    "guess": "AIR",
+    "question": 7
+},
+{
+    "guess": "A DOOR",
+    "question": 18
+},
+{
+    "guess": "pop",
+    "question": 6
+},
+{
+    "guess": "the future",
+    "question": 1
+},
+{
+    "guess": "pop",
+    "question": 6
+},
+{
+    "guess": "nothing",
+    "question": 7
+},
+{
+    "guess": "nothing",
+    "question": 5
+},
+{
+    "guess": "nothing",
+    "question": 16
+},
+{
+    "guess": "aa",
+    "question": 17
+},
+{
+    "guess": "the future",
+    "question": 8
+},
+{
+    "guess": " ",
+    "question": 7
+},
+{
+    "guess": " ",
+    "question": 19
+},
+{
+    "guess": " ",
+    "question": 6
+},
+{
+    "guess": " ",
+    "question": 14
+},
+{
+    "guess": "your name",
+    "question": 19
+},
+{
+    "guess": "your name",
+    "question": 5
+},
+{
+    "guess": "your name",
+    "question": 0
+},
+{
+    "guess": "your name",
+    "question": 7
+},
+{
+    "guess": "your name",
+    "question": 20
+},
+{
+    "guess": "your name",
+    "question": 4
+},
+{
+    "guess": "your name",
+    "question": 7
+},
+{
+    "guess": "mount everest",
+    "question": 13
+},
+{
+    "guess": "mount everest",
+    "question": 8
+},
+{
+    "guess": "mount everest",
+    "question": 9
+},
+{
+    "guess": "pop",
+    "question": 8
+},
+{
+    "guess": "pop",
+    "question": 17
+},
+{
+    "guess": "Big bucks",
+    "question": 7
+},
+{
+    "guess": "The primeinister",
+    "question": 17
+},
+{
+    "guess": "The primeinister",
+    "question": 19
+},
+{
+    "guess": "The primeinister",
+    "question": 15
+},
+{
+    "guess": "The primeinister",
+    "question": 5
+},
+{
+    "guess": "The primeinister",
+    "question": 20
+},
+{
+    "guess": "The primeinister",
+    "question": 10
+},
+{
+    "guess": "teeth",
+    "question": 19
+},
+{
+    "guess": "a tick",
+    "question": 1
+},
+{
+    "guess": "a bag",
+    "question": 10
+},
+{
+    "guess": "bongo bongo land",
+    "question": 20
+},
+{
+    "guess": "white paint",
+    "question": 20
+},
+{
+    "guess": "a poo stick",
+    "question": 17
+},
+{
+    "guess": "money",
+    "question": 8
+},
+{
+    "guess": "chickens",
+    "question": 19
+},
+{
+    "guess": "your toilet",
+    "question": 16
+},
+{
+    "guess": "a pig",
+    "question": 8
+},
+{
+    "guess": "poo",
+    "question": 19
+},
+{
+    "guess": "no idea",
+    "question": 17
+},
+{
+    "guess": "piano",
+    "question": 14
+},
+{
+    "guess": "money",
+    "question": 0
+},
+{
+    "guess": "your shadow",
+    "question": 1
+},
+{
+    "guess": "air",
+    "question": 21
+},
+{
+    "guess": "a newspaper",
+    "question": 15
+},
+{
+    "guess": "a stream",
+    "question": 3
+},
+{
+    "guess": "n",
+    "question": 6
+},
+{
+    "guess": "ngnh",
+    "question": 19
+},
+{
+    "guess": "your breath",
+    "question": 2
 }]

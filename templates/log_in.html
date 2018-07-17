@@ -1,28 +1,21 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'base.html' %} {% block content %}
+<section class="log-in">
+    <div class="form-container">
+        <h2>{{ page_title }}</h2>
+        <p class="login-para">I know what you're thinking. You want to see your name on that leaderboard don't you?</p>
+        <p class="login-para">You think you've got what it takes? Well log in or get signed up and we'll see what you've got!</p>
+        <form class="login-form" method="POST">
+            <label for="email">Email</label>
+            <input type="email" name="email" required/>
 
+            <label for="password">Password</label>
+            <input type="password" name="password" required/>
 
-<h2>{{ page_title }}</h2>
-
-{% with messages = get_flashed_messages() %} 
-{% if messages %} 
-{% for message in messages %}
-<p class="flashed-message">
-    {{ message }}
-</p>
-{% endfor %} 
-
-{% endif %} 
-{% endwith %} 
-
-    <form method="POST">
-        <label for="email">Email</label>
-        <input type="text" name="email" required/>
-        
-        <label for="password">Password</label>
-        <input type="text" name="password" required/>
-        
-        <input type="submit" value="Submit" />
-    </form>
-
-{% endblock %}
+            <input type="submit" value="Submit" /> {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+            <p class="flashed-message centered">
+                {{ message }}
+            </p>
+            {% endfor %} {% endif %} {% endwith %}
+        </form>
+    </div>
+</section>{% endblock %}

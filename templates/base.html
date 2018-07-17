@@ -13,37 +13,30 @@
 </head>
 
 <body>
-    <nav>
-        <div class="logo"></div>
-        <h1 class="title">Hey Riddle Diddle</h1>
+    <nav class="main-nav">
+        <a class="nav-logo" href="{{ url_for('index') }}"> 
+            <img class="riddler-mark-logo" src="{{ url_for('static', filename='images/riddler-mark.png') }}">
+            <h2 class="nav-title grow">Hey Riddle Diddle</h2>
+            <img class="riddler-mark-logo" src="{{ url_for('static', filename='images/riddler-mark.png') }}">
+        </a>
         <ul>
-            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li class="grow"><a href="{{ url_for('index') }}">Home</a></li>
             
             {% if username == "guest" %}
-            <li><a href="{{ url_for('log_in') }}">Log In</a></li>
-            <li><a href="{{ url_for('sign_up') }}">Sign Up</a></li>
+            <li class="grow"><a href="{{ url_for('log_in') }}">Log In</a></li>
+            <li class="grow"><a href="{{ url_for('sign_up') }}">Sign Up</a></li>
             {% endif %}
-            <li><a href="{{ url_for('riddles', username = username) }}">Riddles</a></li>
-            <li><a href="{{ url_for('leaderboard') }}">Leaderboard</a></li>
+            <li class="grow"><a href="{{ url_for('riddles', username = username) }}">Riddles</a></li>
+            <li class="grow"><a href="{{ url_for('leaderboard') }}">Leaderboard</a></li>
             {% if username != "guest" %}
-            <li><a href="{{ url_for('account', username = username) }}">User:  {{ username }}</a></li>
-            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            <li class="grow"><a href="{{ url_for('account', username = username) }}">User:  {{ username }}</a></li>
+            <li class="grow"><a href="{{ url_for('logout') }}">Logout</a></li>
             {% endif %}
         </ul>
     </nav>
-
-    {% block content %} 
-    {% endblock %}
-
-
-    <footer>
-        <h3>By Giancarlo Fiorletta</h3>
+{% block content %}{% endblock %}
+    <footer class="no-overflow">
+        <h3 class="centered grow"><a href="{{ url_for('about_us') }}">About Us</a></h3>
     </footer>
-    <script>
-        setTimeout(function() {
-            location.reload();
-        }, 10000);
-    </script>
 </body>
-
 </html>

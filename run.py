@@ -7,7 +7,7 @@ from answer_checker import *
 app = Flask(__name__)
 app.secret_key = 'hey_riddle_diddle_123'
 
-# Game variables
+# GAME VARIABLES ------------------------------------------------------------------------------
 current_user = "guest"
 current_riddle = 0
 game_in_play = True
@@ -20,72 +20,21 @@ users_file = "data/users.json"
 guesses_file = "data/guesses.json"
 riddles_file = "data/riddles.json"
 
+# ---------------------------------------------------------------------------------------------
+
 # Shortcut for loading json files
 def load_json_data(jsonfile_path, access_mode):
     with open(jsonfile_path, access_mode) as opened_file:
         json_file = json.load(opened_file)
         return json_file
 
-def pick_a_riddle():
-    riddles = load_json_data(riddles_file, "r")
-    ran_num = randint(0, len(riddles)-1)
-    return ran_num
+# USER MANAGEMENT FUNCTIONS --------------------------------------------------------------------
 
-def determine_riddle_order(riddle_order):
-    riddles = load_json_data(riddles_file, "r")
-    while len(riddle_order) < len(riddles):
-        ran_num = pick_a_riddle()
-        if ran_num not in riddle_order:
-            riddle_order.append(ran_num)
-    
-    print(riddle_order)
-        
-# Helps creates an instance of a user
-class User(object):
-    def __init__(self, email, password, username, firstname, surname):
-        self.email = email
-        self.password = password
-        self.username = username
-        self.firstname = firstname
-        self.surname = surname
-        self.highscore = 0
-        
-def jsonDefault(object):
-    return object.__dict__  
-
-# Indexs a guess to a riddle
-class Guess(object):
-    def __init__(self, guess, index):
-        self.question = index + 1
-        self.guess = guess
-
-def add_a_new_user(email, password):
-    
-    user = User(email, password, "TBC", "TBC", "TBC")
-    
-    json_users_data = load_json_data(users_file, "r+")
-    
-    """
-    This will check if the email address is already in the users.json file
-    """
-    existing_email = 0
-    
-    for existing_user in json_users_data:
-        if existing_user["email"] == email:
-            existing_email += 1
-            break
-        
-    if existing_email != 0:
-        flash("I'm sorry, this email address -  {}, has already been registered.\n  Please log in if you've signed up previously or try a different email address.".format(email))
-    else:
-        """
-        If the email address does not already exist, then a new user will be written to the file
-        """
-        json_users_data.append(user)
-        new_data = json.dumps(json_users_data, default=jsonDefault, indent=4, separators=(',', ': '))
-        with open(users_file, "w") as f:
-            f.write(new_data)
-        flash("Hi {}, thanks for signing up!  Please feel free to log in and play.\n Your username should now appear on the leaderboard if you get a high score!".format(email))
+def user_has_logged_in(email):
+    global current_user
+    current_user = email
+    print(current_user)
+    return current_user
 
 def validate_password_on_log_in(email_given, password_given):
     
@@ -111,10 +60,52 @@ def validate_password_on_log_in(email_given, password_given):
     if log_on_validation_status == []:
         flash("I'm sorry, email address {} does not appear to have been registered.  Please sign up now or try again!".format(email_given))
     elif log_on_validation_status[0] == "username & password match":
-        flash("Welcome back {}!  I hope you've got your thinking hat on!".format(email_given))
         return True
     elif log_on_validation_status[0] == "username found, password incorrect":
         flash("I'm sorry, the password you entered does not match with our records.  Please feel free to try again!")
+
+# Helps creates an instance of a user
+class User(object):
+    def __init__(self, email, password, username, firstname, surname):
+        self.email = email
+        self.password = password
+        self.username = username
+        self.firstname = firstname
+        self.surname = surname
+        self.highscore = 0
+        
+def jsonDefault(object):
+    return object.__dict__  
+
+def add_a_new_user(email, password):
+    
+    user = User(email, password, "TBC", "TBC", "TBC")
+    
+    json_users_data = load_json_data(users_file, "r+")
+    
+    """
+    This will check if the email address is already in the users.json file
+    """
+    existing_email = 0
+    
+    for existing_user in json_users_data:
+        if existing_user["email"] == email:
+            existing_email += 1
+            break
+        
+    if existing_email != 0:
+        flash("I'm sorry, this email address -  {}, has already been registered.\n  Please log in if you've signed up previously or try a different email address.".format(email))
+        return False
+    else:
+        """
+        If the email address does not already exist, then a new user will be written to the file
+        """
+        json_users_data.append(user)
+        new_data = json.dumps(json_users_data, default=jsonDefault, indent=4, separators=(',', ': '))
+        with open(users_file, "w") as f:
+            f.write(new_data)
+        user_has_logged_in(email)
+        return True
             
 def update_user_details(current_user, new_email, new_password, new_username, new_firstname, new_surname):
     data = load_json_data(users_file, "r")
@@ -134,7 +125,27 @@ def update_user_details(current_user, new_email, new_password, new_username, new
     with open(users_file, "w") as f:
         new_data = json.dumps(data, default=jsonDefault, indent=4, separators=(',', ': '))
         f.write(new_data)
+    flash("Hey {}, thanks for updating your details!".format(new_email))
+        
+# GAME MECHANICS -----------------------------------------------------------------------------
+def determine_riddle_order(riddle_order):
+    riddles = load_json_data(riddles_file, "r")
+    while len(riddle_order) < len(riddles):
+        ran_num = pick_a_riddle()
+        if ran_num not in riddle_order:
+            riddle_order.append(ran_num)
+            
+def pick_a_riddle():
+    riddles = load_json_data(riddles_file, "r")
+    ran_num = randint(0, len(riddles)-1)
+    return ran_num
     
+# Indexs a guess to a riddle
+class Guess(object):
+    def __init__(self, guess, index):
+        self.question = index + 1
+        self.guess = guess
+
 def add_guess_to_file(guess, index):
     
     guess = Guess(guess, index)
@@ -152,11 +163,6 @@ def add_guess_to_file(guess, index):
             new_guess_str = ",\n{}]".format(jsonguess)
             open_file.seek(guesses_txt_length -1)
             open_file.write(new_guess_str)
-
-def user_has_logged_in(email):
-    global current_user
-    current_user = email
-    return current_user
 
 def update_high_score(new_score):
     data = load_json_data(users_file, "r")
@@ -234,6 +240,8 @@ def create_leaderboard(userdata):
     
     return top_ten
 
+# ROUTES ------------------------------------------------------------------------------        
+
 @app.route('/')
 @app.route('/<username>')
 def index(username=current_user):
@@ -245,7 +253,9 @@ def sign_up():
         """
         Add a new user will check if email already exists in users.json and if not add new username
         """
-        add_a_new_user(str(request.form["email"]), str(request.form["pwd1"]))
+        if add_a_new_user(str(request.form["email"]), str(request.form["pwd1"])) == True:
+            flash("Hi {}, thanks for signing up!\n Your username should now appear on the leaderboard if you get a high score!".format(request.form["email"]))
+            return redirect(url_for('riddles', username=current_user))
     return render_template("sign_up.html", page_title="Sign Up", username=current_user)
 
 @app.route('/log_in.html', methods=["GET", "POST"])
@@ -292,7 +302,11 @@ def account(username):
 def logout():
     global current_user
     current_user = "guest"
-    return redirect("logout")
+    return render_template("logout.html", page_title="Logged Out", username=current_user)
+
+@app.route('/about-us.html')
+def about_us():
+    return render_template("about-us.html", page_title="About Us", username=current_user)
 
 if __name__ == "__main__":
     app.run(host=os.environ.get('IP'),

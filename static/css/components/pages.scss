@@ -1,0 +1,257 @@
+.introduction {
+    background-image: url("../images/riddler.jpg");
+    @extend %cover-background;
+    min-height: 750px;
+    max-width: 1400px;
+}
+
+.welcome-text {
+    max-width: 442px;
+    position: relative;
+    top: 14vh;
+    left: 55vw;
+}
+
+.leaderboard-header {
+    padding: 110px 0 30px;
+}
+
+.leaderboard {
+    position: relative;
+    top: 10vh;
+    left: 10vw;
+    background-color: $white;
+    padding: 30px;
+    border-radius: 15px;
+    min-height: 300px;
+    min-width: 500px;
+    margin: 0;
+}
+
+.leaderboard-page-header {
+     background-image: url("../images/riddler-right-dark.jpg");
+     background-position: top;
+     margin: 0;
+}
+
+th, td {
+    padding: 10px 30px;
+}
+
+tr:nth-of-type(1) {
+    font-weight: bold;
+    font-size: 28px;
+}
+
+tr:nth-of-type(2) {
+    font-weight: bold;
+    font-size: 26px;
+    color: $riddler-green;
+}
+
+tr:nth-of-type(3) {
+    font-weight: bold;
+    font-size: 22px;
+    color: $riddler-pink;
+}
+
+tr:nth-of-type(4) {
+    font-weight: bold;
+    font-size: 18px;
+    color: $riddler-blue;
+}
+
+.riddle-area-header {
+    margin-top: 30px;
+    font-size: 30px;
+}
+
+.riddles-picture {
+     background-image: url("../images/riddler-left-light.jpg");
+     background-position: top;
+     min-height: 770px;
+     margin: 90px 0 0;
+}
+
+.results-box {
+    max-width: 50%;
+    position: absolute;
+    border: 2px solid slategrey;
+    top: 25%;
+    left: 25%;
+    background-color: $riddler-green;
+    border-radius: 15px;
+    z-index: 2;
+    padding: 30px;
+    min-width: 50%;
+    @extend %box-shadow-large;
+    color: $white;
+}
+
+.riddles-box {
+    padding: 0 60px;
+}
+
+.para-for-riddle {
+    line-height: 35px;
+    font-size: 22px;
+    opacity: 0;
+}
+
+.riddle-number {
+    background-color: $riddler-green;
+    width: 300px;
+    border-radius: 30px;
+    margin: 30px auto;
+    color: red;
+    text-shadow: 2px 2px $black;
+    font-weight: 600;
+    @extend %number-shadow;
+}
+
+.riddle-area {
+    max-width: 45%;
+    margin: 0;
+    position: relative;
+    border: 2px solid slategrey;
+    top: 8vh;
+    left: 50vw;
+    background-color: $riddler-purple;
+    border-radius: 15px;
+    z-index: 1;
+    min-height: 400px;
+    color: $white;
+    @extent %box-shadow-large;
+}
+
+.answer-box {
+    margin: 30px;
+    padding: 20px;
+}
+
+.guesses-box {
+    margin: 0 auto;
+    min-width: 95%;
+    background-color: $riddler-purple;
+    border-radius: 35px;
+}
+
+.other-guesses {
+    display: inline-block;
+    margin: 0 15px;
+    text-transform: capitalize;
+    text-shadow: 2px 2px $black;
+}
+
+.log-out-container,
+.account,
+.sign-up,
+.log-in {
+    min-height: 850px;
+    background-image: url("../images/riddler-right.jpg");
+    @extend %cover-background;
+    background-color: $riddler-bright-green;
+}
+
+.log-out-container {
+    background-image: url("../images/riddler-lime-left.jpg");
+    background-color: $riddler-lime-green;
+    margin: 80px 0 0;
+}
+
+.log-out-text {
+    font-weight: 700;
+    font-size: 40px;
+    position: relative;
+    top: 10vh;
+    left: 60vw;
+    color: $white;
+    letter-spacing: 1px;
+}
+
+.about-us-container {
+    background-image: url(../images/riddler-right-white.jpg);
+    background-color: $white;
+    margin: 140px 0 0;
+    background-size: contain;
+    min-height: 800px;
+}
+
+.about-us-text {
+    font-size: 30px;
+    position: relative;
+    top: 5vh;
+    left: 15vw;
+    color: $black;
+    letter-spacing: 0.5px;
+}
+
+.sign-up-para,
+.login-para {
+    font-size: 16px;
+    padding: 0;
+}
+
+.sign-up-form {
+    margin: 90px 0 0;
+}
+
+.login-form {
+    margin: 200px 0 0;
+}
+
+.flashed-message {
+    background-color: $flash-custard-yellow;
+    color: red;
+    font-size: 16px;
+    padding: 15px;
+    border-radius: 35px;
+    margin: 20px 0;
+}
+
+.enlarged-message-font {
+    font-size: 22px;
+    text-shadow: 1px 1px $black;
+}
+
+.account-form-list,
+.sign-up-form-list {
+    padding: 0;
+    margin: 0;
+    float: none;
+}
+
+.sign-up-form-list li {
+    padding: 0 0 20px 0;
+}
+
+.sign-up-form-list li:nth-of-type(1) label {
+    margin: 0 50px 0 0;
+}
+
+.sign-up-form-list li:nth-of-type(2) label {
+    margin: 0 80px 0 0;
+}
+
+.sign-up-form-list li:nth-of-type(3) label {
+    margin: 0 20px 0 0;
+}
+
+.account-form-list li {
+    padding: 0 0 20px 0;
+}
+
+.account-form-list li label {
+    display: inline-block;
+    min-width: 190px;
+}
+
+.welcome-h2 {
+    color: $white;
+    position: relative;
+    top: 10vh;
+    font-size: 50px;
+    letter-spacing: 8px;
+    text-shadow: 6px 6px $black;
+    margin: 0;
+}

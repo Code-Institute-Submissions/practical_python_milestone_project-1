@@ -1,38 +1,30 @@
 {% extends 'base.html' %} {% block content %}
+<h1 class="leaderboard-header">{{ page_title }}</h1>
+<div class="container centered page-header leaderboard-page-header">
+    <table class="leaderboard centered">
+        <tr>
+            <th>Position</th>
+            <th>Username</th>
+            <th>Riddles Solved</th>
+        </tr>
 
+        <!-- For loop to enter top 10 highscores -->
 
-<h2>{{ page_title }}</h2>
+        {% for user in top_ten %}
+        <!-- use ordered list for numbers?-->
+        <tr class="lb-position-{{ loop.index }}">
+            <td>
+                {{ loop.index }}
+            </td>
+            <td>
+                {% if user["username"] == "TBC" %} {{ user["email"] }} {% else %} {{ user["username"] }} {% endif %}
+            </td>
+            <td>
+                {{ user["highscore"] }}
+            </td>
+        </tr>
 
-<table class="leaderboard">
-    <tr>
-        <th>Position</th>
-        <th>Username</th>
-        <th>Riddles Solved</th>
-    </tr>
-
-    <!-- For loop to enter top 10 highscores -->
-
-    {% for user in top_ten %}  <!-- use ordered list for numbers?-->
-    <tr class="lb-position-{{ loop.index }}">
-        <td>
-            {{ loop.index }}
-        </td>
-        <td>
-            {% if user["username"] == "TBC" %}
-            {{ user["email"] }}
-            {% else %}
-            {{ user["username"] }}
-            {% endif %}
-        </td>
-        <td>
-            {{ user["highscore"] }}
-        </td>
-    </tr>
-
-    {% endfor %}
-</table>
-
-
-
-
+        {% endfor %}
+    </table>
+</div>
 {% endblock %}
