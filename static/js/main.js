@@ -1,44 +1,23 @@
-function checkForm(form) {
-  if (form.username.value == "") {
-    alert("Error: Username cannot be blank!");
-    form.username.focus();
-    return false;
-  // }
-  // re = /^\w+$/;
-  // if(!re.test(form.username.value)) {
-  //   alert("Error: Username must contain only letters, numbers and underscores!");
-  //   form.username.focus();
-  //   return false;
-  // }
+var toggle = true;
 
-  if (form.pwd1.value == form.username.value) {
-    alert("Error: Password must be different from Username!");
-    form.pwd1.focus();
-    return false;
-  }
-  re = /[0-9]/;
-  if (!re.test(form.pwd1.value)) {
-    alert("Error: password must contain at least one number (0-9)!");
-    form.pwd1.focus();
-    return false;
-  }
-  re = /[a-z]/;
-  if (!re.test(form.pwd1.value)) {
-    alert("Error: password must contain at least one lowercase letter (a-z)!");
-    form.pwd1.focus();
-    return false;
-  }
-  re = /[A-Z]/;
-  if (!re.test(form.pwd1.value)) {
-    alert("Error: password must contain at least one uppercase letter (A-Z)!");
-    form.pwd1.focus();
-    return false;
+function toggleClass(target, classToToggle){
+  if (toggle){
+    target.addClass(classToToggle);
+    toggle = false;
+  } else {
+    target.removeClass(classToToggle);
+    toggle = true;
   }
 }
-else {
-  alert("Error: Please check that you've entered and confirmed your password!");
-  form.pwd1.focus();
-  return false;
-}
-return true;
-}
+
+$(document).ready(function() {
+  console.log("ready!");
+
+  $("#drop-down-btn").click(function() {
+    $(".menu-list").slideToggle();
+    toggleClass($("#drop-down-btn"), "test");
+  });
+
+  document.getElementById('home-header').scrollIntoView();
+
+});

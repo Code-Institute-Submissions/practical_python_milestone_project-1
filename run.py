@@ -240,6 +240,17 @@ def create_leaderboard(userdata):
     
     return top_ten
 
+def words_in_answer(data, index, riddle_list):
+    correct_riddle_index = riddle_list[index]
+    this_answer = data[correct_riddle_index]["answer"]
+    print(this_answer)
+    word_count = this_answer.split()
+    length_of_answer = len(word_count)
+    if length_of_answer == 1:
+        return "1 word"
+    else:
+        return "{} words".format(length_of_answer)
+
 # ROUTES ------------------------------------------------------------------------------        
 
 @app.route('/')
@@ -278,11 +289,15 @@ def riddles(username):
     if riddle_order == []:
         determine_riddle_order(riddle_order)
     
+    riddles_data=load_json_data(riddles_file, "r")    
+    answer_words = words_in_answer(riddles_data, current_riddle, riddle_order)
+    
     if request.method == "POST":
         check_answer(request.form["guess-entry"], load_json_data(riddles_file, "r"), riddle_order[current_riddle], current_user)
         guesses_data = other_users_guesses(last_riddle)
-    return render_template("riddles.html", page_title="Riddles", riddles_data=load_json_data(riddles_file, "r"), user_data=load_json_data(users_file, "r"), username=current_user, riddle_index=current_riddle, 
-    guesses=guesses_data, game_in_play=game_in_play, score=score_last_game, riddle_order=riddle_order, last=last_riddle)
+        answer_words = words_in_answer(riddles_data, current_riddle, riddle_order)
+    return render_template("riddles.html", page_title="Riddles", riddles_data=riddles_data, user_data=load_json_data(users_file, "r"), username=current_user, riddle_index=current_riddle, 
+    guesses=guesses_data, game_in_play=game_in_play, score=score_last_game, riddle_order=riddle_order, last=last_riddle, word_count=answer_words)
 
 @app.route('/leaderboard.html')
 def leaderboard():

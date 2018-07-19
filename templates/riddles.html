@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 
-<section class="page-header riddles-picture">
+<section class="page-header riddles-picture no-overflow">
     {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
     <div class="results-box centered fade-out">
         <p class="flashed-message enlarged-message-font">
@@ -28,11 +28,12 @@
         <div class="riddles-box centered">
             <p class="para-for-riddle fade-in">{{ riddles_data[riddle_order[riddle_index]]["riddle"] }}</p>
         </div>
+        <p class="word-count fade-in centered">( The answer is {{ word_count }}... )</p> 
         <div class="guess-box centered">
             <p>What is your answer?</p>
 
             <form class="answer-box" method="POST">
-                <input type="text" name="guess-entry" autocomplete="off" autofocus required/>
+                <input id="answer-field" type="text" name="guess-entry" autocomplete="off" required/>
                 <input type="submit" value="Submit" />
             </form>
         </div>

@@ -1,10 +1,10 @@
 {% extends 'base.html' %} {% block content %}
-<section class="log-in">
+<section class="log-in no-overflow">
     <div class="form-container">
         <h2>{{ page_title }}</h2>
         <p class="login-para">I know what you're thinking. You want to see your name on that leaderboard don't you?</p>
         <p class="login-para">You think you've got what it takes? Well log in or get signed up and we'll see what you've got!</p>
-        <form class="login-form" method="POST">
+        <form class="login-form no-overflow" method="POST">
             <label for="email">Email</label>
             <input type="email" name="email" required/>
 

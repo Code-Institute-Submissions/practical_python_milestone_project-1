@@ -1,42 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Hey Riddle Diddle</title>
     
+    <title>Hey Riddle Diddle</title>
+
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
 </head>
 
 <body>
     <nav class="main-nav">
-        <a class="nav-logo" href="{{ url_for('index') }}"> 
-            <img class="riddler-mark-logo" src="{{ url_for('static', filename='images/riddler-mark.png') }}">
-            <h2 class="nav-title grow">Hey Riddle Diddle</h2>
-            <img class="riddler-mark-logo" src="{{ url_for('static', filename='images/riddler-mark.png') }}">
-        </a>
-        <ul>
-            <li class="grow"><a href="{{ url_for('index') }}">Home</a></li>
-            
+        <div class="nav-header">
+            <a class="nav-logo" href="{{ url_for('index') }}"> 
+                <img class="riddler-mark-logo-1" src="{{ url_for('static', filename='images/riddler-mark.png') }}">
+                <h2 class="nav-title grow">Hey Riddle Diddle</h2>
+                <img class="riddler-mark-logo-2" src="{{ url_for('static', filename='images/riddler-mark.png') }}">
+            </a>
+            <i id="drop-down-btn" class="fas fa-chevron-circle-down"></i>
+        </div>
+        <ul class="menu-list">
+            <li class="grow"><a href="{{ url_for('index') }}"><i class="fas fa-home"></i>Home</a></li>
+
             {% if username == "guest" %}
-            <li class="grow"><a href="{{ url_for('log_in') }}">Log In</a></li>
-            <li class="grow"><a href="{{ url_for('sign_up') }}">Sign Up</a></li>
+            <li class="grow"><a href="{{ url_for('log_in') }}"><i class="fas fa-sign-in-alt"></i>Log In</a></li>
+            <li class="grow"><a href="{{ url_for('sign_up') }}"><i class="fas fa-user-plus"></i>Sign Up</a></li>
             {% endif %}
-            <li class="grow"><a href="{{ url_for('riddles', username = username) }}">Riddles</a></li>
-            <li class="grow"><a href="{{ url_for('leaderboard') }}">Leaderboard</a></li>
+            <li class="grow"><a href="{{ url_for('riddles', username = username) }}"><i class="fas fa-question"></i>Riddles</a></li>
+            <li class="grow"><a href="{{ url_for('leaderboard') }}"><i class="fas fa-list-ol"></i>Leaderboard</a></li>
             {% if username != "guest" %}
-            <li class="grow"><a href="{{ url_for('account', username = username) }}">User:  {{ username }}</a></li>
-            <li class="grow"><a href="{{ url_for('logout') }}">Logout</a></li>
+            <li class="grow"><a href="{{ url_for('account', username = username) }}"><i class="fas fa-user-circle"></i>User:  {{ username }}</a></li>
+            <li class="grow"><a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
             {% endif %}
         </ul>
     </nav>
-{% block content %}{% endblock %}
+    {% block content %}{% endblock %}
     <footer class="no-overflow">
         <h3 class="centered grow"><a href="{{ url_for('about_us') }}">About Us</a></h3>
     </footer>
 </body>
+
 </html>

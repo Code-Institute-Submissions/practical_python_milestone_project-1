@@ -7,7 +7,7 @@
         <p class="sign-up-para">Want to appear on that leaderboard? Well there's only one way to do it.</p>
         <p class="sign-up-para">Sign up now and then get to work!</p>
 
-        <form class="sign-up-form" method="POST">
+        <form class="sign-up-form no-overflow" method="POST">
             <ul class="sign-up-form-list">
                 <li>
                     <label for="email">Email Address</label>
@@ -29,7 +29,7 @@
             <p class="flashed-message centered">
                 {{ message }}
             </p>
-            <p class="sign-up-para">Log in now and start playing! <a class="accentuated-link" href="{{ url_for('log_in') }}">Log In</a></p>
+            <p class="sign-up-para">Log in now and start playing! <a class="accentuated-links" href="{{ url_for('log_in') }}">Log In</a></p>
             {% endfor %}{% endif %} {% endwith %}
         </form>
     </div>

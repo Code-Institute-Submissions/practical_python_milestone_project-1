@@ -15,7 +15,13 @@ button:focus {
     font-size: 20px;
     background-color: $riddler-deeper-purple;
     margin: 20px;
+    color: $white;
     
+    @include large-mobile {
+    width: 168px;
+    padding: 14px;
+    font-size: 16px;
+    }
 }
 
 .riddle-link-btn a {

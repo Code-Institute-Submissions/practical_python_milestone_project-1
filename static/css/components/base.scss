@@ -1,6 +1,20 @@
 // Navbar ----------------------------------------------------------------------
+.main-nav {
+    width: 100%;
+    min-height: 90px;
+    background-color: $riddler-purple;
+    position: fixed;
+    top: 0;
+    @extend %nav-shadow;
+    z-index: 100;
 
-.riddler-mark-logo,
+    @include large-mobile {
+        min-height: 75px;
+    }
+}
+
+.riddler-mark-logo-1,
+.riddler-mark-logo-2,
 .nav-title {
     clear: none;
     margin: 0;
@@ -10,34 +24,92 @@
     text-shadow: 5px 5px $black;
 }
 
-.riddler-mark-logo {
-    width: 30px;
+.nav-title {
+    @include large-mobile {
+        font-size: 20px;
+        padding: 24px 0px;
+    }
+}
+
+.riddler-mark-logo-1,
+.riddler-mark-logo-2 {
+    width: 20px;
     padding: 20px 30px 19px;
+}
+
+.riddler-mark-logo-1 {
+
+    @include large-mobile {
+        width: 22px;
+        margin: 16px 22px;
+        padding: 0;
+    }
+}
+
+.riddler-mark-logo-2 {
+    @include mobile {
+        display: none;
+    }
+    
+    @include large-mobile {
+        display: none;
+    }
+}
+
+.fa-chevron-circle-down {
+    display: none;
+
+    @include large-mobile {
+        transition-property: color;
+        transition-duration: 1s;
+        display: block;
+        float: right;
+        font-size: 18px;
+        margin: 25px;
+        color: $white;
+    }
 }
 
 ul {
     float: right;
     margin: 0;
     list-style: none;
+    padding: 0;
+
+    @include large-mobile {
+        float: none;
+        width: 100%;
+        clear: both;
+        display: none;
+    }
 }
 
 nav ul li {
     float: left;
-    padding: 35px;
+    padding: 35px 15px;
     margin: 0 10px;
     text-decoration: none;
     color: $white;
+
+    @include large-mobile {
+        font-size: 15px;
+        float: none;
+        padding: 23px 0;
+        margin: 0;
+        border-top: 1px solid $border-blue;
+    }
 }
 
-.main-nav {
-    width: 100%;
-    min-width: 850px;
-    min-height: 90px;
-    background-color: $riddler-purple;
-    position: fixed;
-    top: 0;
-    @extend %nav-shadow;
-    z-index: 100;
+nav ul li:nth-of-type(odd) {
+    @include large-mobile {
+        background-color: $riddler-green;
+    }
+}
+
+li i {
+    @include large-mobile {
+        margin: 0 40px;
+    }
 }
 
 li a {
@@ -45,8 +117,11 @@ li a {
     color: $white;
 }
 
-// Footer ----------------------------------------------------------------------
+.test {
+    color: $riddler-lime-green;
+}
 
+// Footer ----------------------------------------------------------------------
 footer {
     background-color: $riddler-purple;
     margin: 0;

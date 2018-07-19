@@ -6,23 +6,12 @@
 .accentuated-links {
     color: $alert-red;
     font-size: 26px;
+    
+    @include large-mobile {
+        font-size: 18px;
+    }
 }
 
 .no-overflow {
     overflow: hidden;
-}
-
-.form-container {
-    position: relative;
-    top: 22vh;
-    left: 25vw;
-    color: $white;
-    max-width: 800px;
-}
-
-.page-header {
-    background-image: url("../images/riddler-mask.jpg");
-    @extend %cover-background;
-    min-height: 720px;
-    margin: 60px 0 0;
 }

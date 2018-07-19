@@ -1,11 +1,11 @@
 {% extends 'base.html' %} {% block content %}
-<h1 class="leaderboard-header">{{ page_title }}</h1>
-<div class="container centered page-header leaderboard-page-header">
+<h1 class="leaderboard-header centered">{{ page_title }}</h1>
+<div class="container page-header leaderboard-page-header no-overflow">
     <table class="leaderboard centered">
         <tr>
-            <th>Position</th>
-            <th>Username</th>
-            <th>Riddles Solved</th>
+            <th class="table-row-1">Position</th>
+            <th class="table-row-2">Username</th>
+            <th class="table-row-3">Riddles Solved</th>
         </tr>
 
         <!-- For loop to enter top 10 highscores -->
@@ -13,13 +13,13 @@
         {% for user in top_ten %}
         <!-- use ordered list for numbers?-->
         <tr class="lb-position-{{ loop.index }}">
-            <td>
+            <td class="table-row-1">
                 {{ loop.index }}
             </td>
-            <td>
+            <td class="table-row-2">
                 {% if user["username"] == "TBC" %} {{ user["email"] }} {% else %} {{ user["username"] }} {% endif %}
             </td>
-            <td>
+            <td class="table-row-3">
                 {{ user["highscore"] }}
             </td>
         </tr>

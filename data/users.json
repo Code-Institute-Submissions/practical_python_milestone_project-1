@@ -129,7 +129,7 @@
     },
     {
         "username": "UnicornAreMagic",
-        "highscore": 9,
+        "highscore": 10,
         "surname": "TBC",
         "firstname": "TBC",
         "password": "daftson",
@@ -142,5 +142,13 @@
         "firstname": "TBC",
         "password": "ppppp",
         "email": "p@p.com"
+    },
+    {
+        "username": "Yeet",
+        "highscore": 3,
+        "surname": "TBC",
+        "firstname": "TBC",
+        "password": "yeet1",
+        "email": "yeet@gmail.com"
     }
 ]
