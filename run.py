@@ -33,7 +33,6 @@ def load_json_data(jsonfile_path, access_mode):
 def user_has_logged_in(email):
     global current_user
     current_user = email
-    print(current_user)
     return current_user
 
 def validate_password_on_log_in(email_given, password_given):
@@ -54,7 +53,6 @@ def validate_password_on_log_in(email_given, password_given):
             break
         elif email_given == user["email"] and password_given != user["password"]:
             log_on_validation_status.append("username found, password incorrect")
-            print("found user, password incorrect!")
             break
         
     if log_on_validation_status == []:
@@ -171,7 +169,6 @@ def update_high_score(new_score):
     data = load_json_data(users_file, "r")
     
     for user in range(len(data)):
-        print(current_user)
         if data[user]["email"] == current_user:
             if any("highscore" in x for x in data[user]):
                 if data[user]["highscore"] < new_score:
@@ -186,39 +183,34 @@ def update_high_score(new_score):
         f.write(new_data) 
 
 def check_answer(guess, data, index, username, riddle):
+    
+    global current_riddle
+    global score_last_game
+    global last_riddle
+    global game_in_play
+    global riddle_order
+    
     if guess.lower() == data[index]["answer"].lower():
         if riddle +1 == len(riddle_order):
-            global score_last_game
             score_last_game = current_riddle
-            global last_riddle
             last_riddle = riddle_order[current_riddle]
-            global game_in_play
             game_in_play = False
             update_high_score(current_riddle)
-            global current_riddle
             current_riddle = 0
-            global riddle_order
             riddle_order = []
             determine_riddle_order(riddle_order)
             return "Winner"
         else:
-            global game_in_play
             game_in_play = True
-            global current_riddle
             current_riddle +=1
             flash("Correct!  {} was the right answer!\n Time for your next riddle...!".format(guess.upper()))
     else:
-        global score_last_game
         score_last_game = current_riddle
-        global last_riddle
         last_riddle = riddle_order[current_riddle]
-        global game_in_play
         game_in_play = False
         add_guess_to_file(request.form["guess-entry"], riddle_order[current_riddle]-1)
         update_high_score(current_riddle)
-        global current_riddle
         current_riddle = 0
-        global riddle_order
         riddle_order = []
         determine_riddle_order(riddle_order)
         flash("I'm sorry!  {} was incorrect!\n Please try again from the beginning!".format(guess.upper()))
@@ -263,7 +255,6 @@ def create_leaderboard(userdata):
 def words_in_answer(data, index, riddle_list):
     correct_riddle_index = riddle_list[index]
     this_answer = data[correct_riddle_index]["answer"]
-    print(this_answer)
     word_count = this_answer.split()
     length_of_answer = len(word_count)
     if length_of_answer == 1:
@@ -305,7 +296,6 @@ def log_in():
 @app.route('/<username>/riddles.html', methods=["GET", "POST"])
 def riddles(username):
     guesses_data = []
-    print(guesses_data)
     if riddle_order == []:
         determine_riddle_order(riddle_order)
     
