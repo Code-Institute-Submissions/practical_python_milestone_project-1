@@ -9,7 +9,7 @@
     },
     {
         "username": "ebaymademepoor",
-        "highscore": 12,
+        "highscore": 2,
         "surname": "Fiorletta",
         "firstname": "Giancarlo",
         "password": "ppppp",
@@ -150,5 +150,45 @@
         "firstname": "TBC",
         "password": "yeet1",
         "email": "yeet@gmail.com"
+    },
+    {
+        "username": "TBC",
+        "highscore": 0,
+        "surname": "TBC",
+        "firstname": "TBC",
+        "password": "fffff",
+        "email": "fgf@ghjgh.com"
+    },
+    {
+        "username": "TBC",
+        "highscore": 0,
+        "surname": "TBC",
+        "firstname": "TBC",
+        "password": "ppppp",
+        "email": "p@a.com"
+    },
+    {
+        "username": "TBC",
+        "highscore": 0,
+        "surname": "TBC",
+        "firstname": "TBC",
+        "password": "aaaaa",
+        "email": "caianroma@yahoo.co.ukaa"
+    },
+    {
+        "username": "TBC",
+        "highscore": 0,
+        "surname": "TBC",
+        "firstname": "TBC",
+        "password": "aaaaa",
+        "email": "caianroma@yahoo.co.uka"
+    },
+    {
+        "username": "TBC",
+        "highscore": 0,
+        "surname": "TBC",
+        "firstname": "TBC",
+        "password": "qqqqq",
+        "email": "caianroma@yahoo.co.ukqqq"
     }
 ]

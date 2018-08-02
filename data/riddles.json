@@ -4,10 +4,6 @@
       "answer": "nothing"
     },
     {
-      "riddle": "It walks on four legs in the morning, two legs at noon and three legs in the evening. What is it?",
-      "answer": "man"
-    },
-    {
       "riddle": "I am the beginning of the end, and the end of time and space. I am essential to creation, and I surround every place. What am I?",
       "answer": "the letter e"
     },
@@ -82,6 +78,10 @@
     {
       "riddle": "Before Mount Everest was discovered, what was the highest mountain on Earth?",
       "answer": "Mount Everest"
+    },
+    {
+      "riddle": "If you have me, you want to share me. If you share me, you haven't got me. What am I?",
+      "answer": "A Secret"
     },
         {
       "riddle": "This is as light as a feather, yet no man can hold it for long. What am I?",

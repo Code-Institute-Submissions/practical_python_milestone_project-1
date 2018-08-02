@@ -5,13 +5,17 @@
         <p class="login-para">I know what you're thinking. You want to see your name on that leaderboard don't you?</p>
         <p class="login-para">You think you've got what it takes? Well log in or get signed up and we'll see what you've got!</p>
         <form class="login-form no-overflow" method="POST">
-            <label for="email">Email</label>
-            <input type="email" name="email" required/>
-
-            <label for="password">Password</label>
-            <input type="password" name="password" required/>
-
-            <input type="submit" value="Submit" /> {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+            <div class="login-row">
+                <label for="email">Email</label>
+                <input type="email" name="email" required/>
+            </div>
+            <div class="login-row">
+                <label for="password">Password</label>
+                <input type="password" name="password" required/>
+            </div>
+            <div class="login-row">
+                <input type="submit" value="Submit" /> {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+            </div>
             <p class="flashed-message centered">
                 {{ message }}
             </p>

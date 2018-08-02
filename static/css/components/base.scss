@@ -8,7 +8,7 @@
     @extend %nav-shadow;
     z-index: 100;
 
-    @include large-mobile {
+    @include tablet {
         min-height: 75px;
     }
 }
@@ -25,9 +25,13 @@
 }
 
 .nav-title {
+    @include tablet {
+        font-size: 26px;
+        padding: 24px 0px;
+    }
+    
     @include large-mobile {
         font-size: 20px;
-        padding: 24px 0px;
     }
 }
 
@@ -39,34 +43,38 @@
 
 .riddler-mark-logo-1 {
 
-    @include large-mobile {
-        width: 22px;
+    @include tablet {
+        width: 24px;
         margin: 16px 22px;
         padding: 0;
+    }
+
+    @include large-mobile {
+        width: 22px;
     }
 }
 
 .riddler-mark-logo-2 {
-    @include mobile {
-        display: none;
-    }
-    
-    @include large-mobile {
+    @include tablet {
         display: none;
     }
 }
 
 .fa-chevron-circle-down {
     display: none;
-
-    @include large-mobile {
+    
+    @include tablet {
         transition-property: color;
         transition-duration: 1s;
         display: block;
         float: right;
-        font-size: 18px;
+        font-size: 30px;
         margin: 25px;
         color: $white;
+    }
+    
+    @include large-mobile {
+        font-size: 18px;
     }
 }
 
@@ -76,7 +84,7 @@ ul {
     list-style: none;
     padding: 0;
 
-    @include large-mobile {
+    @include tablet {
         float: none;
         width: 100%;
         clear: both;
@@ -91,23 +99,29 @@ nav ul li {
     text-decoration: none;
     color: $white;
 
-    @include large-mobile {
-        font-size: 15px;
+    @include tablet {
+        font-size: 20px;
         float: none;
         padding: 23px 0;
         margin: 0;
         border-top: 1px solid $border-blue;
     }
+    
+    @include large-mobile {
+        font-size: 15px;
+    }
 }
 
 nav ul li:nth-of-type(odd) {
-    @include large-mobile {
+    
+    @include tablet {
         background-color: $riddler-green;
     }
 }
 
 li i {
-    @include large-mobile {
+    
+    @include tablet {
         margin: 0 40px;
     }
 }
@@ -115,6 +129,14 @@ li i {
 li a {
     text-decoration: none;
     color: $white;
+    
+    @include tablet {
+        margin: 0 0 0 40px;
+    }
+    
+    @include large-mobile {
+        margin: 0 0 0 10px;
+    }
 }
 
 .test {

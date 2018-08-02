@@ -13,7 +13,7 @@
   -moz-box-shadow: inset 0px -4px 30px 0px rgba(0, 0, 0, 0.2);
   box-shadow: inset 0px -4px 30px 0px rgba(0, 0, 0, 0.2); }
 
-.page-header, .introduction {
+.page-header, .introduction, .congrats-container {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover; }
@@ -76,7 +76,7 @@ button:focus {
   transition-duration: 1s; }
 
 .grow:hover {
-  transform: scale(1.2); }
+  transform: scale(1.15); }
 
 .fade-in {
   animation-name: fade-in;
@@ -137,7 +137,7 @@ button:focus {
   position: fixed;
   top: 0;
   z-index: 100; }
-  @media (max-width: 500px) {
+  @media (max-width: 768px) {
     .main-nav {
       min-height: 75px; } }
 
@@ -151,47 +151,53 @@ button:focus {
   color: #fff;
   text-shadow: 5px 5px #000; }
 
+@media (max-width: 768px) {
+  .nav-title {
+    font-size: 26px;
+    padding: 24px 0px; } }
 @media (max-width: 500px) {
   .nav-title {
-    font-size: 20px;
-    padding: 24px 0px; } }
+    font-size: 20px; } }
 
 .riddler-mark-logo-1,
 .riddler-mark-logo-2 {
   width: 20px;
   padding: 20px 30px 19px; }
 
-@media (max-width: 500px) {
+@media (max-width: 768px) {
   .riddler-mark-logo-1 {
-    width: 22px;
+    width: 24px;
     margin: 16px 22px;
     padding: 0; } }
-
-@media (max-width: 320px) {
-  .riddler-mark-logo-2 {
-    display: none; } }
 @media (max-width: 500px) {
+  .riddler-mark-logo-1 {
+    width: 22px; } }
+
+@media (max-width: 768px) {
   .riddler-mark-logo-2 {
     display: none; } }
 
 .fa-chevron-circle-down {
   display: none; }
-  @media (max-width: 500px) {
+  @media (max-width: 768px) {
     .fa-chevron-circle-down {
       transition-property: color;
       transition-duration: 1s;
       display: block;
       float: right;
-      font-size: 18px;
+      font-size: 30px;
       margin: 25px;
       color: #fff; } }
+  @media (max-width: 500px) {
+    .fa-chevron-circle-down {
+      font-size: 18px; } }
 
 ul {
   float: right;
   margin: 0;
   list-style: none;
   padding: 0; }
-  @media (max-width: 500px) {
+  @media (max-width: 768px) {
     ul {
       float: none;
       width: 100%;
@@ -204,25 +210,34 @@ nav ul li {
   margin: 0 10px;
   text-decoration: none;
   color: #fff; }
-  @media (max-width: 500px) {
+  @media (max-width: 768px) {
     nav ul li {
-      font-size: 15px;
+      font-size: 20px;
       float: none;
       padding: 23px 0;
       margin: 0;
       border-top: 1px solid #a8bdec; } }
+  @media (max-width: 500px) {
+    nav ul li {
+      font-size: 15px; } }
 
-@media (max-width: 500px) {
+@media (max-width: 768px) {
   nav ul li:nth-of-type(odd) {
     background-color: #025804; } }
 
-@media (max-width: 500px) {
+@media (max-width: 768px) {
   li i {
     margin: 0 40px; } }
 
 li a {
   text-decoration: none;
   color: #fff; }
+  @media (max-width: 768px) {
+    li a {
+      margin: 0 0 0 40px; } }
+  @media (max-width: 500px) {
+    li a {
+      margin: 0 0 0 10px; } }
 
 .test {
   color: #bffa02; }
@@ -237,6 +252,9 @@ footer {
   background-image: url("../images/riddler-mask.jpg");
   min-height: 720px;
   margin: 75px 0 0; }
+  @media (max-width: 768px) {
+    .page-header {
+      min-height: 766px; } }
   @media (max-width: 500px) {
     .page-header {
       min-height: 458px; } }
@@ -252,6 +270,9 @@ footer {
   letter-spacing: 8px;
   text-shadow: 6px 6px #000;
   margin: 0; }
+  @media (max-width: 768px) {
+    .welcome-h2 {
+      margin: 0 140px; } }
   @media (max-width: 500px) {
     .welcome-h2 {
       margin: 0 30px;
@@ -266,6 +287,9 @@ footer {
   position: relative;
   top: 14vh;
   left: 55vw; }
+  @media (max-width: 768px) {
+    .welcome-text {
+      left: 38vw; } }
   @media (max-width: 500px) {
     .welcome-text {
       position: static;
@@ -278,8 +302,7 @@ footer {
 
 .introduction {
   background-image: url("../images/riddler.jpg");
-  min-height: 750px;
-  max-width: 1400px; }
+  min-height: 750px; }
   @media (max-width: 500px) {
     .introduction {
       background-position: 52%;
@@ -294,16 +317,24 @@ footer {
   left: 25vw;
   color: #fff;
   max-width: 800px; }
-  @media (max-width: 500px) {
+  @media (max-width: 768px) {
     .form-container {
-      margin: 75px 20px 0 20px;
+      margin: 75px 70px 0;
       padding-top: 40px;
       position: static; } }
+  @media (max-width: 500px) {
+    .form-container {
+      margin: 75px 20px 0; } }
 
 .sign-up-para,
 .login-para {
   font-size: 16px;
   padding: 0; }
+  @media (max-width: 768px) {
+    .sign-up-para,
+    .login-para {
+      font-size: 20px;
+      padding: 6px; } }
 
 .log-out-container,
 .account,
@@ -312,13 +343,19 @@ footer {
   min-height: 850px;
   background-image: url("../images/riddler-right.jpg");
   background-color: #13b000; }
-  @media (max-width: 500px) {
+  @media (max-width: 768px) {
     .log-out-container,
     .account,
     .sign-up,
     .log-in {
       background-size: contain;
       background-position: bottom;
+      min-height: 930px; } }
+  @media (max-width: 500px) {
+    .log-out-container,
+    .account,
+    .sign-up,
+    .log-in {
       min-height: 675px; } }
   @media (max-width: 320px) {
     .log-out-container,
@@ -332,6 +369,11 @@ footer {
   @media (max-width: 500px) {
     .login-form {
       margin: 50px 0 0; } }
+
+@media (max-width: 768px) {
+  .login-row {
+    display: block;
+    margin: 15px 0; } }
 
 .sign-up-form {
   margin: 90px 0 0; }
@@ -349,7 +391,7 @@ footer {
   padding: 0;
   margin: 0;
   float: none; }
-  @media (max-width: 500px) {
+  @media (max-width: 768px) {
     .account-form-list,
     .sign-up-form-list {
       display: block; } }
@@ -368,12 +410,16 @@ footer {
 
 .leaderboard-header {
   padding: 110px 0 30px; }
+  @media (max-width: 768px) {
+    .leaderboard-header {
+      letter-spacing: 32px;
+      text-indent: 32px;
+      font-size: 40px; } }
   @media (max-width: 500px) {
     .leaderboard-header {
       font-size: 26px;
       letter-spacing: 6px;
-      text-indent: 6px;
-      padding: 94px 0 24px; } }
+      text-indent: 6px; } }
 
 .leaderboard {
   position: relative;
@@ -385,6 +431,10 @@ footer {
   min-height: 300px;
   min-width: 500px;
   margin: 0; }
+  @media (max-width: 768px) {
+    .leaderboard {
+      font-size: 17px;
+      opacity: .95; } }
   @media (max-width: 500px) {
     .leaderboard {
       position: static;
@@ -429,6 +479,9 @@ td {
 tr:nth-of-type(1) {
   font-weight: bold;
   font-size: 28px; }
+  @media (max-width: 768px) {
+    tr:nth-of-type(1) {
+      font-size: 17px; } }
   @media (max-width: 500px) {
     tr:nth-of-type(1) {
       font-size: 20px; } }
@@ -470,11 +523,17 @@ tr:nth-of-type(4) {
   background-position: top;
   max-height: 770px;
   margin: 90px 0 0; }
+  @media (max-width: 768px) {
+    .riddles-picture {
+      margin: 80px 0 0; } }
   @media (max-width: 500px) {
     .riddles-picture {
-      background-position: 13%;
+      background-position: 10%;
       max-height: 580px;
       margin: 75px 0 0; } }
+  @media (max-width: 320px) {
+    .riddles-picture {
+      background-position: 13%; } }
 
 .riddles-box {
   padding: 0 60px; }
@@ -517,6 +576,10 @@ tr:nth-of-type(4) {
   z-index: 1;
   min-height: 400px;
   color: #fff; }
+  @media (max-width: 768px) {
+    .riddle-area {
+      max-width: 78%;
+      left: 18vw; } }
   @media (max-width: 500px) {
     .riddle-area {
       max-width: 95%;
@@ -554,6 +617,9 @@ tr:nth-of-type(4) {
   padding: 30px;
   min-width: 50%;
   color: #fff; }
+  @media (max-width: 768px) {
+    .results-box {
+      max-width: 56%; } }
   @media (max-width: 500px) {
     .results-box {
       max-width: 86%;
@@ -596,23 +662,31 @@ tr:nth-of-type(4) {
   left: 60vw;
   color: #fff;
   letter-spacing: 1px; }
-  @media (max-width: 500px) {
+  @media (max-width: 768px) {
     .log-out-text {
       position: static;
+      margin: 82px;
+      font-size: 38px; } }
+  @media (max-width: 500px) {
+    .log-out-text {
       margin: 20px;
       font-size: 30px; } }
 
 .about-us-container {
   background-image: url(../images/riddler-right-white.jpg);
   background-color: #fff;
-  margin: 140px 0 0;
-  background-size: contain;
-  min-height: 750px; }
+  background-size: cover;
+  background-position: bottom;
+  min-height: 1200px; }
+  @media (max-width: 768px) {
+    .about-us-container {
+      min-height: 820px;
+      margin: 80px 0 0;
+      background-position: bottom; } }
   @media (max-width: 500px) {
     .about-us-container {
       min-height: 600px;
-      margin: 75px 0 0;
-      background-position: bottom; } }
+      margin: 75px 0 0; } }
   @media (max-width: 320px) {
     .about-us-container {
       min-height: 520px; } }
@@ -624,6 +698,12 @@ tr:nth-of-type(4) {
   left: 20vw;
   color: #000;
   letter-spacing: 0.5px; }
+  @media (max-width: 768px) {
+    .about-us-text {
+      margin: 75px 65px 0;
+      font-size: 26px;
+      position: static;
+      max-width: 500px; } }
   @media (max-width: 500px) {
     .about-us-text {
       margin: 40px 30px 0;
@@ -652,13 +732,55 @@ tr:nth-of-type(4) {
   display: inline-block;
   min-width: 190px; }
 
+.congrats-container {
+  margin: 90px 0 0;
+  min-height: 785px;
+  background-image: url("../images/riddler-winner.jpg");
+  color: #fff; }
+  @media (max-width: 768px) {
+    .congrats-container {
+      margin: 80px 0 0;
+      min-height: 890px; } }
+  @media (max-width: 500px) {
+    .congrats-container {
+      margin: 76px 0 0;
+      min-height: 550px; } }
+
+.congrats-h2 {
+  margin: 0;
+  font-size: 50px; }
+  @media (max-width: 500px) {
+    .congrats-h2 {
+      font-size: 24px; } }
+
+.congrats-text-box {
+  padding: 50px;
+  margin: 100px auto 0;
+  background-color: #000;
+  opacity: .9;
+  max-width: 50%; }
+  @media (max-width: 768px) {
+    .congrats-text-box {
+      max-width: 80%; } }
+  @media (max-width: 500px) {
+    .congrats-text-box {
+      padding: 20px;
+      margin: 35px auto 0;
+      max-width: 85%; } }
+
+.congrats-para:nth-of-type(4) {
+  font-size: 32px;
+  color: #2e9eff; }
+  @media (max-width: 500px) {
+    .congrats-para:nth-of-type(4) {
+      font-size: 20px; } }
+
 html,
 body {
   font-family: 'Roboto', sans-serif;
   padding: 0;
   margin: 0;
   width: 100%;
-  height: 100%;
   background-color: #bffa02; }
 
 a {
@@ -681,14 +803,20 @@ h1 {
   -moz-box-shadow: inset 0px -4px 30px 0px rgba(0, 0, 0, 0.2);
   box-shadow: inset 0px -4px 30px 0px rgba(0, 0, 0, 0.2);
   text-shadow: 0 -1px 0 #fff, 0 1px 0 #2e2e2e, 0 2px 0 #2c2c2c, 0 3px 0 #2a2a2a, 0 4px 0 #282828, 0 5px 0 #262626, 0 6px 0 #242424, 0 7px 0 #222, 0 8px 0 #202020, 0 9px 0 #1e1e1e, 0 10px 0 #1c1c1c, 0 11px 0 #1a1a1a, 0 12px 0 #181818, 0 13px 0 #161616, 0 14px 0 #141414, 0 15px 0 #121212, 0 22px 30px rgba(0, 0, 0, 0.9); }
-  @media (max-width: 500px) {
+  @media (max-width: 768px) {
     h1 {
-      font-size: 45px;
+      font-size: 62px;
       letter-spacing: 18px;
       text-indent: 18px; } }
+  @media (max-width: 500px) {
+    h1 {
+      font-size: 45px; } }
 
 h2 {
   clear: both; }
+  @media (max-width: 768px) {
+    h2 {
+      font-size: 28px; } }
 
 h3 {
   font-size: 30px;
@@ -701,11 +829,15 @@ h3 {
 
 p {
   font-size: 20px;
-  padding: 10px 0; }
+  padding: 10px 0;
+  font-family: 'Roboto Condensed', sans-serif; }
+  @media (max-width: 768px) {
+    p {
+      font-size: 20px;
+      padding: 6px; } }
   @media (max-width: 500px) {
     p {
-      font-size: 14px;
-      padding: 6px; } }
+      font-size: 14px; } }
 
 i {
   margin: 0 15px 0 0; }

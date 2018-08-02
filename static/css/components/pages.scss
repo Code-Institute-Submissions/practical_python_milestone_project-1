@@ -5,6 +5,10 @@
     min-height: 720px;
     margin: 75px 0 0;
 
+    @include tablet {
+        min-height: 766px;
+    }
+
     @include large-mobile {
         min-height: 458px;
     }
@@ -23,6 +27,10 @@
     text-shadow: 6px 6px $black;
     margin: 0;
 
+    @include tablet {
+        margin: 0 140px;
+    }
+
     @include large-mobile {
         margin: 0 30px;
         font-size: 30px;
@@ -40,6 +48,10 @@
     top: 14vh;
     left: 55vw;
 
+    @include tablet {
+        left: 38vw;
+    }
+
     @include large-mobile {
         position: static;
         margin-left: 34%;
@@ -56,7 +68,6 @@
     background-image: url("../images/riddler.jpg");
     @extend %cover-background;
     min-height: 750px;
-    max-width: 1400px;
 
     @include large-mobile {
         background-position: 52%;
@@ -76,10 +87,14 @@
     color: $white;
     max-width: 800px;
 
-    @include large-mobile {
-        margin: 75px 20px 0 20px;
+    @include tablet {
+        margin: 75px 70px 0;
         padding-top: 40px;
         position: static;
+    }
+
+    @include large-mobile {
+        margin: 75px 20px 0;
     }
 }
 
@@ -87,6 +102,11 @@
 .login-para {
     font-size: 16px;
     padding: 0;
+    
+    @include tablet {
+        font-size: 20px;
+        padding: 6px;
+    }
 }
 
 .log-out-container,
@@ -98,9 +118,13 @@
     @extend %contain-background;
     background-color: $riddler-bright-green;
 
-    @include large-mobile {
+    @include tablet {
         background-size: contain;
         background-position: bottom;
+        min-height: 930px;
+    }
+
+    @include large-mobile {
         min-height: 675px;
     }
     
@@ -114,6 +138,13 @@
 
     @include large-mobile {
         margin: 50px 0 0;
+    }
+}
+
+.login-row {
+    @include tablet {
+        display: block;
+        margin: 15px 0;
     }
 }
 
@@ -137,7 +168,7 @@
     margin: 0;
     float: none;
 
-    @include large-mobile {
+    @include tablet {
         display: block;
     }
 }
@@ -162,11 +193,16 @@
 .leaderboard-header {
     padding: 110px 0 30px;
 
+    @include tablet {
+        letter-spacing: 32px;
+        text-indent: 32px;
+        font-size: 40px;
+    }
+    
     @include large-mobile {
         font-size: 26px;
         letter-spacing: 6px;
         text-indent: 6px;
-        padding: 94px 0 24px;
     }
 }
 
@@ -180,6 +216,11 @@
     min-height: 300px;
     min-width: 500px;
     margin: 0;
+
+    @include tablet {
+        font-size: 17px;
+        opacity: .95;
+    }
 
     @include large-mobile {
         position: static;
@@ -238,6 +279,10 @@ tr:nth-of-type(1) {
     font-weight: bold;
     font-size: 28px;
 
+    @include tablet {
+        font-size: 17px;
+    }
+
     @include large-mobile {
         font-size: 20px;
     }
@@ -273,6 +318,9 @@ tr:nth-of-type(4) {
     }
 }
 
+
+// Riddles.html ----------------------------------------------------------------
+
 .riddle-area-header {
     margin-top: 30px;
     font-size: 30px;
@@ -288,11 +336,19 @@ tr:nth-of-type(4) {
     background-position: top;
     max-height: 770px;
     margin: 90px 0 0;
+    
+    @include tablet {
+        margin: 80px 0 0;
+    }
 
     @include large-mobile {
-        background-position: 13%;
+        background-position: 10%;
         max-height: 580px;
         margin: 75px 0 0;
+    }
+    
+    @include mobile {
+        background-position: 13%;
     }
 }
 
@@ -346,6 +402,11 @@ tr:nth-of-type(4) {
     color: $white;
     @extend %box-shadow-large;
 
+    @include tablet {
+        max-width: 78%;
+        left: 18vw;
+    }
+
     @include large-mobile {
         max-width: 95%;
         margin: 150px auto;
@@ -390,6 +451,10 @@ tr:nth-of-type(4) {
     @extend %box-shadow-large;
     color: $white;
 
+    @include tablet {
+        max-width: 56%;
+    }
+
     @include large-mobile {
         max-width: 86%;
         margin: 0;
@@ -415,6 +480,7 @@ tr:nth-of-type(4) {
     text-shadow: 2px 2px $black;
 }
 
+// logout.html -----------------------------------------------------------------
 
 .log-out-container {
     background-image: url("../images/riddler-lime-left.jpg");
@@ -440,24 +506,36 @@ tr:nth-of-type(4) {
     color: $white;
     letter-spacing: 1px;
     
-    @include large-mobile {
+    @include tablet {
         position: static;
+        margin: 82px;
+        font-size: 38px;
+    }
+    
+    @include large-mobile {
         margin: 20px;
         font-size: 30px;
     }
 }
 
+// Aboutus.html ----------------------------------------------------------------
+
 .about-us-container {
     background-image: url(../images/riddler-right-white.jpg);
     background-color: $white;
-    margin: 140px 0 0;
-    background-size: contain;
-    min-height: 750px;
+    background-size: cover;
+    background-position: bottom;
+    min-height: 1200px;
+
+    @include tablet {
+        min-height: 820px;
+        margin: 80px 0 0;
+        background-position: bottom;
+    }
 
     @include large-mobile {
         min-height: 600px;
         margin: 75px 0 0;
-        background-position: bottom;
     }
 
     @include mobile {
@@ -472,6 +550,13 @@ tr:nth-of-type(4) {
     left: 20vw;
     color: $black;
     letter-spacing: 0.5px;
+
+    @include tablet {
+        margin: 75px 65px 0;
+        font-size: 26px;
+        position: static;
+        max-width: 500px;
+    }
 
     @include large-mobile {
         margin: 40px 30px 0;
@@ -498,6 +583,8 @@ tr:nth-of-type(4) {
     text-shadow: 1px 1px $black;
 }
 
+// Account.html ----------------------------------------------------------------
+
 .account-form-list li {
     padding: 0 0 20px 0;
 }
@@ -505,4 +592,60 @@ tr:nth-of-type(4) {
 .account-form-list li label {
     display: inline-block;
     min-width: 190px;
+}
+
+// Congratulations.html --------------------------------------------------------
+
+.congrats-container {
+    margin: 90px 0 0;
+    min-height: 785px;
+    background-image: url("../images/riddler-winner.jpg");
+    @extend %cover-background;   
+    color: $white;
+    
+    @include tablet {
+        margin: 80px 0 0;
+        min-height: 890px;
+    }
+    
+    @include large-mobile {
+        margin: 76px 0 0;
+        min-height: 550px;
+    }
+}
+
+.congrats-h2 {
+    margin: 0;
+    font-size: 50px;
+    
+    @include large-mobile {
+        font-size: 24px;
+    }
+}
+
+.congrats-text-box {
+    padding: 50px;
+    margin: 100px auto 0;
+    background-color: $black;
+    opacity: .9;
+    max-width: 50%;
+    
+    @include tablet {
+        max-width: 80%;
+    }
+    
+    @include large-mobile {
+        padding: 20px;
+        margin: 35px auto 0;
+        max-width: 85%;
+    }
+}
+
+.congrats-para:nth-of-type(4) {
+    font-size: 32px;
+    color: $winner-text-blue;
+    
+    @include large-mobile {
+        font-size: 20px;
+    }
 }

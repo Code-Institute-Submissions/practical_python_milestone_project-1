@@ -13,6 +13,7 @@
         {% if username != "guest" %} {% for user in user_data %} {% if username == user["email"] %}
 
         <p>Your highest ever score is ... <strong>{{ user["highscore"] }}</strong>!</p>
+        
         {% endif %} {% endfor %} {% endif %}
 
         <p>If it's any consolation, here are some of the guesses other people made...</p>

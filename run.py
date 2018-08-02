@@ -77,35 +77,38 @@ class User(object):
 def jsonDefault(object):
     return object.__dict__  
 
-def add_a_new_user(email, password):
-    
-    user = User(email, password, "TBC", "TBC", "TBC")
-    
-    json_users_data = load_json_data(users_file, "r+")
-    
-    """
-    This will check if the email address is already in the users.json file
-    """
-    existing_email = 0
-    
-    for existing_user in json_users_data:
-        if existing_user["email"] == email:
-            existing_email += 1
-            break
+def add_a_new_user(email, password, confirm_password):
+    if password == confirm_password:
         
-    if existing_email != 0:
-        flash("I'm sorry, this email address -  {}, has already been registered.\n  Please log in if you've signed up previously or try a different email address.".format(email))
-        return False
+        user = User(email, password, "TBC", "TBC", "TBC")
+    
+        json_users_data = load_json_data(users_file, "r+")
+    
+        """
+        This will check if the email address is already in the users.json file
+        """
+        existing_email = 0
+    
+        for existing_user in json_users_data:
+            if existing_user["email"] == email:
+                existing_email += 1
+                break
+        
+        if existing_email != 0:
+            flash("I'm sorry, this email address -  {}, has already been registered.\n  Please log in if you've signed up previously or try a different email address.".format(email))
+            return False
+        else:
+            """
+            If the email address does not already exist, then a new user will be written to the file
+            """
+            json_users_data.append(user)
+            new_data = json.dumps(json_users_data, default=jsonDefault, indent=4, separators=(',', ': '))
+            with open(users_file, "w") as f:
+                f.write(new_data)
+            user_has_logged_in(email)
+            return True
     else:
-        """
-        If the email address does not already exist, then a new user will be written to the file
-        """
-        json_users_data.append(user)
-        new_data = json.dumps(json_users_data, default=jsonDefault, indent=4, separators=(',', ': '))
-        with open(users_file, "w") as f:
-            f.write(new_data)
-        user_has_logged_in(email)
-        return True
+        flash("I'm sorry, your passwords didn't match.\n  Please try again!")
             
 def update_user_details(current_user, new_email, new_password, new_username, new_firstname, new_surname):
     data = load_json_data(users_file, "r")
@@ -184,11 +187,26 @@ def update_high_score(new_score):
 
 def check_answer(guess, data, index, username):
     if guess.lower() == data[index]["answer"].lower():
-        global game_in_play
-        game_in_play = True
-        global current_riddle
-        current_riddle +=1
-        flash("Correct!  {} was the right answer!\n Time for your next riddle...!".format(guess.upper()))
+        if current_riddle +1 == len(riddle_order):
+            global score_last_game
+            score_last_game = current_riddle
+            global last_riddle
+            last_riddle = riddle_order[current_riddle]
+            global game_in_play
+            game_in_play = False
+            update_high_score(current_riddle)
+            global current_riddle
+            current_riddle = 0
+            global riddle_order
+            riddle_order = []
+            determine_riddle_order(riddle_order)
+            return "Winner"
+        else:
+            global game_in_play
+            game_in_play = True
+            global current_riddle
+            current_riddle +=1
+            flash("Correct!  {} was the right answer!\n Time for your next riddle...!".format(guess.upper()))
     else:
         global score_last_game
         score_last_game = current_riddle
@@ -203,7 +221,7 @@ def check_answer(guess, data, index, username):
         global riddle_order
         riddle_order = []
         determine_riddle_order(riddle_order)
-        flash("I'm sorry!  {} was incorrect!\n Please try again from the beginning :(".format(guess.upper()))
+        flash("I'm sorry!  {} was incorrect!\n Please try again from the beginning!".format(guess.upper()))
 
 def other_users_guesses(riddle):
     guess_data = load_json_data(guesses_file, "r")
@@ -215,6 +233,8 @@ def other_users_guesses(riddle):
             num_of_related_guesses +=1
         
     if num_of_related_guesses != 0:
+        while len(user_guesses) > 26:
+            user_guesses.pop(0)
         return user_guesses
     else:
         return ["No other guesses so far"]
@@ -264,8 +284,8 @@ def sign_up():
         """
         Add a new user will check if email already exists in users.json and if not add new username
         """
-        if add_a_new_user(str(request.form["email"]), str(request.form["pwd1"])) == True:
-            flash("Hi {}, thanks for signing up!\n Your username should now appear on the leaderboard if you get a high score!".format(request.form["email"]))
+        if add_a_new_user(str(request.form["email"]), str(request.form["pwd1"]), str(request.form["pwd2"])) == True:
+            flash("Hi {}, thanks for signing up! Your username should now appear on the leaderboard if you get a high score! Now get ready to riddle...!".format(request.form["email"]))
             return redirect(url_for('riddles', username=current_user))
     return render_template("sign_up.html", page_title="Sign Up", username=current_user)
 
@@ -293,7 +313,8 @@ def riddles(username):
     answer_words = words_in_answer(riddles_data, current_riddle, riddle_order)
     
     if request.method == "POST":
-        check_answer(request.form["guess-entry"], load_json_data(riddles_file, "r"), riddle_order[current_riddle], current_user)
+        if check_answer(request.form["guess-entry"], load_json_data(riddles_file, "r"), riddle_order[current_riddle], current_user) == "Winner":
+            return redirect(url_for("congratulations", username=current_user))
         guesses_data = other_users_guesses(last_riddle)
         answer_words = words_in_answer(riddles_data, current_riddle, riddle_order)
     return render_template("riddles.html", page_title="Riddles", riddles_data=riddles_data, user_data=load_json_data(users_file, "r"), username=current_user, riddle_index=current_riddle, 
@@ -322,6 +343,10 @@ def logout():
 @app.route('/about-us.html')
 def about_us():
     return render_template("about-us.html", page_title="About Us", username=current_user)
+
+@app.route('/congratulations.html')
+def congratulations():
+    return render_template("congratulations.html", page_title="Winner", username=current_user)
 
 if __name__ == "__main__":
     app.run(host=os.environ.get('IP'),

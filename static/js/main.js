@@ -15,7 +15,7 @@ $(document).ready(function() {
 
   $("#drop-down-btn").click(function() {
     $(".menu-list").slideToggle();
-    toggleClass($("#drop-down-btn"), "test");
+    toggleClass($(this), "test");
   });
 
   document.getElementById('home-header').scrollIntoView();
