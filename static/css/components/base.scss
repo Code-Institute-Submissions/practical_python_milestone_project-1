@@ -25,11 +25,17 @@
 }
 
 .nav-title {
+    @include large-tablet {
+        font-size: 20px;
+        padding: 33px 2px;
+    }
+
+
     @include tablet {
         font-size: 26px;
         padding: 24px 0px;
     }
-    
+
     @include large-mobile {
         font-size: 20px;
     }
@@ -39,6 +45,10 @@
 .riddler-mark-logo-2 {
     width: 20px;
     padding: 20px 30px 19px;
+
+    @include large-tablet {
+        padding: 28px 20px 0;
+    }
 }
 
 .riddler-mark-logo-1 {
@@ -62,7 +72,7 @@
 
 .fa-chevron-circle-down {
     display: none;
-    
+
     @include tablet {
         transition-property: color;
         transition-duration: 1s;
@@ -72,9 +82,10 @@
         margin: 25px;
         color: $white;
     }
-    
+
     @include large-mobile {
         font-size: 18px;
+        padding: 3px 0 0;
     }
 }
 
@@ -99,6 +110,11 @@ nav ul li {
     text-decoration: none;
     color: $white;
 
+    @include large-tablet {
+        font-size: 14px;
+        padding: 36px 8px;
+    }
+
     @include tablet {
         font-size: 20px;
         float: none;
@@ -106,21 +122,21 @@ nav ul li {
         margin: 0;
         border-top: 1px solid $border-blue;
     }
-    
+
     @include large-mobile {
         font-size: 15px;
     }
 }
 
 nav ul li:nth-of-type(odd) {
-    
+
     @include tablet {
         background-color: $riddler-green;
     }
 }
 
 li i {
-    
+
     @include tablet {
         margin: 0 40px;
     }
@@ -129,11 +145,11 @@ li i {
 li a {
     text-decoration: none;
     color: $white;
-    
+
     @include tablet {
         margin: 0 0 0 40px;
     }
-    
+
     @include large-mobile {
         margin: 0 0 0 10px;
     }

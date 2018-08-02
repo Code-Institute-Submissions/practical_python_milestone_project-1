@@ -5,6 +5,10 @@
     min-height: 720px;
     margin: 75px 0 0;
 
+    @include large-tablet {
+        min-height: 1000px;
+    }
+
     @include tablet {
         min-height: 766px;
     }
@@ -27,7 +31,14 @@
     text-shadow: 6px 6px $black;
     margin: 0;
 
+    @include large-tablet {
+        font-size: 60px;
+        margin: 0 auto;
+        max-width: 650px;
+    }
+
     @include tablet {
+        font-size: 50px;
         margin: 0 140px;
     }
 
@@ -36,7 +47,7 @@
         font-size: 30px;
         letter-spacing: 4px;
     }
-    
+
     @include mobile {
         margin: 0;
     }
@@ -48,6 +59,11 @@
     top: 14vh;
     left: 55vw;
 
+    @include large-tablet {
+        left: 48vw;
+        top: 18vh;
+    }
+
     @include tablet {
         left: 38vw;
     }
@@ -58,7 +74,7 @@
         max-width: 216px;
         padding-top: 60px;
     }
-    
+
     @include mobile {
         margin-left: 84px;
     }
@@ -69,11 +85,15 @@
     @extend %cover-background;
     min-height: 750px;
 
+    @include large-tablet {
+        min-height: 900px;
+    }
+
     @include large-mobile {
         background-position: 52%;
         min-height: 500px;
     }
-    
+
     @include mobile {
         background-position: 48%;
     }
@@ -87,6 +107,10 @@
     color: $white;
     max-width: 800px;
 
+    @include large-tablet {
+        left: 14vw;
+    }
+
     @include tablet {
         margin: 75px 70px 0;
         padding-top: 40px;
@@ -98,11 +122,18 @@
     }
 }
 
+li input {
+    @include large-tablet {
+        font-size: 20px;
+        padding: 4px 16px;    
+    }
+}
+
 .sign-up-para,
 .login-para {
     font-size: 16px;
     padding: 0;
-    
+
     @include tablet {
         font-size: 20px;
         padding: 6px;
@@ -118,6 +149,10 @@
     @extend %contain-background;
     background-color: $riddler-bright-green;
 
+    @include large-tablet {
+        min-height: 1300px;
+    }
+
     @include tablet {
         background-size: contain;
         background-position: bottom;
@@ -127,7 +162,7 @@
     @include large-mobile {
         min-height: 675px;
     }
-    
+
     @include mobile {
         min-height: 545px;
     }
@@ -193,12 +228,12 @@
 .leaderboard-header {
     padding: 110px 0 30px;
 
-    @include tablet {
+    @include large-tablet {
+        font-size: 40px;
         letter-spacing: 32px;
         text-indent: 32px;
-        font-size: 40px;
     }
-    
+
     @include large-mobile {
         font-size: 26px;
         letter-spacing: 6px;
@@ -217,15 +252,22 @@
     min-width: 500px;
     margin: 0;
 
-    @include tablet {
+    @include large-tablet {
+        top: 18vh;
+        left: 7vw;
         font-size: 17px;
         opacity: .95;
+    }
+
+    @include tablet {
+        top: 10vh;
+        left: 10vw;
     }
 
     @include large-mobile {
         position: static;
         padding: 6px;
-        margin: 250px auto 10px;
+        margin: 208px auto 10px;
         min-width: 302px;
     }
 }
@@ -242,8 +284,21 @@
     background-position: top;
     margin: 0;
 
+    @include large-tablet {
+        min-height: 1080px;
+    }
+    
+    @include tablet {
+        min-height: 780px;
+    }
+
     @include large-mobile {
         background-position: 80%;
+        min-height: 560px;
+    }
+    
+    @include mobile {
+        min-height: 492px;
     }
 }
 
@@ -320,7 +375,6 @@ tr:nth-of-type(4) {
 
 
 // Riddles.html ----------------------------------------------------------------
-
 .riddle-area-header {
     margin-top: 30px;
     font-size: 30px;
@@ -331,24 +385,40 @@ tr:nth-of-type(4) {
     }
 }
 
+.riddles-h1 {
+    @include large-tablet {
+        font-size: 50px;
+    }
+    
+    @include mobile {
+        font-size: 36px;
+    }
+}
+
 .riddles-picture {
     background-image: url("../images/riddler-left-light.jpg");
     background-position: top;
-    max-height: 770px;
+    min-height: 770px;
     margin: 90px 0 0;
-    
+
+    @include large-tablet {
+        min-height: 1090px;
+    }
+
     @include tablet {
+        min-height: 826px;
         margin: 80px 0 0;
     }
 
     @include large-mobile {
         background-position: 10%;
-        max-height: 580px;
+        min-height: 580px;
         margin: 75px 0 0;
     }
-    
+
     @include mobile {
-        background-position: 13%;
+        background-position: 12%;
+        min-height: 492px;
     }
 }
 
@@ -402,8 +472,15 @@ tr:nth-of-type(4) {
     color: $white;
     @extend %box-shadow-large;
 
+    @include large-tablet {
+        max-width: 64%;
+        left: 32vw;
+        top: 16vh;
+    }
+
     @include tablet {
         max-width: 78%;
+        top: 7vh;
         left: 18vw;
     }
 
@@ -416,6 +493,12 @@ tr:nth-of-type(4) {
         -moz-box-shadow: 3px 10px 5px 0px rgba(0, 0, 0, 0.75);
         box-shadow: 3px 10px 5px 0px rgba(0, 0, 0, 0.75);
     }
+
+    @include large-mobile {
+        max-width: 95%;
+        margin: 100px auto;
+    }
+
 }
 
 .word-count {
@@ -481,17 +564,16 @@ tr:nth-of-type(4) {
 }
 
 // logout.html -----------------------------------------------------------------
-
 .log-out-container {
     background-image: url("../images/riddler-lime-left.jpg");
     background-color: $riddler-lime-green;
     margin: 80px 0 0;
-    
+
     @include large-mobile {
         margin: 75px 0 0;
         min-height: 600px;
     }
-    
+
     @include mobile {
         min-height: 482px;
     }
@@ -505,13 +587,18 @@ tr:nth-of-type(4) {
     left: 60vw;
     color: $white;
     letter-spacing: 1px;
-    
+
+    @include large-tablet {
+        top: 56vh;
+        left: 50vw;        
+    }
+
     @include tablet {
         position: static;
         margin: 82px;
         font-size: 38px;
     }
-    
+
     @include large-mobile {
         margin: 20px;
         font-size: 30px;
@@ -519,7 +606,6 @@ tr:nth-of-type(4) {
 }
 
 // Aboutus.html ----------------------------------------------------------------
-
 .about-us-container {
     background-image: url(../images/riddler-right-white.jpg);
     background-color: $white;
@@ -551,6 +637,11 @@ tr:nth-of-type(4) {
     color: $black;
     letter-spacing: 0.5px;
 
+    @include large-tablet {
+        top: 28vh;
+        left: 16vw;
+    }
+
     @include tablet {
         margin: 75px 65px 0;
         font-size: 26px;
@@ -559,6 +650,7 @@ tr:nth-of-type(4) {
     }
 
     @include large-mobile {
+        max-width: 300px;
         margin: 40px 30px 0;
         font-size: 26px;
         position: static;
@@ -584,7 +676,6 @@ tr:nth-of-type(4) {
 }
 
 // Account.html ----------------------------------------------------------------
-
 .account-form-list li {
     padding: 0 0 20px 0;
 }
@@ -595,19 +686,22 @@ tr:nth-of-type(4) {
 }
 
 // Congratulations.html --------------------------------------------------------
-
 .congrats-container {
     margin: 90px 0 0;
     min-height: 785px;
     background-image: url("../images/riddler-winner.jpg");
-    @extend %cover-background;   
+    @extend %cover-background;
     color: $white;
-    
+
+    @include large-tablet {
+        min-height: 1300px;
+    }
+
     @include tablet {
         margin: 80px 0 0;
         min-height: 890px;
     }
-    
+
     @include large-mobile {
         margin: 76px 0 0;
         min-height: 550px;
@@ -617,7 +711,7 @@ tr:nth-of-type(4) {
 .congrats-h2 {
     margin: 0;
     font-size: 50px;
-    
+
     @include large-mobile {
         font-size: 24px;
     }
@@ -629,11 +723,16 @@ tr:nth-of-type(4) {
     background-color: $black;
     opacity: .9;
     max-width: 50%;
-    
+
+    @include large-tablet {
+        margin: 225px auto 0;
+    }
+
     @include tablet {
+        margin: 100px auto 0;
         max-width: 80%;
     }
-    
+
     @include large-mobile {
         padding: 20px;
         margin: 35px auto 0;
@@ -644,7 +743,7 @@ tr:nth-of-type(4) {
 .congrats-para:nth-of-type(4) {
     font-size: 32px;
     color: $winner-text-blue;
-    
+
     @include large-mobile {
         font-size: 20px;
     }

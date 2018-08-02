@@ -151,6 +151,10 @@ button:focus {
   color: #fff;
   text-shadow: 5px 5px #000; }
 
+@media (max-width: 1024px) {
+  .nav-title {
+    font-size: 20px;
+    padding: 33px 2px; } }
 @media (max-width: 768px) {
   .nav-title {
     font-size: 26px;
@@ -163,6 +167,10 @@ button:focus {
 .riddler-mark-logo-2 {
   width: 20px;
   padding: 20px 30px 19px; }
+  @media (max-width: 1024px) {
+    .riddler-mark-logo-1,
+    .riddler-mark-logo-2 {
+      padding: 28px 20px 0; } }
 
 @media (max-width: 768px) {
   .riddler-mark-logo-1 {
@@ -190,7 +198,8 @@ button:focus {
       color: #fff; } }
   @media (max-width: 500px) {
     .fa-chevron-circle-down {
-      font-size: 18px; } }
+      font-size: 18px;
+      padding: 3px 0 0; } }
 
 ul {
   float: right;
@@ -210,6 +219,10 @@ nav ul li {
   margin: 0 10px;
   text-decoration: none;
   color: #fff; }
+  @media (max-width: 1024px) {
+    nav ul li {
+      font-size: 14px;
+      padding: 36px 8px; } }
   @media (max-width: 768px) {
     nav ul li {
       font-size: 20px;
@@ -252,6 +265,9 @@ footer {
   background-image: url("../images/riddler-mask.jpg");
   min-height: 720px;
   margin: 75px 0 0; }
+  @media (max-width: 1024px) {
+    .page-header {
+      min-height: 1000px; } }
   @media (max-width: 768px) {
     .page-header {
       min-height: 766px; } }
@@ -270,8 +286,14 @@ footer {
   letter-spacing: 8px;
   text-shadow: 6px 6px #000;
   margin: 0; }
+  @media (max-width: 1024px) {
+    .welcome-h2 {
+      font-size: 60px;
+      margin: 0 auto;
+      max-width: 650px; } }
   @media (max-width: 768px) {
     .welcome-h2 {
+      font-size: 50px;
       margin: 0 140px; } }
   @media (max-width: 500px) {
     .welcome-h2 {
@@ -287,6 +309,10 @@ footer {
   position: relative;
   top: 14vh;
   left: 55vw; }
+  @media (max-width: 1024px) {
+    .welcome-text {
+      left: 48vw;
+      top: 18vh; } }
   @media (max-width: 768px) {
     .welcome-text {
       left: 38vw; } }
@@ -303,6 +329,9 @@ footer {
 .introduction {
   background-image: url("../images/riddler.jpg");
   min-height: 750px; }
+  @media (max-width: 1024px) {
+    .introduction {
+      min-height: 900px; } }
   @media (max-width: 500px) {
     .introduction {
       background-position: 52%;
@@ -317,6 +346,9 @@ footer {
   left: 25vw;
   color: #fff;
   max-width: 800px; }
+  @media (max-width: 1024px) {
+    .form-container {
+      left: 14vw; } }
   @media (max-width: 768px) {
     .form-container {
       margin: 75px 70px 0;
@@ -325,6 +357,11 @@ footer {
   @media (max-width: 500px) {
     .form-container {
       margin: 75px 20px 0; } }
+
+@media (max-width: 1024px) {
+  li input {
+    font-size: 20px;
+    padding: 4px 16px; } }
 
 .sign-up-para,
 .login-para {
@@ -343,6 +380,12 @@ footer {
   min-height: 850px;
   background-image: url("../images/riddler-right.jpg");
   background-color: #13b000; }
+  @media (max-width: 1024px) {
+    .log-out-container,
+    .account,
+    .sign-up,
+    .log-in {
+      min-height: 1300px; } }
   @media (max-width: 768px) {
     .log-out-container,
     .account,
@@ -410,11 +453,11 @@ footer {
 
 .leaderboard-header {
   padding: 110px 0 30px; }
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     .leaderboard-header {
+      font-size: 40px;
       letter-spacing: 32px;
-      text-indent: 32px;
-      font-size: 40px; } }
+      text-indent: 32px; } }
   @media (max-width: 500px) {
     .leaderboard-header {
       font-size: 26px;
@@ -431,15 +474,21 @@ footer {
   min-height: 300px;
   min-width: 500px;
   margin: 0; }
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     .leaderboard {
+      top: 18vh;
+      left: 7vw;
       font-size: 17px;
       opacity: .95; } }
+  @media (max-width: 768px) {
+    .leaderboard {
+      top: 10vh;
+      left: 10vw; } }
   @media (max-width: 500px) {
     .leaderboard {
       position: static;
       padding: 6px;
-      margin: 250px auto 10px;
+      margin: 208px auto 10px;
       min-width: 302px; } }
 
 @media (max-width: 500px) {
@@ -451,9 +500,19 @@ footer {
   background-image: url("../images/riddler-right-dark.jpg");
   background-position: top;
   margin: 0; }
+  @media (max-width: 1024px) {
+    .leaderboard-page-header {
+      min-height: 1080px; } }
+  @media (max-width: 768px) {
+    .leaderboard-page-header {
+      min-height: 780px; } }
   @media (max-width: 500px) {
     .leaderboard-page-header {
-      background-position: 80%; } }
+      background-position: 80%;
+      min-height: 560px; } }
+  @media (max-width: 320px) {
+    .leaderboard-page-header {
+      min-height: 492px; } }
 
 th,
 td {
@@ -518,22 +577,34 @@ tr:nth-of-type(4) {
       margin-top: 20px;
       font-size: 20px; } }
 
+@media (max-width: 1024px) {
+  .riddles-h1 {
+    font-size: 50px; } }
+@media (max-width: 320px) {
+  .riddles-h1 {
+    font-size: 36px; } }
+
 .riddles-picture {
   background-image: url("../images/riddler-left-light.jpg");
   background-position: top;
-  max-height: 770px;
+  min-height: 770px;
   margin: 90px 0 0; }
+  @media (max-width: 1024px) {
+    .riddles-picture {
+      min-height: 1090px; } }
   @media (max-width: 768px) {
     .riddles-picture {
+      min-height: 826px;
       margin: 80px 0 0; } }
   @media (max-width: 500px) {
     .riddles-picture {
       background-position: 10%;
-      max-height: 580px;
+      min-height: 580px;
       margin: 75px 0 0; } }
   @media (max-width: 320px) {
     .riddles-picture {
-      background-position: 13%; } }
+      background-position: 12%;
+      min-height: 492px; } }
 
 .riddles-box {
   padding: 0 60px; }
@@ -576,9 +647,15 @@ tr:nth-of-type(4) {
   z-index: 1;
   min-height: 400px;
   color: #fff; }
+  @media (max-width: 1024px) {
+    .riddle-area {
+      max-width: 64%;
+      left: 32vw;
+      top: 16vh; } }
   @media (max-width: 768px) {
     .riddle-area {
       max-width: 78%;
+      top: 7vh;
       left: 18vw; } }
   @media (max-width: 500px) {
     .riddle-area {
@@ -589,6 +666,10 @@ tr:nth-of-type(4) {
       -webkit-box-shadow: 3px 10px 5px 0px rgba(0, 0, 0, 0.75);
       -moz-box-shadow: 3px 10px 5px 0px rgba(0, 0, 0, 0.75);
       box-shadow: 3px 10px 5px 0px rgba(0, 0, 0, 0.75); } }
+  @media (max-width: 500px) {
+    .riddle-area {
+      max-width: 95%;
+      margin: 100px auto; } }
 
 .word-count {
   opacity: 0;
@@ -662,6 +743,10 @@ tr:nth-of-type(4) {
   left: 60vw;
   color: #fff;
   letter-spacing: 1px; }
+  @media (max-width: 1024px) {
+    .log-out-text {
+      top: 56vh;
+      left: 50vw; } }
   @media (max-width: 768px) {
     .log-out-text {
       position: static;
@@ -698,6 +783,10 @@ tr:nth-of-type(4) {
   left: 20vw;
   color: #000;
   letter-spacing: 0.5px; }
+  @media (max-width: 1024px) {
+    .about-us-text {
+      top: 28vh;
+      left: 16vw; } }
   @media (max-width: 768px) {
     .about-us-text {
       margin: 75px 65px 0;
@@ -706,6 +795,7 @@ tr:nth-of-type(4) {
       max-width: 500px; } }
   @media (max-width: 500px) {
     .about-us-text {
+      max-width: 300px;
       margin: 40px 30px 0;
       font-size: 26px;
       position: static; } }
@@ -737,6 +827,9 @@ tr:nth-of-type(4) {
   min-height: 785px;
   background-image: url("../images/riddler-winner.jpg");
   color: #fff; }
+  @media (max-width: 1024px) {
+    .congrats-container {
+      min-height: 1300px; } }
   @media (max-width: 768px) {
     .congrats-container {
       margin: 80px 0 0;
@@ -759,8 +852,12 @@ tr:nth-of-type(4) {
   background-color: #000;
   opacity: .9;
   max-width: 50%; }
+  @media (max-width: 1024px) {
+    .congrats-text-box {
+      margin: 225px auto 0; } }
   @media (max-width: 768px) {
     .congrats-text-box {
+      margin: 100px auto 0;
       max-width: 80%; } }
   @media (max-width: 500px) {
     .congrats-text-box {
