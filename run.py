@@ -1,11 +1,11 @@
 import os
 import json
 from random import *
-from flask import Flask, render_template, request, flash, redirect, url_for
+from flask import Flask, render_template, request, flash, redirect, url_for, session, g
 from answer_checker import *
 
 app = Flask(__name__)
-app.secret_key = 'hey_riddle_diddle_123'
+app.secret_key = os.urandom(24)
 
 # GAME VARIABLES ------------------------------------------------------------------------------
 current_user = "guest"
@@ -234,6 +234,7 @@ def other_users_guesses(riddle):
 def create_leaderboard(userdata):
     sort_on = "highscore"
     decorated = [(dict_[sort_on], dict_) for dict_ in userdata]
+    print(decorated)
     decorated.sort(reverse=True)
     result = [dict_ for (key, dict_) in decorated]
     
@@ -269,6 +270,12 @@ def words_in_answer(data, index, riddle_list):
 def index(username=current_user):
     return render_template("index.html", page_title="Home", username=current_user)
 
+@app.before_request
+def before_request():
+    g.user = None
+    if 'user' in session:
+        g.user = session['user']
+
 @app.route('/sign_up.html', methods=["GET", "POST"])
 def sign_up():
     if request.method == "POST":
@@ -283,11 +290,13 @@ def sign_up():
 @app.route('/log_in.html', methods=["GET", "POST"])
 def log_in():
     if request.method == "POST":
+        session.pop('user', None)
         """
         Validate_password_on_log_in will check to see if a user is already signed up and then if the password
         given matches the users stored password
         """
         if validate_password_on_log_in(request.form["email"], request.form["password"]) == True:
+            session['user'] = current_user
             return redirect(request.form["email"])
         else:
             return render_template("log_in.html", page_title="Log In", username=current_user)
@@ -317,13 +326,16 @@ def leaderboard():
 
 @app.route('/<username>/account.html', methods=["GET", "POST"])
 def account(username):
-    user_data = load_json_data(users_file, "r")
-    
-    if request.method == "POST":
-        update_user_details(username, request.form["email"], request.form["password"], request.form["username"], request.form["firstname"], request.form["surname"])
+    if g.user:
         user_data = load_json_data(users_file, "r")
-    return render_template("account.html", page_title="Account", username=current_user, user_data=user_data)
-
+    
+        if request.method == "POST":
+            update_user_details(username, request.form["email"], request.form["password"], request.form["username"], request.form["firstname"], request.form["surname"])
+            user_data = load_json_data(users_file, "r")
+        return render_template("account.html", page_title="Account", username=current_user, user_data=user_data)
+    
+    return redirect(url_for('log_in'))
+    
 @app.route('/logout.html')
 def logout():
     global current_user
