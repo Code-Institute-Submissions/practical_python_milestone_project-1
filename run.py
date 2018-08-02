@@ -185,9 +185,9 @@ def update_high_score(new_score):
         new_data = json.dumps(data, default=jsonDefault, indent=4, separators=(',', ': '))
         f.write(new_data) 
 
-def check_answer(guess, data, index, username):
+def check_answer(guess, data, index, username, riddle):
     if guess.lower() == data[index]["answer"].lower():
-        if current_riddle +1 == len(riddle_order):
+        if riddle +1 == len(riddle_order):
             global score_last_game
             score_last_game = current_riddle
             global last_riddle
@@ -313,7 +313,7 @@ def riddles(username):
     answer_words = words_in_answer(riddles_data, current_riddle, riddle_order)
     
     if request.method == "POST":
-        if check_answer(request.form["guess-entry"], load_json_data(riddles_file, "r"), riddle_order[current_riddle], current_user) == "Winner":
+        if check_answer(request.form["guess-entry"], load_json_data(riddles_file, "r"), riddle_order[current_riddle], current_user, current_riddle) == "Winner":
             return redirect(url_for("congratulations", username=current_user))
         guesses_data = other_users_guesses(last_riddle)
         answer_words = words_in_answer(riddles_data, current_riddle, riddle_order)

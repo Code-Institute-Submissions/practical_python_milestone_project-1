@@ -802,4 +802,8 @@
 {
     "guess": "bob",
     "question": 17
+},
+{
+    "guess": "a horse",
+    "question": 3
 }]
