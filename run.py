@@ -32,7 +32,8 @@ def load_json_data(jsonfile_path, access_mode):
 
 def user_has_logged_in(email):
     global current_user
-    current_user = email
+    session['user'] = email
+    current_user = session['user']
     return current_user
 
 def validate_password_on_log_in(email_given, password_given):
@@ -289,6 +290,7 @@ def sign_up():
 
 @app.route('/log_in.html', methods=["GET", "POST"])
 def log_in():
+    
     if request.method == "POST":
         session.pop('user', None)
         """
@@ -296,7 +298,6 @@ def log_in():
         given matches the users stored password
         """
         if validate_password_on_log_in(request.form["email"], request.form["password"]) == True:
-            session['user'] = current_user
             return redirect(request.form["email"])
         else:
             return render_template("log_in.html", page_title="Log In", username=current_user)
@@ -338,6 +339,7 @@ def account(username):
     
 @app.route('/logout.html')
 def logout():
+    session.pop('user', None)
     global current_user
     current_user = "guest"
     return render_template("logout.html", page_title="Logged Out", username=current_user)
