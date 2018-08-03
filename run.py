@@ -1,7 +1,8 @@
 import os
 import json
 from random import *
-from flask import Flask, render_template, request, flash, redirect, url_for, session, g
+from flask import Flask, render_template, request, flash, redirect, url_for, session
+from operator import itemgetter
 from answer_checker import *
 
 app = Flask(__name__)
@@ -34,7 +35,6 @@ def user_has_logged_in(email):
     global current_user
     session['user'] = email
     current_user = session['user']
-    return current_user
 
 def validate_password_on_log_in(email_given, password_given):
     
@@ -236,23 +236,34 @@ def other_users_guesses(riddle):
         return ["No other guesses so far"]
             
 def create_leaderboard(userdata):
-    sort_on = "highscore"
-    decorated = [(dict_[sort_on], dict_) for dict_ in userdata]
-    print(decorated)
-    decorated.sort(reverse=True)
-    result = [dict_ for (key, dict_) in decorated]
+    # sort_on = "highscore"
+    # decorated = [(dict_[sort_on], dict_) for dict_ in userdata]
+    # decorated.sort(reverse=True)
+    # result = [dict_ for (key, dict_) in decorated]
+    
+    all_user_scores = []
+    
+    for dict in userdata:
+        this_user = []
+        for k, v in dict.items():
+            if k == "email" or k == "username" or k == "highscore":
+                this_user.append(v)
+        all_user_scores.append(this_user)
+                
+    scores_sorted_by_highscore = sorted(all_user_scores, key=itemgetter(1), reverse=True)
+    
+    print(scores_sorted_by_highscore)
     
     top_ten = []
     
-    if len(result) < 10:
-        max_leaderboard = len(result)
+    if len(scores_sorted_by_highscore) < 10:
+        max_leaderboard = len(scores_sorted_by_highscore)
     else:
         max_leaderboard = 10
     
-    
     i = 0
     while i < max_leaderboard:
-        top_ten.append(result[i])
+        top_ten.append(scores_sorted_by_highscore[i])
         i+= 1
     
     return top_ten
@@ -269,16 +280,16 @@ def words_in_answer(data, index, riddle_list):
 
 # ROUTES ------------------------------------------------------------------------------        
 
-@app.route('/')
-@app.route('/<username>')
-def index(username=current_user):
-    return render_template("index.html", page_title="Home", username=current_user)
-
 @app.before_request
 def before_request():
     protected_route = ['account']
     if request.endpoint in protected_route and 'user' not in session:
         return redirect('/login')
+
+@app.route('/')
+@app.route('/<username>')
+def index(username=current_user):
+    return render_template("index.html", page_title="Home", username=current_user)
 
 @app.route('/sign_up.html', methods=["GET", "POST"])
 def sign_up():

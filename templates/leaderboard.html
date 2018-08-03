@@ -17,10 +17,10 @@
                 {{ loop.index }}
             </td>
             <td class="table-row-2">
-                {% if user["username"] == "TBC" %} {{ user["email"] }} {% else %} {{ user["username"] }} {% endif %}
+                {% if user[0] == "TBC" %} {{ user[2] }} {% else %} {{ user[0] }} {% endif %}
             </td>
             <td class="table-row-3">
-                {{ user["highscore"] }}
+                {{ user[1] }}
             </td>
         </tr>
 
