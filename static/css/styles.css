@@ -132,14 +132,19 @@ button:focus {
     opacity: 0; } }
 .main-nav {
   width: 100%;
+  min-width: 1100px;
   min-height: 90px;
   background-color: #94396a;
   position: fixed;
   top: 0;
   z-index: 100; }
+  @media (max-width: 1024px) {
+    .main-nav {
+      min-width: 1024px; } }
   @media (max-width: 768px) {
     .main-nav {
-      min-height: 75px; } }
+      min-height: 75px;
+      min-width: 310px; } }
 
 .riddler-mark-logo-1,
 .riddler-mark-logo-2,

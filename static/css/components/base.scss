@@ -1,6 +1,7 @@
 // Navbar ----------------------------------------------------------------------
 .main-nav {
     width: 100%;
+    min-width: 1100px;
     min-height: 90px;
     background-color: $riddler-purple;
     position: fixed;
@@ -8,8 +9,13 @@
     @extend %nav-shadow;
     z-index: 100;
 
+    @include large-tablet {
+       min-width: 1024px; 
+    }
+
     @include tablet {
         min-height: 75px;
+        min-width: 310px;
     }
 }
 

@@ -5,7 +5,7 @@ from flask import Flask, render_template, request, flash, redirect, url_for, ses
 from answer_checker import *
 
 app = Flask(__name__)
-app.secret_key = os.urandom(24)
+app.secret_key = 'hey-riddle-diddle-123'
 
 # GAME VARIABLES ------------------------------------------------------------------------------
 current_user = "guest"
@@ -191,7 +191,10 @@ def check_answer(guess, data, index, username, riddle):
     global game_in_play
     global riddle_order
     
-    if guess.lower() == data[index]["answer"].lower():
+    no_spaces_guess = guess.replace(" ", "")
+    no_spaces_answer = data[index]["answer"].replace(" ", "")
+    
+    if no_spaces_guess.lower() == no_spaces_answer.lower():
         if riddle +1 == len(riddle_order):
             score_last_game = current_riddle
             last_riddle = riddle_order[current_riddle]
