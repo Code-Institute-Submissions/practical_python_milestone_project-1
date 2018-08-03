@@ -276,9 +276,9 @@ def index(username=current_user):
 
 @app.before_request
 def before_request():
-    g.user = None
-    if 'user' in session:
-        g.user = session['user']
+    protected_route = ['account']
+    if request.endpoint in protected_route and 'user' not in session:
+        return redirect('/login')
 
 @app.route('/sign_up.html', methods=["GET", "POST"])
 def sign_up():
@@ -330,7 +330,7 @@ def leaderboard():
 
 @app.route('/<username>/account.html', methods=["GET", "POST"])
 def account(username):
-    if g.user:
+    if session['user']:
         user_data = load_json_data(users_file, "r")
     
         if request.method == "POST":
