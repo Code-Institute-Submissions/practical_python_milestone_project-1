@@ -313,8 +313,8 @@ def log_in():
         if validate_password_on_log_in(request.form["email"], request.form["password"]) == True:
             return redirect(request.form["email"])
         else:
-            return render_template("log_in.html", page_title="Log In")
-    return render_template("log_in.html", page_title="Log In")
+            return render_template("log_in.html", page_title="Log In", username="guest")
+    return render_template("log_in.html", page_title="Log In", username="guest")
 
 @app.route('/<username>/riddles.html', methods=["GET", "POST"])
 def riddles(username="guest"):
