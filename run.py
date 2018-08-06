@@ -243,11 +243,16 @@ def create_leaderboard(userdata):
     for dict in userdata:
         this_user = []
         for k, v in dict.items():
-            if k == "email" or k == "username" or k == "highscore":
-                this_user.append(v)
+            if k == "email" or k == "username":
+                str_value = str(v)
+                this_user.append(str_value)
+            elif k == "highscore":
+                int_value = int(v)
+                this_user.append(int_value)
         all_user_scores.append(this_user)
-                
+    
     scores_sorted_by_highscore = sorted(all_user_scores, key=itemgetter(1), reverse=True)
+    print(scores_sorted_by_highscore)
     
     top_ten = []
     
