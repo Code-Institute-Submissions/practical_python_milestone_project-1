@@ -317,9 +317,7 @@ def log_in():
     return render_template("log_in.html", page_title="Log In", username="guest")
 
 @app.route('/<username>/riddles.html', methods=["GET", "POST"])
-def riddles(username="guest"):
-    if session['user'] != username:
-        return redirect(url_for('riddles', page_title="Riddles", username=session['user']))
+def riddles(username):
     
     guesses_data = []
     if riddle_order == []:
@@ -328,7 +326,7 @@ def riddles(username="guest"):
     riddles_data=load_json_data(riddles_file, "r")    
     answer_words = words_in_answer(riddles_data, current_riddle, riddle_order)
     
-    if session['user']:
+    if 'user' in session:
         current_user = session['user']
     else:
         current_user = "guest"
