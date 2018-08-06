@@ -190,5 +190,13 @@
         "firstname": "TBC",
         "password": "qqqqq",
         "email": "caianroma@yahoo.co.ukqqq"
+    },
+    {
+        "username": "TBC",
+        "highscore": 0,
+        "surname": "TBC",
+        "firstname": "TBC",
+        "password": "ppppp",
+        "email": "jim@jim.com"
     }
 ]

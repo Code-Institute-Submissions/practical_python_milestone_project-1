@@ -1,7 +1,7 @@
 import os
 import json
 from random import *
-from flask import Flask, render_template, request, flash, redirect, url_for, session
+from flask import Flask, render_template, request, flash, session, redirect, url_for
 from operator import itemgetter
 from answer_checker import *
 
@@ -9,7 +9,6 @@ app = Flask(__name__)
 app.secret_key = 'hey-riddle-diddle-123'
 
 # GAME VARIABLES ------------------------------------------------------------------------------
-current_user = "guest"
 current_riddle = 0
 game_in_play = True
 score_last_game = 0
@@ -32,9 +31,7 @@ def load_json_data(jsonfile_path, access_mode):
 # USER MANAGEMENT FUNCTIONS --------------------------------------------------------------------
 
 def user_has_logged_in(email):
-    global current_user
     session['user'] = email
-    current_user = session['user']
 
 def validate_password_on_log_in(email_given, password_given):
     
@@ -116,7 +113,7 @@ def update_user_details(current_user, new_email, new_password, new_username, new
     a new user with the details provided
     """
     for user in range(len(data)):
-        if data[user]["email"] == current_user:
+        if data[user]["email"] == session['user']:
             data[user]["email"] = new_email
             data[user]["surname"]  = new_surname
             data[user]["password"]  = new_password
@@ -170,7 +167,7 @@ def update_high_score(new_score):
     data = load_json_data(users_file, "r")
     
     for user in range(len(data)):
-        if data[user]["email"] == current_user:
+        if data[user]["email"] == session['user']:
             if any("highscore" in x for x in data[user]):
                 if data[user]["highscore"] < new_score:
                     data[user]["highscore"]  = new_score
@@ -252,8 +249,6 @@ def create_leaderboard(userdata):
                 
     scores_sorted_by_highscore = sorted(all_user_scores, key=itemgetter(1), reverse=True)
     
-    print(scores_sorted_by_highscore)
-    
     top_ten = []
     
     if len(scores_sorted_by_highscore) < 10:
@@ -288,9 +283,13 @@ def before_request():
 
 @app.route('/')
 @app.route('/<username>')
-def index(username=current_user):
+def index(username=None):
+    if 'user' in session:
+        current_user = session['user']
+    else:
+        current_user = "guest"
     return render_template("index.html", page_title="Home", username=current_user)
-
+    
 @app.route('/sign_up.html', methods=["GET", "POST"])
 def sign_up():
     if request.method == "POST":
@@ -299,14 +298,14 @@ def sign_up():
         """
         if add_a_new_user(str(request.form["email"]), str(request.form["pwd1"]), str(request.form["pwd2"])) == True:
             flash("Hi {}, thanks for signing up! Your username should now appear on the leaderboard if you get a high score! Now get ready to riddle...!".format(request.form["email"]))
-            return redirect(url_for('riddles', username=current_user))
-    return render_template("sign_up.html", page_title="Sign Up", username=current_user)
+            return redirect(url_for('riddles', username=session['user']))
+    return render_template("sign_up.html", page_title="Sign Up", username="guest")
 
 @app.route('/log_in.html', methods=["GET", "POST"])
 def log_in():
+    session.pop('user', None)
     
     if request.method == "POST":
-        session.pop('user', None)
         """
         Validate_password_on_log_in will check to see if a user is already signed up and then if the password
         given matches the users stored password
@@ -314,17 +313,25 @@ def log_in():
         if validate_password_on_log_in(request.form["email"], request.form["password"]) == True:
             return redirect(request.form["email"])
         else:
-            return render_template("log_in.html", page_title="Log In", username=current_user)
-    return render_template("log_in.html", page_title="Log In", username=current_user)
+            return render_template("log_in.html", page_title="Log In")
+    return render_template("log_in.html", page_title="Log In")
 
 @app.route('/<username>/riddles.html', methods=["GET", "POST"])
-def riddles(username):
+def riddles(username="guest"):
+    if session['user'] != username:
+        return redirect(url_for('riddles', page_title="Riddles", username=session['user']))
+    
     guesses_data = []
     if riddle_order == []:
         determine_riddle_order(riddle_order)
     
     riddles_data=load_json_data(riddles_file, "r")    
     answer_words = words_in_answer(riddles_data, current_riddle, riddle_order)
+    
+    if session['user']:
+        current_user = session['user']
+    else:
+        current_user = "guest"
     
     if request.method == "POST":
         if check_answer(request.form["guess-entry"], load_json_data(riddles_file, "r"), riddle_order[current_riddle], current_user, current_riddle) == "Winner":
@@ -337,7 +344,11 @@ def riddles(username):
 @app.route('/leaderboard.html')
 def leaderboard():
     top_ten = create_leaderboard(load_json_data(users_file, "r"))
-    return render_template("leaderboard.html", page_title="Leaderboard", username=current_user, top_ten = top_ten)
+    if 'user' in session:
+        current_user = session['user']
+    else:
+        current_user = "guest"
+    return render_template("leaderboard.html", page_title="Leaderboard", top_ten = top_ten, username=current_user)
 
 @app.route('/<username>/account.html', methods=["GET", "POST"])
 def account(username):
@@ -347,23 +358,35 @@ def account(username):
         if request.method == "POST":
             update_user_details(username, request.form["email"], request.form["password"], request.form["username"], request.form["firstname"], request.form["surname"])
             user_data = load_json_data(users_file, "r")
-        return render_template("account.html", page_title="Account", username=current_user, user_data=user_data)
+        return render_template("account.html", page_title="Account", username=session['user'], user_data=user_data)
     
     return redirect(url_for('log_in'))
     
 @app.route('/logout.html')
 def logout():
     session.pop('user', None)
-    global current_user
-    current_user = "guest"
+    if 'user' in session:
+        current_user = session['user']
+    else:
+        current_user = "guest"
+    
     return render_template("logout.html", page_title="Logged Out", username=current_user)
 
 @app.route('/about-us.html')
 def about_us():
+    if 'user' in session:
+        current_user = session['user']
+    else:
+        current_user = "guest"
     return render_template("about-us.html", page_title="About Us", username=current_user)
 
 @app.route('/congratulations.html')
 def congratulations():
+    if session['user']:
+        current_user = session['user']
+    else:
+        current_user = "guest"
+    
     return render_template("congratulations.html", page_title="Winner", username=current_user)
 
 if __name__ == "__main__":
