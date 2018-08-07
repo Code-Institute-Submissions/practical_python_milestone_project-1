@@ -32,6 +32,12 @@ def load_json_data(jsonfile_path, access_mode):
 
 def user_has_logged_in(email):
     session['user'] = email
+    
+def determine_current_user(session_data):
+    if 'user' in session:
+        return session['user']
+    else:
+        return "guest"
 
 def validate_password_on_log_in(email_given, password_given):
     
@@ -288,10 +294,7 @@ def before_request():
 @app.route('/')
 @app.route('/<username>')
 def index(username=None):
-    if 'user' in session:
-        current_user = session['user']
-    else:
-        current_user = "guest"
+    current_user = determine_current_user(session)
     return render_template("index.html", page_title="Home", username=current_user)
     
 @app.route('/sign_up.html', methods=["GET", "POST"])
@@ -330,10 +333,7 @@ def riddles(username):
     riddles_data=load_json_data(riddles_file, "r")    
     answer_words = words_in_answer(riddles_data, current_riddle, riddle_order)
     
-    if 'user' in session:
-        current_user = session['user']
-    else:
-        current_user = "guest"
+    current_user = determine_current_user(session)
     
     if request.method == "POST":
         if check_answer(request.form["guess-entry"], load_json_data(riddles_file, "r"), riddle_order[current_riddle], current_user, current_riddle) == "Winner":
@@ -346,10 +346,7 @@ def riddles(username):
 @app.route('/leaderboard.html')
 def leaderboard():
     top_ten = create_leaderboard(load_json_data(users_file, "r"))
-    if 'user' in session:
-        current_user = session['user']
-    else:
-        current_user = "guest"
+    current_user = determine_current_user(session)
     return render_template("leaderboard.html", page_title="Leaderboard", top_ten = top_ten, username=current_user)
 
 @app.route('/<username>/account.html', methods=["GET", "POST"])
@@ -367,28 +364,18 @@ def account(username):
 @app.route('/logout.html')
 def logout():
     session.pop('user', None)
-    if 'user' in session:
-        current_user = session['user']
-    else:
-        current_user = "guest"
+    current_user = determine_current_user(session)
     
     return render_template("logout.html", page_title="Logged Out", username=current_user)
 
 @app.route('/about-us.html')
 def about_us():
-    if 'user' in session:
-        current_user = session['user']
-    else:
-        current_user = "guest"
+    current_user = determine_current_user(session)
     return render_template("about-us.html", page_title="About Us", username=current_user)
 
 @app.route('/congratulations.html')
 def congratulations():
-    if session['user']:
-        current_user = session['user']
-    else:
-        current_user = "guest"
-    
+    current_user = determine_current_user(session)
     return render_template("congratulations.html", page_title="Winner", username=current_user)
 
 if __name__ == "__main__":
