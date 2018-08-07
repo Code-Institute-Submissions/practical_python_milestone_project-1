@@ -164,7 +164,7 @@ li input {
     }
 
     @include mobile {
-        min-height: 545px;
+        min-height: 655px;
     }
 }
 
@@ -226,6 +226,9 @@ li input {
 
 // Leaderboard.html ------------------------------------------------------------
 .leaderboard-header {
+    font-size: 60px;
+    letter-spacing: 70px;
+    text-indent: 70px;
     padding: 110px 0 30px;
 
     @include large-tablet {

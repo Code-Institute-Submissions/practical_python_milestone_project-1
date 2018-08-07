@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed);
 .riddle-area, .results-box {
   -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
@@ -132,7 +133,7 @@ button:focus {
     opacity: 0; } }
 .main-nav {
   width: 100%;
-  min-width: 1100px;
+  min-width: 1238px;
   min-height: 90px;
   background-color: #94396a;
   position: fixed;
@@ -410,7 +411,7 @@ footer {
     .account,
     .sign-up,
     .log-in {
-      min-height: 545px; } }
+      min-height: 655px; } }
 
 .login-form {
   margin: 200px 0 0; }
@@ -457,6 +458,9 @@ footer {
   margin: 0 20px 0 0; }
 
 .leaderboard-header {
+  font-size: 60px;
+  letter-spacing: 70px;
+  text-indent: 70px;
   padding: 110px 0 30px; }
   @media (max-width: 1024px) {
     .leaderboard-header {

@@ -252,7 +252,6 @@ def create_leaderboard(userdata):
         all_user_scores.append(this_user)
     
     scores_sorted_by_highscore = sorted(all_user_scores, key=itemgetter(1), reverse=True)
-    print(scores_sorted_by_highscore)
     
     top_ten = []
     
