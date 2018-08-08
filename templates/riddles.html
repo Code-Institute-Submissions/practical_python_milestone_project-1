@@ -1,44 +1,50 @@
 {% extends 'base.html' %} {% block content %}
 
 <section class="page-header riddles-picture no-overflow">
-    {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+    {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %} {% if game_in_play == True %}
+
     <div class="results-box centered fade-out">
         <p class="flashed-message enlarged-message-font">
             {{ message }}
         </p>
 
-        {% if game_in_play == False %}
+        {% elif game_in_play == False %}
+        <div class="results-box centered continue">
+            <p class="flashed-message enlarged-message-font">
+                {{ message }}
+            </p>
+            <div class="score-message">
+                <p>Your score was ... <strong>{{ score }}</strong></p>
+                {% if username != "guest" %} {% for user in user_data %} {% if username == user["email"] %}
 
-        <p>Your score was ... <strong>{{ score }}</strong></p>
-        {% if username != "guest" %} {% for user in user_data %} {% if username == user["email"] %}
+                <p>Your highest ever score is ... <strong>{{ user["highscore"] }}</strong>!</p>
+            </div>
+            {% endif %} {% endfor %} {% endif %}
 
-        <p>Your highest ever score is ... <strong>{{ user["highscore"] }}</strong>!</p>
-        
-        {% endif %} {% endfor %} {% endif %}
+            <p>If it's any consolation, here are some of the guesses other people made...</p>
+            <div class="guesses-box">
+                {% for guess in guesses %}
+                <p class="other-guesses">{{ guess }}</p>
+                {% endfor %}
+            </div>
+            <button class="continue-btn" id="continue">Continue</button> {% endif %}
+        </div>{% endfor %} {% endif %} {% endwith %}
+        <div class="riddle-area">
+            <h2 class="centered riddle-area-header">It's thinking time...</h2>
+            <h3 class="centered riddle-number">Riddle {{ riddle_index + 1 }}</h3>
+            <div class="riddles-box centered">
+                <p class="para-for-riddle fade-in">{{ riddles_data[riddle_order[riddle_index]]["riddle"] }}</p>
+            </div>
+            <p class="word-count fade-in centered">( The answer is {{ word_count }}... )</p>
+            <div class="guess-box centered">
+                <p>What is your answer?</p>
 
-        <p>If it's any consolation, here are some of the guesses other people made...</p>
-        <div class="guesses-box">
-            {% for guess in guesses %}
-            <p class="other-guesses">{{ guess }}</p>
-            {% endfor %}{% endif %}
+                <form class="answer-box" method="POST">
+                    <input id="answer-field" class="bring-to-front" type="text" name="guess-entry" autocomplete="off" required/>
+                    <input class="bring-to-front" type="submit" value="Submit" />
+                </form>
+            </div>
         </div>
-    </div> {% endfor %} {% endif %} {% endwith %}
-    <div class="riddle-area">
-        <h2 class="centered riddle-area-header">It's thinking time...</h2>
-        <h3 class="centered riddle-number">Riddle {{ riddle_index + 1 }}</h3>
-        <div class="riddles-box centered">
-            <p class="para-for-riddle fade-in">{{ riddles_data[riddle_order[riddle_index]]["riddle"] }}</p>
-        </div>
-        <p class="word-count fade-in centered">( The answer is {{ word_count }}... )</p> 
-        <div class="guess-box centered">
-            <p>What is your answer?</p>
-
-            <form class="answer-box" method="POST">
-                <input id="answer-field" type="text" name="guess-entry" autocomplete="off" required/>
-                <input type="submit" value="Submit" />
-            </form>
-        </div>
-    </div>
 </section>
 <h1 class="centered riddles-h1">{{ page_title }}</h1>
 {% endblock %}

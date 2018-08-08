@@ -170,21 +170,22 @@ def add_guess_to_file(guess, index):
             open_file.write(new_guess_str)
 
 def update_high_score(new_score):
-    data = load_json_data(users_file, "r")
+    if 'user' in session:
+        data = load_json_data(users_file, "r")
     
-    for user in range(len(data)):
-        if data[user]["email"] == session['user']:
-            if any("highscore" in x for x in data[user]):
-                if data[user]["highscore"] < new_score:
-                    data[user]["highscore"]  = new_score
+        for user in range(len(data)):
+            if data[user]["email"] == session['user']:
+                if any("highscore" in x for x in data[user]):
+                    if data[user]["highscore"] < new_score:
+                        data[user]["highscore"]  = new_score
+                        break
+                else:
+                    data[user]["highscore"] = new_score
                     break
-            else:
-                data[user]["highscore"] = new_score
-                break
     
-    with open(users_file, "w") as f:
-        new_data = json.dumps(data, default=jsonDefault, indent=4, separators=(',', ': '))
-        f.write(new_data) 
+        with open(users_file, "w") as f:
+            new_data = json.dumps(data, default=jsonDefault, indent=4, separators=(',', ': '))
+            f.write(new_data) 
 
 def check_answer(guess, data, index, username, riddle):
     
@@ -232,7 +233,7 @@ def other_users_guesses(riddle):
             num_of_related_guesses +=1
         
     if num_of_related_guesses != 0:
-        while len(user_guesses) > 26:
+        while len(user_guesses) > 18:
             user_guesses.pop(0)
         return user_guesses
     else:

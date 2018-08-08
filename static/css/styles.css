@@ -68,6 +68,9 @@ button:focus {
 .riddle-link-btn a {
   color: #fff; }
 
+.continue-btn {
+  margin: 22px 0 0; }
+
 .color-change-and-shrink {
   animation: shrink 5s 1, color-change 30s 1; }
 
@@ -79,16 +82,12 @@ button:focus {
 .grow:hover {
   transform: scale(1.15); }
 
+.bring-to-front:hover {
+  z-index: 5; }
+
 .fade-in {
   animation-name: fade-in;
   animation-duration: 10s;
-  animation-delay: 5s;
-  animation-iteration-count: 1;
-  animation-fill-mode: forwards; }
-
-.fade-out {
-  animation-name: fade-out;
-  animation-duration: 1s;
   animation-delay: 5s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards; }
@@ -126,11 +125,6 @@ button:focus {
     opacity: 0; }
   100% {
     opacity: 1; } }
-@keyframes fade-out {
-  0% {
-    opacity: 1; }
-  100% {
-    opacity: 0; } }
 .main-nav {
   width: 100%;
   min-width: 1238px;
@@ -719,6 +713,9 @@ tr:nth-of-type(4) {
       right: 0;
       margin-left: auto;
       margin-right: auto; } }
+
+.score-message {
+  color: #e5ef4d; }
 
 .guesses-box {
   margin: 0 auto;

@@ -3,26 +3,22 @@
 }
 
 .grow {
-  transform: scale(1);
-  transition-property: transform;
-  transition-duration: 1s;
+    transform: scale(1);
+    transition-property: transform;
+    transition-duration: 1s;
 }
 
 .grow:hover {
-  transform: scale(1.15);
+    transform: scale(1.15);
+}
+
+.bring-to-front:hover {
+    z-index: 5;
 }
 
 .fade-in {
     animation-name: fade-in;
     animation-duration: 10s;
-    animation-delay: 5s;
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards;
-}
-
-.fade-out {
-    animation-name: fade-out;
-    animation-duration: 1s;
     animation-delay: 5s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
@@ -79,14 +75,5 @@
     }
     100% {
         opacity: 1;
-    }
-}
-
-@keyframes fade-out {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
     }
 }
