@@ -206,5 +206,13 @@
         "firstname": "TBC",
         "password": "ppppp",
         "email": "kkkkkl@l.com"
+    },
+    {
+        "username": "TBC",
+        "highscore": 0,
+        "surname": "TBC",
+        "firstname": "TBC",
+        "password": "ppppp",
+        "email": "b@b.com"
     }
 ]
