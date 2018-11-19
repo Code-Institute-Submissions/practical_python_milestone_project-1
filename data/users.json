@@ -214,5 +214,13 @@
         "firstname": "TBC",
         "password": "ppppp",
         "email": "b@b.com"
+    },
+    {
+        "username": "TBC",
+        "highscore": 0,
+        "surname": "TBC",
+        "firstname": "TBC",
+        "password": "77777",
+        "email": "sss@sss.com"
     }
 ]
