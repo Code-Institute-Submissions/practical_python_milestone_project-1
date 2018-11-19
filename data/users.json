@@ -222,5 +222,21 @@
         "firstname": "TBC",
         "password": "77777",
         "email": "sss@sss.com"
+    },
+    {
+        "username": "TBC",
+        "highscore": 0,
+        "surname": "TBC",
+        "firstname": "TBC",
+        "password": "ppppp",
+        "email": "bubs@bub.uk"
+    },
+    {
+        "username": "TBC",
+        "highscore": 0,
+        "surname": "TBC",
+        "firstname": "TBC",
+        "password": "11111",
+        "email": "chick@l.com"
     }
 ]

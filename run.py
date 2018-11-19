@@ -240,38 +240,19 @@ def other_users_guesses(riddle):
         return ["No other guesses so far"]
             
 def create_leaderboard(userdata):
-    # sort_on = "highscore"
-    # decorated = [(dict_[sort_on], dict_) for dict_ in userdata]
-    # decorated.sort(reverse=True)
-    # result = [dict_ for (key, dict_) in decorated]
-    
-    all_user_scores = []
-    
-    for dict in userdata:
-        this_user = []
-        for k, v in dict.items():
-            if k == "email" or k == "username":
-                str_value = str(v)
-                this_user.append(str_value)
-            elif k == "highscore":
-                int_value = int(v)
-                this_user.append(int_value)
-        all_user_scores.append(this_user)
-        
-    
-    print(all_user_scores)
-    scores_sorted_by_highscore = sorted(all_user_scores, key=lambda score: score[1], reverse=True)
+
+    sorted_user_scores = sorted(userdata, key=lambda k: k['highscore'], reverse=True) 
     
     top_ten = []
     
-    if len(scores_sorted_by_highscore) < 10:
+    if len(sorted_user_scores) < 10:
         max_leaderboard = len(scores_sorted_by_highscore)
     else:
         max_leaderboard = 10
     
     i = 0
     while i < max_leaderboard:
-        top_ten.append(scores_sorted_by_highscore[i])
+        top_ten.append(sorted_user_scores[i])
         i+= 1
     
     return top_ten
