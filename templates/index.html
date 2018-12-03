@@ -11,7 +11,7 @@
     <div class="introduction">
         <div class="welcome-text">
             {% if username != "guest" %}
-            <h3 id="welcome-user">Welcome back {{ username }}!</h3>
+            <h3 id="welcome-user">Welcome back {{ username.lower() }}!</h3>
             {% else %}
             <h3>Welcome to Hey Riddle Diddle!!!</h3>
             <p>A website for all your riddling needs.<br><a class="accentuated-links" href="{{ url_for('sign_up') }}"><strong>Sign up</strong></a> or <a class="accentuated-links" href="{{ url_for('log_in') }}"><strong>Log in</strong></a> now!</p>

@@ -9,23 +9,23 @@
             <ul class="account-form-list">
                 <li>
                     <label for="username">Choose a Username</label>
-                    <input required maxlength="15" type="text" name="username" value={% for user in user_data %} {% if user[ "email"]==username %} "{{ user['username'] }}" {% endif %} {% endfor %}/>
+                    <input required maxlength="15" type="text" name="username" value="{{ this_user['username'] }}"/>
                 </li>
                 <li>
                     <label for="password">Password</label>
-                    <input required minlength="5" type="password" name="password" value={% for user in user_data %} {% if user[ "email"]==username %} "{{ user['password'] }}" {% endif %} {% endfor %}/>
+                    <input required minlength="5" type="password" name="password" value="{{ this_user['password'] }}"/>
                 </li>
                 <li>
                     <label for="firstname">First Name</label>
-                    <input required type="text" name="firstname" value={% for user in user_data %} {% if user[ "email"]==username %} "{{ user['firstname'] }}" {% endif %} {% endfor %}/>
+                    <input required type="text" name="firstname" value="{{ this_user['firstname'] }}"/>
                 </li>
                 <li>
                     <label for="surname">Surname</label>
-                    <input required type="text" name="surname" value={% for user in user_data %} {% if user[ "email"]==username %} "{{ user['surname'] }}" {% endif %} {% endfor %}/>
+                    <input required type="text" name="surname" value="{{ this_user['surname'] }}"/>
                 </li>
                 <li>
                     <label for="email">Email Address</label>
-                    <input required type="email" name="email" value={% for user in user_data %} {% if user[ "email"]==username %} "{{ user['email'] }}" {% endif %} {% endfor %}/>
+                    <input required type="email" name="email" value="{{ this_user['email'] }}"/> 
                 </li>
                 <li>
                     <input type="submit" value="Update" />

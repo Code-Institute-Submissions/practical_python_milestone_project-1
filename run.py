@@ -8,17 +8,11 @@ from answer_checker import *
 app = Flask(__name__)
 app.secret_key = 'hey-riddle-diddle-123'
 
-# GAME VARIABLES ------------------------------------------------------------------------------
-current_riddle = 0
-game_in_play = True
-score_last_game = 0
-riddle_order = []
-last_riddle = 0
-
 # File variables
 users_file = "data/users.json"
 guesses_file = "data/guesses.json"
 riddles_file = "data/riddles.json"
+# riddles_file = "data/riddles1.json" - change riddles variable to this to test that the congratulations page is working (only 3 riddles)
 
 # ---------------------------------------------------------------------------------------------
 
@@ -51,11 +45,11 @@ def validate_password_on_log_in(email_given, password_given):
     log_on_validation_status = []
         
     for user in json_users:
-        if email_given == user["email"] and password_given == user["password"]:
+        if email_given.lower() == user["email"].lower() and password_given == user["password"]:
             user_has_logged_in(email_given)
             log_on_validation_status.append("username & password match")
             break
-        elif email_given == user["email"] and password_given != user["password"]:
+        elif email_given.lower() == user["email"].lower() and password_given != user["password"]:
             log_on_validation_status.append("username found, password incorrect")
             break
         
@@ -69,7 +63,7 @@ def validate_password_on_log_in(email_given, password_given):
 # Helps creates an instance of a user
 class User(object):
     def __init__(self, email, password, username, firstname, surname):
-        self.email = email
+        self.email = email.lower()
         self.password = password
         self.username = username
         self.firstname = firstname
@@ -119,13 +113,16 @@ def update_user_details(current_user, new_email, new_password, new_username, new
     a new user with the details provided
     """
     for user in range(len(data)):
-        if data[user]["email"] == session['user']:
-            data[user]["email"] = new_email
-            data[user]["surname"]  = new_surname
+        if data[user]["email"].lower() == session['user'].lower():
+            print("Okay")
+            data[user]["email"] = new_email.lower()
+            data[user]["surname"]  = new_surname.capitalize()
             data[user]["password"]  = new_password
-            data[user]["username"]  = new_username
-            data[user]["firstname"]  = new_firstname
+            data[user]["username"]  = new_username.lower()
+            data[user]["firstname"]  = new_firstname.capitalize()
             break
+        else:
+            print("Not found")
     
     with open(users_file, "w") as f:
         new_data = json.dumps(data, default=jsonDefault, indent=4, separators=(',', ': '))
@@ -133,12 +130,14 @@ def update_user_details(current_user, new_email, new_password, new_username, new
     flash("Hey {}, thanks for updating your details!".format(new_email))
         
 # GAME MECHANICS -----------------------------------------------------------------------------
-def determine_riddle_order(riddle_order):
+def determine_riddle_order():
     riddles = load_json_data(riddles_file, "r")
-    while len(riddle_order) < len(riddles):
+    new_riddle_order = []
+    while len(new_riddle_order) < len(riddles):
         ran_num = pick_a_riddle()
-        if ran_num not in riddle_order:
-            riddle_order.append(ran_num)
+        if ran_num not in new_riddle_order:
+            new_riddle_order.append(ran_num)
+    session["riddle_order"] = new_riddle_order
             
 def pick_a_riddle():
     riddles = load_json_data(riddles_file, "r")
@@ -189,38 +188,32 @@ def update_high_score(new_score):
 
 def check_answer(guess, data, index, username, riddle):
     
-    global current_riddle
-    global score_last_game
-    global last_riddle
-    global game_in_play
-    global riddle_order
-    
     no_spaces_guess = guess.replace(" ", "")
     no_spaces_answer = data[index]["answer"].replace(" ", "")
     
     if no_spaces_guess.lower() == no_spaces_answer.lower():
-        if riddle +1 == len(riddle_order):
-            score_last_game = current_riddle
-            last_riddle = riddle_order[current_riddle]
-            game_in_play = False
-            update_high_score(current_riddle)
-            current_riddle = 0
-            riddle_order = []
-            determine_riddle_order(riddle_order)
+        if riddle +1 == len(session["riddle_order"]):
+            session["score_last_game"] = session["current_riddle"]
+            session["last_riddle"] = session["riddle_order"][session["current_riddle"]]
+            session["game_in_play"] = False
+            update_high_score(session["current_riddle"])
+            session["current_riddle"] = 0
+            session["riddle_order"] = []
+            determine_riddle_order()
             return "Winner"
         else:
-            game_in_play = True
-            current_riddle +=1
-            flash("Correct!  {} was the right answer!\n Time for your next riddle...!".format(guess.upper()))
+            session["game_in_play"] = True
+            session["current_riddle"] +=1
+            flash("Correct!  {} was the right answer!\n Time for your next riddle...!".format(data[index]["answer"].upper()))
     else:
-        score_last_game = current_riddle
-        last_riddle = riddle_order[current_riddle]
-        game_in_play = False
-        add_guess_to_file(request.form["guess-entry"], riddle_order[current_riddle]-1)
-        update_high_score(current_riddle)
-        current_riddle = 0
-        riddle_order = []
-        determine_riddle_order(riddle_order)
+        session["score_last_game"] = session["current_riddle"]
+        session["last_riddle"] = session["riddle_order"][session["current_riddle"]]
+        session["game_in_play"] = False
+        add_guess_to_file(request.form["guess-entry"], session["riddle_order"][session["current_riddle"]]-1)
+        update_high_score(session["current_riddle"])
+        session["current_riddle"] = 0
+        session["riddle_order"] = []
+        determine_riddle_order()
         flash("I'm sorry!  {} was incorrect!\n Please try again from the beginning!".format(guess.upper()))
 
 def other_users_guesses(riddle):
@@ -279,6 +272,16 @@ def before_request():
 @app.route('/<username>')
 def index(username=None):
     current_user = determine_current_user(session)
+    
+    try:
+        session["current_riddle"]
+    except:
+        session["current_riddle"] = 0
+        session["game_in_play"] = True
+        session["score_last_game"] = 0
+        session["riddle_order"] = []
+        session["last_riddle"] = 0
+    
     return render_template("index.html", page_title="Home", username=current_user)
     
 @app.route('/sign_up.html', methods=["GET", "POST"])
@@ -311,21 +314,28 @@ def log_in():
 def riddles(username):
     
     guesses_data = []
-    if riddle_order == []:
-        determine_riddle_order(riddle_order)
-    
     riddles_data=load_json_data(riddles_file, "r")    
-    answer_words = words_in_answer(riddles_data, current_riddle, riddle_order)
+    
+    print(len(riddles_data))
+    
+    if session["riddle_order"] == [] or len(riddles_data) != len(session["riddle_order"]):
+        determine_riddle_order()
+    
+    print(session["current_riddle"])
+    print(session["riddle_order"])
+    
+    answer_words = words_in_answer(riddles_data, session["current_riddle"], session["riddle_order"])
     
     current_user = determine_current_user(session)
     
     if request.method == "POST":
-        if check_answer(request.form["guess-entry"], load_json_data(riddles_file, "r"), riddle_order[current_riddle], current_user, current_riddle) == "Winner":
+        
+        if check_answer(request.form["guess-entry"], load_json_data(riddles_file, "r"), session["riddle_order"][session["current_riddle"]], current_user, session["current_riddle"]) == "Winner":
             return redirect(url_for("congratulations", username=current_user))
-        guesses_data = other_users_guesses(last_riddle)
-        answer_words = words_in_answer(riddles_data, current_riddle, riddle_order)
-    return render_template("riddles.html", page_title="Riddles", riddles_data=riddles_data, user_data=load_json_data(users_file, "r"), username=current_user, riddle_index=current_riddle, 
-    guesses=guesses_data, game_in_play=game_in_play, score=score_last_game, riddle_order=riddle_order, last=last_riddle, word_count=answer_words)
+        guesses_data = other_users_guesses(session["last_riddle"])
+        answer_words = words_in_answer(riddles_data, session["current_riddle"], session["riddle_order"])
+    return render_template("riddles.html", page_title="Riddles", riddles_data=riddles_data, user_data=load_json_data(users_file, "r"), username=current_user, riddle_index=session["current_riddle"], 
+    guesses=guesses_data, game_in_play=session["game_in_play"], score=session["score_last_game"], riddle_order=session["riddle_order"], last=session["last_riddle"], word_count=answer_words)
 
 @app.route('/leaderboard.html')
 def leaderboard():
@@ -335,15 +345,20 @@ def leaderboard():
 
 @app.route('/<username>/account.html', methods=["GET", "POST"])
 def account(username):
-    if session['user']:
+    user_data = load_json_data(users_file, "r")
+    for user in user_data:
+        if user["email"].lower() == session["user"].lower():
+            this_user = user
+    
+    if request.method == "POST":
+        update_user_details(username, request.form["email"], request.form["password"], request.form["username"], request.form["firstname"], request.form["surname"])
         user_data = load_json_data(users_file, "r")
+        for user in user_data:
+            if user["email"].lower() == session["user"].lower():
+                this_user = user
     
-        if request.method == "POST":
-            update_user_details(username, request.form["email"], request.form["password"], request.form["username"], request.form["firstname"], request.form["surname"])
-            user_data = load_json_data(users_file, "r")
-        return render_template("account.html", page_title="Account", username=session['user'], user_data=user_data)
-    
-    return redirect(url_for('log_in'))
+    return render_template("account.html", page_title="Account", username=session['user'], this_user = this_user)
+
     
 @app.route('/logout.html')
 def logout():

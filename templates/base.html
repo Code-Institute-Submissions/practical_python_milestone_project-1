@@ -34,7 +34,7 @@
             <li class="grow"><a href="{{ url_for('riddles', username = username) }}"><i class="fas fa-question"></i>Riddles</a></li>
             <li class="grow"><a href="{{ url_for('leaderboard') }}"><i class="fas fa-list-ol"></i>Leaderboard</a></li>
             {% if username != "guest" %}
-            <li class="grow"><a href="{{ url_for('account', username = username) }}"><i class="fas fa-user-circle"></i>User:  {{ username }}</a></li>
+            <li class="grow"><a href="{{ url_for('account', username = username) }}"><i class="fas fa-user-circle"></i>User:  {{ username.lower() }}</a></li>
             <li class="grow"><a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
             {% endif %}
         </ul>

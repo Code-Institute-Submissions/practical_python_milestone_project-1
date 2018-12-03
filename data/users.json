@@ -8,10 +8,10 @@
         "email": "billy@bob.com"
     },
     {
-        "username": "ebaymademepoor",
-        "highscore": 4,
+        "username": "ebaymademecry",
+        "highscore": 7,
         "surname": "Fiorletta",
-        "firstname": "Giancarlo",
+        "firstname": "Carlo",
         "password": "ppppp",
         "email": "caianroma@yahoo.co.uk"
     },
@@ -40,10 +40,10 @@
         "email": "giorgio@yahoo.co.uk"
     },
     {
-        "username": "TBC",
-        "highscore": 0,
-        "surname": "TBC",
-        "firstname": "TBC",
+        "username": "bananaman",
+        "highscore": 2,
+        "surname": "Rice",
+        "firstname": "Tim",
         "password": "ppppp",
         "email": "tim@tim.com"
     },
@@ -238,5 +238,13 @@
         "firstname": "TBC",
         "password": "11111",
         "email": "chick@l.com"
+    },
+    {
+        "username": "johnny",
+        "highscore": 0,
+        "surname": "Dunn",
+        "firstname": "James",
+        "password": "aaaaa",
+        "email": "fgdfs@dfsd.com"
     }
 ]
