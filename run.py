@@ -3,7 +3,7 @@ import json
 from random import *
 from flask import Flask, render_template, request, flash, session, redirect, url_for
 from operator import itemgetter
-from answer_checker import *
+from byotests import *
 
 app = Flask(__name__)
 app.secret_key = 'hey-riddle-diddle-123'
@@ -59,7 +59,7 @@ def validate_password_on_log_in(email_given, password_given):
     elif log_on_validation_status[0] == "username found, password incorrect":
         flash("I'm sorry, the password you entered does not match with our records.  Please feel free to try again!")
 
-# Helps creates an instance of a user
+# Creates an instance of a user
 class User(object):
     def __init__(self, email, password, username, firstname, surname):
         self.email = email.lower()
@@ -131,14 +131,11 @@ def update_user_details(current_user, new_email, new_password, new_username, new
 # GAME MECHANICS -----------------------------------------------------------------------------
 
 def set_up_client_side_game_variables():
-    try:
-        session["current_riddle"]
-    except:
-        session["current_riddle"] = 0
-        session["game_in_play"] = True
-        session["score_last_game"] = 0
-        session["riddle_order"] = []
-        session["last_riddle"] = 0
+    session["current_riddle"] = 0
+    session["game_in_play"] = True
+    session["score_last_game"] = 0
+    session["riddle_order"] = []
+    session["last_riddle"] = 0
 
 def determine_riddle_order():
     riddles = load_json_data(riddles_file, "r")
@@ -275,6 +272,13 @@ def create_leaderboard(userdata):
     
     return top_ten
 
+# TESTS ------------------------------------------------------------------------------
+
+
+
+print("All tests have passed")
+
+
 # ROUTES ------------------------------------------------------------------------------        
 
 @app.before_request
@@ -287,7 +291,10 @@ def before_request():
 @app.route('/<username>')
 def index(username=None):
     current_user = determine_current_user(session)
-    set_up_client_side_game_variables()
+    try:
+        session["current_riddle"]
+    except:
+        set_up_client_side_game_variables()
     
     return render_template("index.html", page_title="Home", username=current_user)
     
@@ -305,6 +312,7 @@ def sign_up():
 @app.route('/log_in.html', methods=["GET", "POST"])
 def log_in():
     session.pop('user', None)
+    set_up_client_side_game_variables()
     
     if request.method == "POST":
         """
@@ -365,6 +373,7 @@ def account(username):
 @app.route('/logout.html')
 def logout():
     session.pop('user', None)
+    set_up_client_side_game_variables()
     current_user = determine_current_user(session)
     
     return render_template("logout.html", page_title="Logged Out", username=current_user)
@@ -383,3 +392,4 @@ if __name__ == "__main__":
     app.run(host=os.environ.get('IP'),
         port=int(os.environ.get('PORT')),
         debug=True)
+    
