@@ -12,9 +12,8 @@ app.secret_key = 'hey-riddle-diddle-123'
 users_file = "data/users.json"
 guesses_file = "data/guesses.json"
 riddles_file = "data/riddles.json"
-# riddles_file = "data/riddles1.json" - change riddles variable to this to test that the congratulations page is working (only 3 riddles)
 
-# ---------------------------------------------------------------------------------------------
+# GENERAL---------------------------------------------------------------------------------------
 
 # Shortcut for loading json files
 def load_json_data(jsonfile_path, access_mode):
@@ -130,6 +129,17 @@ def update_user_details(current_user, new_email, new_password, new_username, new
     flash("Hey {}, thanks for updating your details!".format(new_email))
         
 # GAME MECHANICS -----------------------------------------------------------------------------
+
+def set_up_client_side_game_variables():
+    try:
+        session["current_riddle"]
+    except:
+        session["current_riddle"] = 0
+        session["game_in_play"] = True
+        session["score_last_game"] = 0
+        session["riddle_order"] = []
+        session["last_riddle"] = 0
+
 def determine_riddle_order():
     riddles = load_json_data(riddles_file, "r")
     new_riddle_order = []
@@ -143,49 +153,17 @@ def pick_a_riddle():
     riddles = load_json_data(riddles_file, "r")
     ran_num = randint(0, len(riddles)-1)
     return ran_num
-    
-# Indexs a guess to a riddle
-class Guess(object):
-    def __init__(self, guess, index):
-        self.question = index + 1
-        self.guess = guess
 
-def add_guess_to_file(guess, index):
+def words_in_answer(data, index, riddle_list):
+    correct_riddle_index = riddle_list[index]
+    this_answer = data[correct_riddle_index]["answer"]
+    word_count = this_answer.split()
+    length_of_answer = len(word_count)
+    if length_of_answer == 1:
+        return "1 word"
+    else:
+        return "{} words".format(length_of_answer)
     
-    guess = Guess(guess, index)
-    jsonguess = json.dumps(guess, default=jsonDefault, indent=4, separators=(',', ': '))
-    
-    with open(guesses_file, "r+") as open_file:
-        guess_text = open_file.read()
-        guesses_txt_length = len(guess_text)
-
-        if guess_text == "[]":
-            new_guess_str = "\n{}]".format(jsonguess)
-            open_file.seek(guesses_txt_length -1)
-            open_file.write(new_guess_str)
-        else:
-            new_guess_str = ",\n{}]".format(jsonguess)
-            open_file.seek(guesses_txt_length -1)
-            open_file.write(new_guess_str)
-
-def update_high_score(new_score):
-    if 'user' in session:
-        data = load_json_data(users_file, "r")
-    
-        for user in range(len(data)):
-            if data[user]["email"] == session['user']:
-                if any("highscore" in x for x in data[user]):
-                    if data[user]["highscore"] < new_score:
-                        data[user]["highscore"]  = new_score
-                        break
-                else:
-                    data[user]["highscore"] = new_score
-                    break
-    
-        with open(users_file, "w") as f:
-            new_data = json.dumps(data, default=jsonDefault, indent=4, separators=(',', ': '))
-            f.write(new_data) 
-
 def check_answer(guess, data, index, username, riddle):
     
     no_spaces_guess = guess.replace(" ", "")
@@ -216,6 +194,33 @@ def check_answer(guess, data, index, username, riddle):
         determine_riddle_order()
         flash("I'm sorry!  {} was incorrect!\n Please try again from the beginning!".format(guess.upper()))
 
+# GUESSES FILE FUNCTIONS -----------------------------------------------------------------------------------
+
+
+# Indexs a guess to a riddle
+class Guess(object):
+    def __init__(self, guess, index):
+        self.question = index + 1
+        self.guess = guess
+
+def add_guess_to_file(guess, index):
+    
+    guess = Guess(guess, index)
+    jsonguess = json.dumps(guess, default=jsonDefault, indent=4, separators=(',', ': '))
+    
+    with open(guesses_file, "r+") as open_file:
+        guess_text = open_file.read()
+        guesses_txt_length = len(guess_text)
+
+        if guess_text == "[]":
+            new_guess_str = "\n{}]".format(jsonguess)
+            open_file.seek(guesses_txt_length -1)
+            open_file.write(new_guess_str)
+        else:
+            new_guess_str = ",\n{}]".format(jsonguess)
+            open_file.seek(guesses_txt_length -1)
+            open_file.write(new_guess_str)
+
 def other_users_guesses(riddle):
     guess_data = load_json_data(guesses_file, "r")
     user_guesses = []
@@ -231,7 +236,27 @@ def other_users_guesses(riddle):
         return user_guesses
     else:
         return ["No other guesses so far"]
-            
+
+# HIGH SCORE FUNCTIONS -----------------------------------------------------------------------------------
+
+def update_high_score(new_score):
+    if 'user' in session:
+        data = load_json_data(users_file, "r")
+    
+        for user in range(len(data)):
+            if data[user]["email"] == session['user']:
+                if any("highscore" in x for x in data[user]):
+                    if data[user]["highscore"] < new_score:
+                        data[user]["highscore"]  = new_score
+                        break
+                else:
+                    data[user]["highscore"] = new_score
+                    break
+    
+        with open(users_file, "w") as f:
+            new_data = json.dumps(data, default=jsonDefault, indent=4, separators=(',', ': '))
+            f.write(new_data) 
+
 def create_leaderboard(userdata):
 
     sorted_user_scores = sorted(userdata, key=lambda k: k['highscore'], reverse=True) 
@@ -250,16 +275,6 @@ def create_leaderboard(userdata):
     
     return top_ten
 
-def words_in_answer(data, index, riddle_list):
-    correct_riddle_index = riddle_list[index]
-    this_answer = data[correct_riddle_index]["answer"]
-    word_count = this_answer.split()
-    length_of_answer = len(word_count)
-    if length_of_answer == 1:
-        return "1 word"
-    else:
-        return "{} words".format(length_of_answer)
-
 # ROUTES ------------------------------------------------------------------------------        
 
 @app.before_request
@@ -272,15 +287,7 @@ def before_request():
 @app.route('/<username>')
 def index(username=None):
     current_user = determine_current_user(session)
-    
-    try:
-        session["current_riddle"]
-    except:
-        session["current_riddle"] = 0
-        session["game_in_play"] = True
-        session["score_last_game"] = 0
-        session["riddle_order"] = []
-        session["last_riddle"] = 0
+    set_up_client_side_game_variables()
     
     return render_template("index.html", page_title="Home", username=current_user)
     
@@ -315,18 +322,11 @@ def riddles(username):
     
     guesses_data = []
     riddles_data=load_json_data(riddles_file, "r")    
-    
-    print(len(riddles_data))
+    answer_words = words_in_answer(riddles_data, session["current_riddle"], session["riddle_order"])
+    current_user = determine_current_user(session)
     
     if session["riddle_order"] == [] or len(riddles_data) != len(session["riddle_order"]):
         determine_riddle_order()
-    
-    print(session["current_riddle"])
-    print(session["riddle_order"])
-    
-    answer_words = words_in_answer(riddles_data, session["current_riddle"], session["riddle_order"])
-    
-    current_user = determine_current_user(session)
     
     if request.method == "POST":
         
@@ -334,6 +334,7 @@ def riddles(username):
             return redirect(url_for("congratulations", username=current_user))
         guesses_data = other_users_guesses(session["last_riddle"])
         answer_words = words_in_answer(riddles_data, session["current_riddle"], session["riddle_order"])
+    
     return render_template("riddles.html", page_title="Riddles", riddles_data=riddles_data, user_data=load_json_data(users_file, "r"), username=current_user, riddle_index=session["current_riddle"], 
     guesses=guesses_data, game_in_play=session["game_in_play"], score=session["score_last_game"], riddle_order=session["riddle_order"], last=session["last_riddle"], word_count=answer_words)
 
@@ -347,15 +348,16 @@ def leaderboard():
 def account(username):
     user_data = load_json_data(users_file, "r")
     for user in user_data:
-        if user["email"].lower() == session["user"].lower():
+        if user["email"].lower() == username.lower():
             this_user = user
     
     if request.method == "POST":
         update_user_details(username, request.form["email"], request.form["password"], request.form["username"], request.form["firstname"], request.form["surname"])
         user_data = load_json_data(users_file, "r")
         for user in user_data:
-            if user["email"].lower() == session["user"].lower():
+            if user["email"].lower() == username.lower():
                 this_user = user
+        return render_template("account.html", page_title="Account", username=session['user'], this_user = this_user)
     
     return render_template("account.html", page_title="Account", username=session['user'], this_user = this_user)
 

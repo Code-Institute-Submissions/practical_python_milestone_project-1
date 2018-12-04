@@ -372,22 +372,6 @@
     "question": 12
 },
 {
-    "guess": "the letter e",
-    "question": 6
-},
-{
-    "guess": "the letter e",
-    "question": 8
-},
-{
-    "guess": "the letter e",
-    "question": 5
-},
-{
-    "guess": "the letter e",
-    "question": 11
-},
-{
     "guess": "A whale",
     "question": 17
 },
@@ -492,42 +476,6 @@
     "question": 19
 },
 {
-    "guess": "your name",
-    "question": 5
-},
-{
-    "guess": "your name",
-    "question": 0
-},
-{
-    "guess": "your name",
-    "question": 7
-},
-{
-    "guess": "your name",
-    "question": 20
-},
-{
-    "guess": "your name",
-    "question": 4
-},
-{
-    "guess": "your name",
-    "question": 7
-},
-{
-    "guess": "mount everest",
-    "question": 13
-},
-{
-    "guess": "mount everest",
-    "question": 8
-},
-{
-    "guess": "mount everest",
-    "question": 9
-},
-{
     "guess": "pop",
     "question": 8
 },
@@ -540,30 +488,6 @@
     "question": 7
 },
 {
-    "guess": "The primeinister",
-    "question": 17
-},
-{
-    "guess": "The primeinister",
-    "question": 19
-},
-{
-    "guess": "The primeinister",
-    "question": 15
-},
-{
-    "guess": "The primeinister",
-    "question": 5
-},
-{
-    "guess": "The primeinister",
-    "question": 20
-},
-{
-    "guess": "The primeinister",
-    "question": 10
-},
-{
     "guess": "teeth",
     "question": 19
 },
@@ -574,10 +498,6 @@
 {
     "guess": "a bag",
     "question": 10
-},
-{
-    "guess": "bongo bongo land",
-    "question": 20
 },
 {
     "guess": "white paint",
@@ -1090,4 +1010,48 @@
 {
     "guess": "ice cream",
     "question": 8
+},
+{
+    "guess": "some paint",
+    "question": 8
+},
+{
+    "guess": "pop",
+    "question": 11
+},
+{
+    "guess": "your toilet",
+    "question": 15
+},
+{
+    "guess": "aa",
+    "question": 18
+},
+{
+    "guess": "pop",
+    "question": 11
+},
+{
+    "guess": "no idea",
+    "question": 9
+},
+{
+    "guess": "pips",
+    "question": 4
+},
+{
+    "guess": "a time bandit",
+    "question": 5
+},
+{
+    "guess": "the time",
+    "question": 20
+},
+{
+    "guess": "a blanket room",
+    "question": 12
+},
+{
+    "guess": "dirt",
+    "question": 14
 }]

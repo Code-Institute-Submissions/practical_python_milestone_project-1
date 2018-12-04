@@ -246,5 +246,13 @@
         "firstname": "James",
         "password": "aaaaa",
         "email": "fgdfs@dfsd.com"
+    },
+    {
+        "username": "mick-im",
+        "highscore": 6,
+        "surname": "Mouse",
+        "firstname": "Micky",
+        "password": "ppppp",
+        "email": "mickymouse@disney.com"
     }
 ]
