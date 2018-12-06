@@ -1,5 +1,6 @@
 import os
 import json
+import flask
 from random import *
 from flask import Flask, render_template, request, flash, session, redirect, url_for
 from operator import itemgetter
@@ -113,7 +114,6 @@ def update_user_details(current_user, new_email, new_password, new_username, new
     """
     for user in range(len(data)):
         if data[user]["email"].lower() == session['user'].lower():
-            print("Okay")
             data[user]["email"] = new_email.lower()
             data[user]["surname"]  = new_surname.capitalize()
             data[user]["password"]  = new_password
@@ -139,12 +139,19 @@ def set_up_client_side_game_variables():
 
 def determine_riddle_order():
     riddles = load_json_data(riddles_file, "r")
+    
+    """ 
+    This will create a list of numbers as long as the number of riddles in the riddles file 
+    and order them randomly so that the riddles appear for the user in a different order each 
+    time a game is played.
+    """
+    
     new_riddle_order = []
     while len(new_riddle_order) < len(riddles):
         ran_num = pick_a_riddle()
         if ran_num not in new_riddle_order:
             new_riddle_order.append(ran_num)
-    session["riddle_order"] = new_riddle_order
+    return new_riddle_order
             
 def pick_a_riddle():
     riddles = load_json_data(riddles_file, "r")
@@ -152,6 +159,13 @@ def pick_a_riddle():
     return ran_num
 
 def words_in_answer(data, index, riddle_list):
+    
+    """
+    This will detemine the value of the clue around how many words the answer to the riddle is
+    in length.  It looks at the answer to the current riddle and determines how many
+    words the answer is, returning the number of words to be displayed.
+    """
+    
     correct_riddle_index = riddle_list[index]
     this_answer = data[correct_riddle_index]["answer"]
     word_count = this_answer.split()
@@ -163,34 +177,29 @@ def words_in_answer(data, index, riddle_list):
     
 def check_answer(guess, data, index, username, riddle):
     
+    """
+    This essentially takes the answer to the riddle and the answer given by the user,
+    ignores any spaces and the case, and verifies if the answer is correct.  If it is,
+    this also determines whether the last riddle has been reached and the game is won,
+    or whether the next riddle should be displayed.
+    """
     no_spaces_guess = guess.replace(" ", "")
     no_spaces_answer = data[index]["answer"].replace(" ", "")
     
     if no_spaces_guess.lower() == no_spaces_answer.lower():
-        if riddle +1 == len(session["riddle_order"]):
-            session["score_last_game"] = session["current_riddle"]
-            session["last_riddle"] = session["riddle_order"][session["current_riddle"]]
-            session["game_in_play"] = False
-            update_high_score(session["current_riddle"])
-            session["current_riddle"] = 0
-            session["riddle_order"] = []
-            determine_riddle_order()
+        if riddle +1 == len(data):
             return "Winner"
         else:
-            session["game_in_play"] = True
-            session["current_riddle"] +=1
-            flash("Correct!  {} was the right answer!\n Time for your next riddle...!".format(data[index]["answer"].upper()))
+            return "Next Riddle"
     else:
-        session["score_last_game"] = session["current_riddle"]
-        session["last_riddle"] = session["riddle_order"][session["current_riddle"]]
-        session["game_in_play"] = False
-        add_guess_to_file(request.form["guess-entry"], session["riddle_order"][session["current_riddle"]]-1)
-        update_high_score(session["current_riddle"])
-        session["current_riddle"] = 0
-        session["riddle_order"] = []
-        determine_riddle_order()
-        flash("I'm sorry!  {} was incorrect!\n Please try again from the beginning!".format(guess.upper()))
+        return "Incorrect"
 
+def end_game():
+    session["game_in_play"] = False
+    update_high_score(session["current_riddle"])
+    session["current_riddle"] = 0
+    session["riddle_order"] = determine_riddle_order()
+    
 # GUESSES FILE FUNCTIONS -----------------------------------------------------------------------------------
 
 
@@ -274,10 +283,25 @@ def create_leaderboard(userdata):
 
 # TESTS ------------------------------------------------------------------------------
 
+# Tests to ensure that player reaches the correct game path when answer is checked...
 
+test_are_equal(check_answer("wrong answer", [{"answer":"correct answer"}], 0 , "username", 0), "Incorrect") # player answers incorrectly and the game ends
+test_are_equal(check_answer("correct answer", [{"answer":"correct answer"}], 0 , "username", 0), "Winner")  # player answers correctly on only question and wins the game
+test_are_equal(check_answer("correct answer three", [{"answer":"correct answer one"}, {"answer":"correct answer two"}, {"answer":"correct answer three"}], 2 , "username", 2), "Winner")  # player answers correctly on last question and wins the game
+test_are_equal(check_answer("correct answer two", [{"answer":"correct answer one"}, {"answer":"correct answer two"}, {"answer":"correct answer three"}], 1 , "username", 1), "Next Riddle")  # player answers correctly on second question and moves to next riddle
+
+# Tests to ensure that player is given the correct clue for the number of words required in the answer...
+
+test_are_equal(words_in_answer([{"answer":"oneword"}, {"answer":"two words"}, {"answer":"three words here"}], 0, [0,2,1]), "1 word") # on the first go, the answer is the first in the index and is 1 word
+test_are_equal(words_in_answer([{"answer":"oneword"}, {"answer":"two words"}, {"answer":"three words here"}], 1, [0,2,1]), "3 words") # on the second go, the answer is the third in the index and is 3 words
+test_are_equal(words_in_answer([{"answer":"oneword"}, {"answer":"two words"}, {"answer":"three words here"}], 2, [0,2,1]), "2 words") # on the third go, the answer is the second in the index and is 2 words
+
+# Tests to ensure that the riddles get shown in a random order, in full and don't repeat...
+
+test_length_of_collection_matches(determine_riddle_order(), load_json_data(riddles_file, "r")) # the riddle list generated matches the length of the riddles file
+test_all_indexes_appear_in_collection(determine_riddle_order(), load_json_data(riddles_file, "r")) # the index of each riddle is in the generated riddle order list
 
 print("All tests have passed")
-
 
 # ROUTES ------------------------------------------------------------------------------        
 
@@ -328,21 +352,36 @@ def log_in():
 @app.route('/<username>/riddles.html', methods=["GET", "POST"])
 def riddles(username):
     
-    guesses_data = []
-    riddles_data=load_json_data(riddles_file, "r")    
-    answer_words = words_in_answer(riddles_data, session["current_riddle"], session["riddle_order"])
     current_user = determine_current_user(session)
-    
+    riddles_data=load_json_data(riddles_file, "r") 
     if session["riddle_order"] == [] or len(riddles_data) != len(session["riddle_order"]):
-        determine_riddle_order()
+        session["riddle_order"] = determine_riddle_order()
+    
+    answer_words = words_in_answer(riddles_data, session["current_riddle"], session["riddle_order"])
+    
+    guesses_data = []
     
     if request.method == "POST":
         
         if check_answer(request.form["guess-entry"], load_json_data(riddles_file, "r"), session["riddle_order"][session["current_riddle"]], current_user, session["current_riddle"]) == "Winner":
+            session["score_last_game"] = session["current_riddle"]
+            end_game()
             return redirect(url_for("congratulations", username=current_user))
-        guesses_data = other_users_guesses(session["last_riddle"])
-        answer_words = words_in_answer(riddles_data, session["current_riddle"], session["riddle_order"])
-    
+        elif check_answer(request.form["guess-entry"], load_json_data(riddles_file, "r"), session["riddle_order"][session["current_riddle"]], current_user, session["current_riddle"]) == "Next Riddle":
+            session["game_in_play"] = True
+            session["current_riddle"] +=1
+            flash("Correct!  {} was the right answer!\n Time for your next riddle...!".format(request.form["guess-entry"].upper()))
+            return redirect(url_for("riddles", username=current_user))
+        else:
+            add_guess_to_file(request.form["guess-entry"], session["riddle_order"][session["current_riddle"]]-1)
+            session["score_last_game"] = session["current_riddle"]
+            session["last_riddle"] = session["riddle_order"][session["current_riddle"]]
+            guesses_data = other_users_guesses(session["last_riddle"])
+            end_game()
+            flash("I'm sorry!  {} was incorrect!\n Please try again from the beginning!".format(request.form["guess-entry"].upper()))
+            return render_template("riddles.html", page_title="Riddles", riddles_data=riddles_data, user_data=load_json_data(users_file, "r"), username=current_user, riddle_index=session["current_riddle"], 
+            guesses=guesses_data, game_in_play=session["game_in_play"], score=session["score_last_game"], riddle_order=session["riddle_order"], last=session["last_riddle"], word_count=answer_words)
+
     return render_template("riddles.html", page_title="Riddles", riddles_data=riddles_data, user_data=load_json_data(users_file, "r"), username=current_user, riddle_index=session["current_riddle"], 
     guesses=guesses_data, game_in_play=session["game_in_play"], score=session["score_last_game"], riddle_order=session["riddle_order"], last=session["last_riddle"], word_count=answer_words)
 
