@@ -1046,4 +1046,12 @@
 {
     "guess": "dirt",
     "question": 14
+},
+{
+    "guess": "A wizard",
+    "question": 3
+},
+{
+    "guess": "a puddle",
+    "question": 20
 }]

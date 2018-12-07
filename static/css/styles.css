@@ -52,12 +52,13 @@ button:focus {
   margin: 20px auto; }
 
 .riddle-link-btn {
+  display: block;
   width: 225px;
   padding: 20px;
   border-radius: 50px;
   font-size: 20px;
   background-color: #792d75;
-  margin: 20px;
+  margin: 20px auto 0;
   color: #fff; }
   @media (max-width: 500px) {
     .riddle-link-btn {
@@ -70,6 +71,9 @@ button:focus {
 
 .continue-btn {
   margin: 22px 0 0; }
+
+.nav-header .color-dropdown-btn {
+  color: #bffa02; }
 
 .color-change-and-shrink {
   animation: shrink 5s 1, color-change 30s 1; }
@@ -251,9 +255,6 @@ li a {
   @media (max-width: 500px) {
     li a {
       margin: 0 0 0 10px; } }
-
-.test {
-  color: #bffa02; }
 
 footer {
   background-color: #94396a;

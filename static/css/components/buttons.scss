@@ -9,12 +9,13 @@ button:focus {
 }
 
 .riddle-link-btn {
+    display: block;
     width: 225px;
     padding: 20px;
     border-radius: 50px;
     font-size: 20px;
     background-color: $riddler-deeper-purple;
-    margin: 20px;
+    margin: 20px auto 0;
     color: $white;
 
     @include large-mobile {
@@ -30,4 +31,8 @@ button:focus {
 
 .continue-btn {
     margin: 22px 0 0;
+}
+
+.nav-header .color-dropdown-btn {
+    color: $riddler-lime-green;
 }

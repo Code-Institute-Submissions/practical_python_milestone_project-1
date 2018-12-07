@@ -7,11 +7,11 @@
         <form class="login-form no-overflow" method="POST">
             <div class="login-row">
                 <label for="email">Email</label>
-                <input type="email" name="email" required/>
+                <input id="email" type="email" name="email" required/>
             </div>
             <div class="login-row">
                 <label for="password">Password</label>
-                <input type="password" name="password" required/>
+                <input id="password" type="password" name="password" required/>
             </div>
             <div class="login-row">
                 <input type="submit" value="Submit" /> {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}

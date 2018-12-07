@@ -9,33 +9,29 @@
             <ul class="account-form-list">
                 <li>
                     <label for="username">Choose a Username</label>
-                    <input required maxlength="15" type="text" name="username" value="{{ this_user['username'] }}"/>
+                    <input id="username" required maxlength="15" type="text" name="username" value="{{ this_user['username'] }}"/>
                 </li>
                 <li>
                     <label for="password">Password</label>
-                    <input required minlength="5" type="password" name="password" value="{{ this_user['password'] }}"/>
+                    <input id="password" required minlength="5" type="password" name="password" value="{{ this_user['password'] }}"/>
                 </li>
                 <li>
                     <label for="firstname">First Name</label>
-                    <input required type="text" name="firstname" value="{{ this_user['firstname'] }}"/>
+                    <input id="firstname" required type="text" name="firstname" value="{{ this_user['firstname'] }}"/>
                 </li>
                 <li>
                     <label for="surname">Surname</label>
-                    <input required type="text" name="surname" value="{{ this_user['surname'] }}"/>
-                </li>
-                <li>
-                    <label for="email">Email Address</label>
-                    <input required type="email" name="email" value="{{ this_user['email'] }}"/> 
+                    <input id="surname" required type="text" name="surname" value="{{ this_user['surname'] }}"/>
                 </li>
                 <li>
                     <input type="submit" value="Update" />
                 </li>
-                {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
-                <p class="flashed-message centered">
-                    {{ message }}
-                </p>
-                {% endfor %} {% endif %} {% endwith %}
             </ul>
+            {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+            <p class="flashed-message centered">
+                {{ message }}
+            </p>
+            {% endfor %} {% endif %} {% endwith %}
         </form>
     </div>
 </div>

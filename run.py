@@ -106,7 +106,7 @@ def add_a_new_user(email, password, confirm_password):
     else:
         flash("I'm sorry, your passwords didn't match.\n  Please try again!")
             
-def update_user_details(current_user, new_email, new_password, new_username, new_firstname, new_surname):
+def update_user_details(current_user, email, new_password, new_username, new_firstname, new_surname):
     data = load_json_data(users_file, "r")
     """
     This will check through the json file of users until it finds the right user.  It then deletes that users data and adds
@@ -114,7 +114,7 @@ def update_user_details(current_user, new_email, new_password, new_username, new
     """
     for user in range(len(data)):
         if data[user]["email"].lower() == session['user'].lower():
-            data[user]["email"] = new_email.lower()
+            data[user]["email"] = email.lower()
             data[user]["surname"]  = new_surname.capitalize()
             data[user]["password"]  = new_password
             data[user]["username"]  = new_username.lower()
@@ -126,7 +126,7 @@ def update_user_details(current_user, new_email, new_password, new_username, new
     with open(users_file, "w") as f:
         new_data = json.dumps(data, default=jsonDefault, indent=4, separators=(',', ': '))
         f.write(new_data)
-    flash("Hey {}, thanks for updating your details!".format(new_email))
+    flash("Hey {}, thanks for updating your details!".format(email))
         
 # GAME MECHANICS -----------------------------------------------------------------------------
 
@@ -228,6 +228,13 @@ def add_guess_to_file(guess, index):
             open_file.write(new_guess_str)
 
 def other_users_guesses(riddle):
+    
+    """
+    Looks through list of guesses and creates of list of the guesses that relate
+    to the riddle that was answered incorrectly, then limits the number of responces
+    to the latest 18 guesses that have been given to feedback to the user
+    """
+    
     guess_data = load_json_data(guesses_file, "r")
     user_guesses = []
     num_of_related_guesses = 0
@@ -246,6 +253,13 @@ def other_users_guesses(riddle):
 # HIGH SCORE FUNCTIONS -----------------------------------------------------------------------------------
 
 def update_high_score(new_score):
+    
+    """
+    Updates users high score if their last score was higher than any of their
+    previous scores
+    """
+    
+    
     if 'user' in session:
         data = load_json_data(users_file, "r")
     
@@ -264,7 +278,12 @@ def update_high_score(new_score):
             f.write(new_data) 
 
 def create_leaderboard(userdata):
-
+    
+    """
+    Generates a list of every users highscore and sorts in decending order,
+    then returns a list containing the top 10 scores
+    """
+    
     sorted_user_scores = sorted(userdata, key=lambda k: k['highscore'], reverse=True) 
     
     top_ten = []
@@ -289,6 +308,7 @@ test_are_equal(check_answer("wrong answer", [{"answer":"correct answer"}], 0 , "
 test_are_equal(check_answer("correct answer", [{"answer":"correct answer"}], 0 , "username", 0), "Winner")  # player answers correctly on only question and wins the game
 test_are_equal(check_answer("correct answer three", [{"answer":"correct answer one"}, {"answer":"correct answer two"}, {"answer":"correct answer three"}], 2 , "username", 2), "Winner")  # player answers correctly on last question and wins the game
 test_are_equal(check_answer("correct answer two", [{"answer":"correct answer one"}, {"answer":"correct answer two"}, {"answer":"correct answer three"}], 1 , "username", 1), "Next Riddle")  # player answers correctly on second question and moves to next riddle
+test_are_equal(check_answer("correct answer one", [{"answer":"correct answer one"}, {"answer":"correct answer two"}, {"answer":"correct answer three"}], 1 , "username", 1), "Incorrect")  # player enters an answer that is correct for one of the riddles but not the one that is being played so game ends
 
 # Tests to ensure that player is given the correct clue for the number of words required in the answer...
 
@@ -399,7 +419,7 @@ def account(username):
             this_user = user
     
     if request.method == "POST":
-        update_user_details(username, request.form["email"], request.form["password"], request.form["username"], request.form["firstname"], request.form["surname"])
+        update_user_details(username, this_user["email"], request.form["password"], request.form["username"], request.form["firstname"], request.form["surname"])
         user_data = load_json_data(users_file, "r")
         for user in user_data:
             if user["email"].lower() == username.lower():

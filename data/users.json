@@ -8,10 +8,10 @@
         "email": "billy@bob.com"
     },
     {
-        "username": "ebaymademecry",
+        "username": "ebaymademepoor",
         "highscore": 10,
         "surname": "Fiorletta",
-        "firstname": "Carlo",
+        "firstname": "Giancarlo",
         "password": "ppppp",
         "email": "caianroma@yahoo.co.uk"
     },
@@ -254,5 +254,13 @@
         "firstname": "Micky",
         "password": "ppppp",
         "email": "mickymouse@disney.com"
+    },
+    {
+        "username": "caimand",
+        "highscore": 2,
+        "surname": "Tbc",
+        "firstname": "Tbc",
+        "password": "aaaaa",
+        "email": "cai@yahoo.com"
     }
 ]
