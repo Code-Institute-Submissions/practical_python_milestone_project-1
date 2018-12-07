@@ -7,7 +7,7 @@ from operator import itemgetter
 from byotests import *
 
 app = Flask(__name__)
-app.secret_key = 'hey-riddle-diddle-123'
+app.secret_key = os.environ.get('SECRET_KEY', 'hey-riddle-diddle-123')
 
 # File variables
 users_file = "data/users.json"
@@ -344,6 +344,9 @@ def index(username=None):
     
 @app.route('/sign_up.html', methods=["GET", "POST"])
 def sign_up():
+    session.pop('user', None)
+    set_up_client_side_game_variables()
+    
     if request.method == "POST":
         """
         Add a new user will check if email already exists in users.json and if not add new username
@@ -450,5 +453,5 @@ def congratulations():
 if __name__ == "__main__":
     app.run(host=os.environ.get('IP'),
         port=int(os.environ.get('PORT')),
-        debug=True)
+        debug=False)
     
