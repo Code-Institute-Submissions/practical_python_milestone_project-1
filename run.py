@@ -440,10 +440,10 @@ def logout():
     
     return render_template("logout.html", page_title="Logged Out", username=current_user)
 
-@app.route('/about-us.html')
+@app.route('/about_us.html')
 def about_us():
     current_user = determine_current_user(session)
-    return render_template("about-us.html", page_title="About Us", username=current_user)
+    return render_template("about_us.html", page_title="About Us", username=current_user)
 
 @app.route('/congratulations.html')
 def congratulations():

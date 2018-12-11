@@ -1054,4 +1054,8 @@
 {
     "guess": "a puddle",
     "question": 20
+},
+{
+    "guess": "No horse",
+    "question": 10
 }]

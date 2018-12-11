@@ -8,7 +8,7 @@
         "email": "billy@bob.com"
     },
     {
-        "username": "ebaymademepoor",
+        "username": "the riddler",
         "highscore": 10,
         "surname": "Fiorletta",
         "firstname": "Giancarlo",
@@ -262,5 +262,13 @@
         "firstname": "Tbc",
         "password": "aaaaa",
         "email": "cai@yahoo.com"
+    },
+    {
+        "username": "TBC",
+        "highscore": 0,
+        "surname": "TBC",
+        "firstname": "TBC",
+        "password": "aaaaa",
+        "email": "caianroma@yahoo.co.ukaaaa"
     }
 ]
