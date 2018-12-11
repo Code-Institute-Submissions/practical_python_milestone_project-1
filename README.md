@@ -89,17 +89,17 @@ riddles file, the player is redirected to the congratulations.html page which in
 the user what their score was (verses their highest score if they are signed in), and it gives them a number of answers that the previous users had incorrectly provided which will possibly provide some clues and perhaps
 some laughs along the way!
 
-### PAGE 7 - THE LEADERBOARD (leaderboard.html):
+#### PAGE 7 - THE LEADERBOARD (leaderboard.html):
 
 The leaderboard page has two main components, another stylish comic inspired picture and the leaderboard itself.  Every time this page is accessed, the leaderboard is rebuilt based on the most up to date high scores that have
 been achieved by a user on completion of their game.  It displays the top ten scores and the username of the player if provided (their email address if not) and the score that had been achieved.
 
-### PAGE 8 - ABOUT US (about_us.html):
+#### PAGE 8 - ABOUT US (about_us.html):
 
 This page features a few paragraphs about me which are meant to be humorous.  Usually this would include more details or links associated with the company or creator of the site, but in this instance as there aren't really 
 any I can add, I have left it as a basic page but with my email address should any user wish to get in touch.
 
-### PAGE 9 - CONGRATULATIONS (congratulations.html):
+#### PAGE 9 - CONGRATULATIONS (congratulations.html):
 
 Another humorous message meets any user that successfully answers all of the riddles that are available on the site.  This is determined by the length of the riddles.json file so will automatically keep track of the number of
 riddles available and display the page when required accordingly.
@@ -222,27 +222,49 @@ enthusiasm for the site with friends at a restaurant meet, who seemed pretty eng
 Each element on the site has been manually tested to ensure it functions as intended as follows:
 
 **Test 1** - On home page, logo is clicked - reloads home page - SUCCESS
+
 **Test 2** - On home page, Home is clicked on the navbar - reloads home page - SUCCESS
+
 **Test 3** - On home page, Log In is clicked on the navbar - loads log in page - SUCCESS
+
 **Test 4** - On home page, Sign Up is clicked on the navbar - loads sign up page - SUCCESS
+
 **Test 5** - On home page, Riddles is clicked on the navbar - loads riddle page, a riddle fades in with correct number of answer words displayed - SUCCESS
+
 **Test 6** - On home page, Leaderboard is clicked on the navbar - loads leaderboard page, with 10 best scored users - SUCCESS
+
 **Test 7** - On home page, Sign Up text is clicked in bottom section - loads sign up page - SUCCESS
+
 **Test 8** - On home page, Log in text is clicked in bottom section - loads log in page - SUCCESS
+
 **Test 9** - On home page, purple riddles button is clicked in bottom section - button increases in size when hovered and loads riddles page - SUCCESS
+
 **Test 10** - On home page, about us text is clicked in footer - font increases in size when hovered and loads about us page - SUCCESS
+
 **Test 11** - On sign up page, attempted to sign up with an existing users email address - denied, flashed message to advise - SUCCESS
+
 **Test 12** - On sign up page, attempted to sign up with passwords that dont match - denied, flashed message to advise - SUCCESS
+
 **Test 13** - On sign up page, attempted to sign up with unique details and matching passwords - user added to users.json, redirected to riddles page and flashed message to welcome - SUCCESS
+
 **Test 14** - On home page, clicked log out on nav, redirected to logout page and nav bar returns to options for guest users - SUCCESS
+
 **Test 15** - On log in page, attempted to log in existing user with incorrect password - denied, flashed message to advise - SUCCESS
+
 **Test 16** - On log in page, attempted to log in a user that does not yet exist - denied, flashed message to advise - SUCCESS
+
 **Test 17** - On log in page, attempted to log in an existing user with the correct password - accepted, redirected to home page with customised welcome message, screen goes straight to message - SUCCESS
+
 **Test 18** - On home page, User is clicked on the navbar - redirected to account page prepopulated with any existing user details - SUCCESS
+
 **Test 19** - On account page, updated all user details - page reloads with new details and flashed message to confirm details were updated - SUCCESS
+
 **Test 20** - On riddles page, entered correct answer for riddle - flashed message displays to confirm answer was correct before next riddle fades in - SUCCESS
+
 **Test 21** - On riddles page, entered incorrect answer for riddle - Message displays to advise of incorrect answer, your score, your best score and some guesses that other people made, window closes on button click, game has restarted - SUCCESS
+
 **Test 22** - On riddles page, answered multiple riddles and generated a new high score - leaderboard.html has been updated with new score and ranking order - SUCCESS
+
 **Test 23** - On riddles page, answered all riddles correctly - redirected to congratulations page, game has reset - SUCCESS
 
 These tests have also been performed in different orders to ensure the result and the way the game is displayed is always as intended and no errors have been found.
